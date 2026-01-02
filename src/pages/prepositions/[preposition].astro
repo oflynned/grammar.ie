@@ -1,0 +1,69 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import {getCollection} from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+    const prepositionEntries = await getCollection('prepositions');
+
+    return prepositionEntries.map((entry: CollectionEntry<'prepositions'>) => {
+        return {
+            params: {preposition: entry.slug},
+            props: {entry},
+        }
+    })
+}
+
+interface Props {
+    entry: CollectionEntry<'prepositions'>;
+    prev: CollectionEntry<'prepositions'> | null;
+    next: CollectionEntry<'prepositions'> | null;
+}
+
+const {entry, prev, next} = Astro.props;
+const {Content} = await entry.render();
+---
+
+
+<Layout title={entry.data.title}>
+    <main class="max-w-4xl mx-auto px-6 py-12">
+
+        <nav class="flex text-sm text-slate-400 mb-8 font-medium">
+            <a href="/" class="hover:text-emerald-600">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/prepositions" class="hover:text-emerald-600">{entry.data.category}</a>
+        </nav>
+
+        <article>
+            <header class="mb-12 border-b border-slate-200 pb-8">
+                <h1 class="text-5xl font-bold text-slate-900 mb-4">
+                    {entry.data.title}
+                </h1>
+                <p class="text-slate-500 leading-relaxed">
+                    {entry.data.description}
+                </p>
+
+                <div class="flex gap-2 mt-6">
+                  <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    {entry.data.level}
+                  </span>
+                </div>
+            </header>
+
+            <div class="prose prose-slate prose-emerald max-w-none">
+                <Content/>
+            </div>
+        </article>
+
+        <footer class="mt-20 pt-8 border-t border-slate-200 flex justify-between">
+            <div class="text-left">
+                <span class="block text-xs text-slate-400 uppercase font-bold tracking-widest">Previous</span>
+                <a href="#" class="text-emerald-600 font-bold hover:underline">← Introduction</a>
+            </div>
+            <div class="text-right">
+                <span class="block text-xs text-slate-400 uppercase font-bold tracking-widest">Next Topic</span>
+                <a href="#" class="text-emerald-600 font-bold hover:underline">Preposition: Ar →</a>
+            </div>
+        </footer>
+    </main>
+</Layout>

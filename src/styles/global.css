@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@layer components {
+    /* For highlighting the specific mutation letter */
+    .highlight {
+        @apply text-emerald-600 font-bold underline decoration-emerald-200 decoration-2 underline-offset-4;
+    }
+
+    /* For the phonetic pronunciation hints */
+    .pronunciation {
+        @apply text-slate-400 text-sm font-mono italic;
+    }
+}
