@@ -6,3 +6,15 @@
         @apply text-emerald-600 font-bold underline decoration-emerald-200 decoration-2 underline-offset-4;
     }
 }
+
+code {
+    @apply bg-emerald-50 text-emerald-700 p-1 rounded-md text-xs font-bold px-1.5;
+}
+
+code::before {
+    content: none;
+}
+
+code::after {
+    content: none;
+}

@@ -1,8 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 export default {
-    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-    theme: {
+    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'], theme: {
         extend: {
             typography: ({theme}) => ({
                 // We are creating a custom "grammar" theme
@@ -26,10 +25,7 @@ export default {
                             letterSpacing: '-0.025em',
                         },
                         h3: {
-                            fontSize: '1.25rem',
-                            fontWeight: '600',
-                            marginTop: '1.5rem',
-                            marginBottom: '0.75rem',
+                            fontSize: '1.25rem', fontWeight: '600', marginTop: '1.5rem', marginBottom: '0.75rem',
                         },
 
                         // Making Irish examples stand out
@@ -37,14 +33,10 @@ export default {
                             paddingLeft: '0.5rem',
                         },
                         'li strong': {
-                            color: theme('colors.slate[900]'),
-                            fontWeight: '700',
-                        },
-                        // Style for "translation" text in italics
+                            color: theme('colors.slate[900]'), fontWeight: '700',
+                        }, // Style for "translation" text in italics
                         'li em': {
-                            color: theme('colors.slate[500]'),
-                            fontStyle: 'italic',
-                            marginLeft: '0.25rem',
+                            color: theme('colors.slate[500]'), fontStyle: 'italic', marginLeft: '0.25rem',
                         },
 
                         // Code blocks (for grammar formulas)
@@ -61,6 +53,5 @@ export default {
                 },
             }),
         },
-    },
-    plugins: [],
+    }, plugins: [],
 };

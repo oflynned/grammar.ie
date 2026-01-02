@@ -3,7 +3,8 @@ import type {CollectionEntry} from 'astro:content';
 import {getCollection} from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
-import {Icon} from 'astro-icon/components';
+import Navigation from "../../components/Navigation.astro";
+import Tag from "../../components/Tag.astro";
 
 export async function getStaticPaths() {
     const prepositionEntries = await getCollection('prepositions');
@@ -26,20 +27,9 @@ const {Content, headings} = await entry.render();
 
 <Layout title={entry.data.title}>
     <main class="flex flex-col min-h-screen bg-white">
-        <nav class="z-20 sticky top-0 text-sm text-slate-400 p-8 bg-white/80 backdrop-blur-md border-b border-slate-100 font-medium">
-            <section class="mx-auto flex justify-between max-w-6xl">
-                <div>
-                    <a href="/" class="hover:text-emerald-600">Home</a>
-                    <span class="mx-2">/</span>
-                    <a href="/prepositions" class="hover:text-emerald-600">{entry.data.category}</a>
-                </div>
-                <div>
-                    <button class="text-slate-400 hover:text-emerald-600">Search...</button>
-                </div>
-            </section>
-        </nav>
+        <Navigation category="Preposition"/>
 
-        <section class="flex mx-auto w-full max-w-6xl gap-12 px-8 py-12">
+        <section class="flex mx-auto w-full max-w-6xl gap-12 px-4 py-12">
             <article class="flex-1 min-w-0">
                 <header class="mb-12 border-b border-slate-200 pb-8">
                     <h1 class="text-5xl font-bold text-slate-900 mb-4 tracking-tight">
@@ -51,9 +41,7 @@ const {Content, headings} = await entry.render();
 
                     <div class="flex gap-2 mt-6">
                         {entry.data.tags.map(tag => (
-                                <span class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider border border-emerald-100">
-                                    {tag}
-                                </span>
+                            <Tag tag={tag}/>
                         ))}
                     </div>
                 </header>
