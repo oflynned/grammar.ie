@@ -7,7 +7,7 @@ const prepositions = defineCollection({
         title: z.string(),
         category: z.string(),
         description: z.string().optional(),
-        level: z.string().optional(),
+        tags: z.array(z.string()),
     }),
 });
 

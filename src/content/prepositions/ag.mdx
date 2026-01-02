@@ -1,30 +1,51 @@
 ---
 title: "Ag"
 category: "Prepositions"
-description: "Comprehensive guide to 'ag' (at), including possession, states, and verbal nouns."
-level: "Beginner"
+description: "Ag primarily denotes location (at, by), but also expresses possession and ongoing action."
+tags: ["Preposition", "Conjugated"]
 ---
 import MutationCard from '../../components/MutationCard.astro';
 import LogicSection from '../../components/LogicSection.astro';
 
 ## Overview
-The preposition **ag** primarily denotes location (at), but its most vital role for learners is expressing **possession** and **ongoing action**.
+`Ag` is governed by the dative case.
 
-### Initial Mutations
-With the article *an*, the noun changes:
+| Pronoun      | Form   | Contrast Form | Translation |
+|:-------------|:-------|:--------------|:------------|
+| **I**        | agam   | agamsa        | at me       |
+| **you**      | agat   | agatsa        | at you      |
+| **he**       | aige   | aigesean      | at him      |
+| **she**      | aici   | aicise        | at her      |
+| **we**       | againn | againne       | at us       |
+| **you (pl)** | agaibh | agaibhse      | at you      |
+| **they**     | acu    | acusan        | at them     |
 
-- ag an <span class="highlight">m</span>bord *(at the table)*
-- ag an <span class="highlight">n</span>doras *(at the door)*
+## Interrogatives
+
+| Structure    | Following Clause  | Translation        | Example                   | Translation              |
+|:-------------|:------------------|:-------------------|:--------------------------|--------------------------|
+| **Cé + ag**  | Indirect relative | by whom?           | Cé aige a bhfuil sé?      | Who has it?              |
+| **Cad + ag** | Indirect relative | at what?           | Cad aige a bhfuil sé?     | Who has it?              |
+| **Cé + ag**  | Direct relative   | which?             | Cé acu is fearr leat?     | Which do you prefer?     |
+| **Cé + ag**  | Direct relative   | who of?            | Cé againn a bheidh ansin? | Who of us will be there? |
+
+## Mutations
 
 <MutationCard
-    title="With the definite article"
-    before="ag bord"
-    after="ag an mbord"
-    rule="Triggers eclipsis"
+    title="Without an article"
+    before="ag"
+    after="ag Seán"
+    rule="No lenition/eclipsis"
 />
 
-### Semantic Uses
-Based on the *Gramadach na Gaeilge* archive, here are the functional uses of ag:
+<MutationCard
+    title="With an article"
+    before="ag fear"
+    after="ag an bhfear"
+    rule="Causes eclipsis (except d/t)"
+/>
+
+## Advanced uses
 
 <LogicSection title="Possession & Knowledge">
     - **Possession:** *Tá leabhar agam* (I have a book).
@@ -43,3 +64,57 @@ Based on the *Gramadach na Gaeilge* archive, here are the functional uses of ag:
     - **The Partitive:** *Duine acu* (One of them).
     - **Genitive Substitute:** *Mac ag an rí* (A son of the king).
 </LogicSection>
+
+### Munster
+
+<MutationCard
+    title="Munster dialect"
+    before="ag doras"
+    after="ag an ndoras"
+    rule="d/t causes eclipsis"
+/>
+
+### Connacht
+#### Shortened pronouns
+
+| Person      | Standard | Short Form | Emphatic (Short) |
+|:------------|:---------|:-----------|:-----------------|
+| **At me**   | agam     | 'am        | 'amsa            |
+| **At you**  | agat     | 'ad        | 'adsa            |
+| **At him**  | aige     | -          | -                |
+| **At her**  | aici     | -          | -                |
+| **At us**   | againn   | 'ainn      | 'ainne           |
+| **At you**  | agaibh   | -          | -                |
+| **At them** | acu      | -          | -                |
+
+#### Alternate usage
+
+<MutationCard
+    title="Connacht dialect"
+    before="chuig fear"
+    after="ag fear"
+    rule="Ag can be used in place of chuig"
+/>
+
+<MutationCard
+    title="Connacht dialect"
+    before="ag súil"
+    after="ag an tsúil"
+    rule="t-prefix precedes feminine nouns beginning with s"
+/>
+
+### Ulster
+
+<MutationCard
+    title="Ulster dialect"
+    before="chuig fear"
+    after="ag fear"
+    rule="Ag can be used in place of chuig"
+/>
+
+<MutationCard
+    title="Ulster dialect"
+    before="ag fear"
+    after="ag an fhear"
+    rule="Always causes lenition"
+/>
