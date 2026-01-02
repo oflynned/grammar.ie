@@ -1,14 +1,14 @@
 ---
 title: "Ag"
 category: "Prepositions"
-description: "Ag primarily denotes location (at, by), but also expresses possession and ongoing action."
+description: "Ag primarily denotes location (at, by), but also expresses possession, ongoing action, and agency."
 tags: ["Preposition", "Conjugated"]
 ---
+
 import MutationCard from '../../components/MutationCard.astro';
-import LogicSection from '../../components/LogicSection.astro';
 
 ## Overview
-`Ag` is governed by the dative case.
+`Ag` requires the dative case. It is perhaps the most versatile preposition in Irish, serving as the primary way to express "having" or "possession."
 
 | Pronoun      | Form   | Contrast Form | Translation |
 |:-------------|:-------|:--------------|:------------|
@@ -20,101 +20,94 @@ import LogicSection from '../../components/LogicSection.astro';
 | **you (pl)** | agaibh | agaibhse      | at you      |
 | **they**     | acu    | acusan        | at them     |
 
-## Interrogatives
-
-| Structure    | Following Clause  | Translation        | Example                   | Translation              |
-|:-------------|:------------------|:-------------------|:--------------------------|--------------------------|
-| **Cé + ag**  | Indirect relative | by whom?           | Cé aige a bhfuil sé?      | Who has it?              |
-| **Cad + ag** | Indirect relative | at what?           | Cad aige a bhfuil sé?     | Who has it?              |
-| **Cé + ag**  | Direct relative   | which?             | Cé acu is fearr leat?     | Which do you prefer?     |
-| **Cé + ag**  | Direct relative   | who of?            | Cé againn a bheidh ansin? | Who of us will be there? |
-
 ## Mutations
-
 <MutationCard
-    title="Without an article"
-    before="ag"
-    after="ag Seán"
-    rule="No lenition/eclipsis"
+    title="Standard"
+    before="ag fuinneoig"
+    after="ag an bhfuinneoig"
+    rule="Causes eclipsis with the article (except d/t)."
 />
-
 <MutationCard
-    title="With an article"
-    before="ag fear"
-    after="ag an bhfear"
-    rule="Causes eclipsis (except d/t)"
-/>
-
-## Advanced uses
-
-<LogicSection title="Possession & Knowledge">
-    - **Possession:** *Tá leabhar agam* (I have a book).
-    - **Knowledge:** *Tá Gaeilge aige* (He knows Irish).
-    - **Ability:** *Tá snámh aici* (She can swim).
-</LogicSection>
-
-<LogicSection title="Spatial & Temporal">
-    - **Place:** *Ag an doras* (At the door).
-    - **Time:** *Ag am dinnéir* (At dinner time).
-    - **Events:** *Ag an rince* (At the dance).
-</LogicSection>
-
-<LogicSection title="Advanced Grammatical Functions">
-    - **Verbal Noun:** *Ag obair* (Working).
-    - **The Partitive:** *Duine acu* (One of them).
-    - **Genitive Substitute:** *Mac ag an rí* (A son of the king).
-</LogicSection>
-
-### Munster
-
-<MutationCard
-    title="Munster dialect"
-    before="ag doras"
-    after="ag an ndoras"
-    rule="d/t causes eclipsis"
-/>
-
-### Connacht
-#### Shortened pronouns
-
-| Person      | Standard | Short Form | Emphatic (Short) |
-|:------------|:---------|:-----------|:-----------------|
-| **At me**   | agam     | 'am        | 'amsa            |
-| **At you**  | agat     | 'ad        | 'adsa            |
-| **At him**  | aige     | -          | -                |
-| **At her**  | aici     | -          | -                |
-| **At us**   | againn   | 'ainn      | 'ainne           |
-| **At you**  | agaibh   | -          | -                |
-| **At them** | acu      | -          | -                |
-
-#### Alternate usage
-
-<MutationCard
-    title="Connacht dialect"
-    before="chuig fear"
-    after="ag fear"
-    rule="Ag can be used in place of chuig"
-/>
-
-<MutationCard
-    title="Connacht dialect"
-    before="ag súil"
-    after="ag an tsúil"
-    rule="t-prefix precedes feminine nouns beginning with s"
-/>
-
-### Ulster
-
-<MutationCard
-    title="Ulster dialect"
-    before="chuig fear"
-    after="ag fear"
-    rule="Ag can be used in place of chuig"
-/>
-
-<MutationCard
-    title="Ulster dialect"
-    before="ag fear"
+    title="Ulster/Connacht"
+    before="ag an fhear"
     after="ag an fhear"
-    rule="Always causes lenition"
+    rule="Ulster prefers lenition after the article in almost all cases."
 />
+<MutationCard
+    title="Munster"
+    before="ag an doras"
+    after="ag an ndoras"
+    rule="Munster causes eclipsis even with d/t."
+/>
+
+---
+
+## Core Functions
+
+### Spatial & Temporal (at, by, around)
+Used for a fixed point in space or time.
+* **Location:** *ag an bhfuinneoig* — at/by the window.
+* **Time:** *ag a trí a chlog* — at 3 o'clock.
+* **Events:** *ag an rince* — at the dance.
+
+### Possession & Capacity (to have)
+Irish has no verb "to have". Instead, the construction `bí + ag` is used for a broad idea of "possession".
+* **Physical Objects:** *Tá teach aige* — He has a house.
+* **Languages:** *Tá Gaeilge agam* — I speak (have) Irish.
+* **Abilities:** *Tá snámh aige* — He can swim (he has swimming).
+* **Permission:** *Tá cead agat* — You may (you have permission).
+* **Obligation:** *Níl agat ach...* — You just have to...
+
+### Derived Verbs
+Some verbs exist in Irish as set constructions, instead of as a dedicated verb.
+
+| Concept  | Formula           | Example                    | Translation                   |
+|----------|-------------------|----------------------------|-------------------------------|
+| Love     | Grá ag... ar...   | Tá grá agam uirthi.        | I love her.                   |
+| Desire   | Dúil ag... i...   | Tá dúil agam san fhíon.    | I have a desire for the wine. |
+| Interest | Suim ag... i...   | An bhfuil suim agat ann?   | Are you interested in it?     |
+| Need     | Gá ag... le...    | Tá gá agam le hairgead.    | I need money.                 |
+| Hatred   | Fuath ag... do... | Tá fuath agam don fhuacht. | I hate the cold.              |
+
+### Continuous Aspect
+When placed before a Verbal Noun, it creates the "ing" form in English.
+* *Tá mé ag ithe* — I am eating (lit. "I am at eating").
+
+---
+
+## Agency & Cause
+
+`Ag` identifies the person responsible for a state or the cause of a feeling.
+- **Physical Cause:** *Táim tinn ag an ngrian* — I'm sick from the sun.
+- **Result of Action:** *Táim bodhar agat* — You have me deafened (by your noise).
+- **Perfective Aspect:** *Tá an bord briste agam* — I have broken the table — lit. The table is in a state of broken by me.
+- **Opinion:** *Is beag agam é* — I think little of it — lit. It is little "at me".
+
+## The Partitive (Subset of a group)
+Used to describe "some of" or "many of" a group, specifically with plural pronouns.
+- **Group:** *go leor acu* — many of them.
+- **Selection:** *duine againn* — one of us.
+- **Comparison:** *Cé acu is fearr?* — Which (of them) is better?
+
+## Adjectival Reference (For/By)
+When following an adjective, `ag` defines the person for whom the quality applies.
+- **Relative ease:** *éasca agam* — easy for me.
+- **Subjective weight:** *trom aici* — heavy for her.
+- **Character:** *deas agat* — nice of you.
+
+---
+
+## Dialectal Variations
+
+### The "Chuig" Replacement
+In Connacht and Ulster dialects, `ag` often replaces the preposition `chuig` (towards/to) due to phonetic merging.
+* *Ag an fhear* — To the man.
+
+### Connacht Shortened Forms
+In rapid speech, the "ag-" prefix is often dropped.
+
+| Standard | Short Form | Emphatic   |
+|:---------|:-----------|:-----------|
+| agam     | **'am**    | **'amsa**  |
+| agat     | **'ad**    | **'adsa**  |
+| againn   | **'ainn**  | **'ainne** |
