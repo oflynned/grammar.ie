@@ -1,0 +1,88 @@
+---
+const {headings} = Astro.props;
+const relevantHeaders = headings.filter(heading => heading.depth <= 3)
+---
+
+<nav class="toc">
+    <ul class="flex flex-col">
+        {relevantHeaders.map((heading) => (
+                <li class={`group flex gap-4 depth-${heading.depth}`}>
+                    <div class="relative w-4 flex flex-col items-center shrink-0">
+                        <div class="absolute inset-0 flex justify-center">
+                            <div class="w-px h-full bg-slate-100 group-first:mt-3 group-first:h-[calc(100%-12px)] group-last:h-3">
+                            </div>
+                        </div>
+                        <span
+                                class="dot relative z-10 w-2.5 h-2.5 rounded-full border-2 border-slate-200 bg-white transition-all duration-300 shrink-0 mt-[7px]"
+                                data-dot-slug={heading.slug}
+                        />
+                    </div>
+
+                    <a
+                            href={`#${heading.slug}`}
+                            class="toc-link pb-6 text-sm leading-6 text-slate-500 hover:text-emerald-600 transition-colors duration-200"
+                            data-slug={heading.slug}
+                    >
+                        {heading.text}
+                    </a>
+                </li>
+        ))}
+    </ul>
+</nav>
+
+<style>
+    @reference "../styles/global.css";
+
+    .depth-3 .toc-link {
+        @apply ml-4 text-xs;
+    }
+
+    .toc-link.active {
+        @apply text-emerald-600 font-bold;
+    }
+
+    .dot.active {
+        @apply border-emerald-500 bg-emerald-500 scale-125;
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+    }
+</style>
+
+<script>
+    const observerOptions = {
+        root: null,
+        rootMargin: '-100px 0px -70% 0px',
+        threshold: [0, 1]
+    };
+
+    const handleActiveState = (id: string | null) => {
+        if (id) {
+            document.querySelectorAll('.toc-link, .dot').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.toc-link[data-slug="${id}"]`)?.classList.add('active');
+            document.querySelector(`.dot[data-dot-slug="${id}"]`)?.classList.add('active');
+        }
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                handleActiveState(entry.target.getAttribute('id'));
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('article h2, article h3').forEach((h) => observer.observe(h));
+
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.innerHeight + window.scrollY;
+        const bodyHeight = document.documentElement.scrollHeight;
+
+        if (scrollPosition >= bodyHeight - 64) {
+            const allLinks = document.querySelectorAll('.toc-link');
+            const lastLink = allLinks[allLinks.length - 1];
+            if (lastLink) {
+                const id = lastLink.getAttribute('data-slug');
+                handleActiveState(id);
+            }
+        }
+    });
+</script>
