@@ -26,27 +26,28 @@ const {Content, headings} = await entry.render();
 ---
 
 <Layout title={entry.data.title}>
-    <main class="flex flex-col min-h-screen bg-white">
-        <Navigation category="Preposition"/>
+    <main class="flex flex-col min-h-screen bg-slate-50 dark:bg-gray-800 transition-colors duration-300">
+        <Navigation category="Prepositions"/>
 
         <section class="flex mx-auto w-full max-w-6xl gap-12 px-4 py-12">
             <article class="flex-1 min-w-0">
-                <header class="mb-12 border-b border-slate-200 pb-8">
-                    <h1 class="text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+                <header class="mb-12 border-b border-slate-200 dark:border-slate-800 pb-8">
+                    <h1 class="text-5xl font-bold text-slate-900 dark:text-slate-50 mb-4 tracking-tight">
                         {entry.data.title}
                     </h1>
-                    <p class="text-slate-500 leading-relaxed">
+
+                    <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-lg">
                         {entry.data.description}
                     </p>
 
                     <div class="flex gap-2 mt-6">
                         {entry.data.tags.map(tag => (
-                            <Tag tag={tag}/>
+                                <Tag tag={tag}/>
                         ))}
                     </div>
                 </header>
 
-                <div class="prose prose-slate prose-emerald max-w-none">
+                <div class="prose prose-slate dark:prose-invert prose-emerald max-w-none">
                     <Content/>
                 </div>
             </article>
@@ -56,7 +57,6 @@ const {Content, headings} = await entry.render();
                     <TableOfContents headings={headings}/>
                 </div>
             </aside>
-
         </section>
     </main>
 </Layout>
@@ -72,7 +72,7 @@ const {Content, headings} = await entry.render();
 
         const anchor = document.createElement('a');
         anchor.href = `#${id}`;
-        anchor.className = 'anchor-link relative ml-2 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300 text-slate-500 flex items-center justify-center no-underline';
+        anchor.className = 'anchor-link relative ml-2 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300 text-slate-500 dark:text-slate-400 flex items-center justify-center no-underline';
         anchor.innerHTML = `${LINK_SVG}${COPIED_SVG}`;
         anchor.title = 'Copy link to this section';
 
