@@ -72,7 +72,7 @@ const {Content, headings} = await entry.render();
 
         const anchor = document.createElement('a');
         anchor.href = `#${id}`;
-        anchor.className = 'anchor-link relative ml-2 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300 text-slate-500 dark:text-slate-400 flex items-center justify-center no-underline';
+        anchor.className = 'anchor-link relative ml-2 w-6 h-6 opacity-100 md:opacity-0 group-hover:opacity-100 transition-all duration-300 text-slate-500 dark:text-slate-400 flex items-center justify-center no-underline';
         anchor.innerHTML = `${LINK_SVG}${COPIED_SVG}`;
         anchor.title = 'Copy link to this section';
 
