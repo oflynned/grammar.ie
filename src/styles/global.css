@@ -2,11 +2,12 @@
 @plugin "@tailwindcss/typography";
 
 @layer components {
-    .highlight {
-        /* Light Mode */
-        @apply text-emerald-600 font-bold underline decoration-emerald-200 decoration-2 underline-offset-4;
+    html {
+        @apply bg-white dark:bg-gray-800
+    }
 
-        /* Dark Mode: Brighter text and more subtle underline */
+    .highlight {
+        @apply text-emerald-600 font-bold underline decoration-emerald-200 decoration-2 underline-offset-4;
         @apply dark:text-emerald-400 dark:decoration-emerald-500/40;
     }
 }
