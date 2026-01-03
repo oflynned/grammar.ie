@@ -3,12 +3,17 @@
 
 @layer components {
     .highlight {
+        /* Light Mode */
         @apply text-emerald-600 font-bold underline decoration-emerald-200 decoration-2 underline-offset-4;
+
+        /* Dark Mode: Brighter text and more subtle underline */
+        @apply dark:text-emerald-400 dark:decoration-emerald-500/40;
     }
 }
 
 code {
-    @apply bg-emerald-50 text-emerald-700 p-1 rounded-md text-xs font-bold px-1.5;
+    @apply bg-emerald-50 text-emerald-700 p-1 rounded-md text-xs font-bold px-1.5 transition-colors duration-300;
+    @apply dark:bg-emerald-500/10 dark:text-emerald-400 dark:border dark:border-emerald-500/20;
 }
 
 code::before {
