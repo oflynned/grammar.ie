@@ -19,21 +19,7 @@ const {title} = Astro.props;
     <meta name="generator" content={Astro.generator}/>
     <title>{title} | Grammar.ie</title>
 </head>
-<body class="bg-[#fcfcfd] antialiased">
+<body>
 	<slot/>
 </body>
 </html>
-
-<style is:global>
-    :root {
-        --accent: 16, 185, 129;
-    }
-
-    html {
-        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    }
-
-    h2, h3, h4 {
-        scroll-margin-top: 6rem;
-    }
-</style>

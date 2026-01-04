@@ -1,7 +1,38 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+import {getCollection} from 'astro:content';
+
+const prepositions = await getCollection('prepositions');
 ---
 
 <Layout title="Prepositions">
-    <main>Prepositions</main>
+    <main class="flex flex-col min-h-screen transition-colors duration-300">
+        <Navigation category="Prepositions" url="/prepositions"/>
+        <section class="flex-col mx-auto w-full max-w-6xl px-4 py-12 prose prose-slate dark:prose-invert">
+            <h1>Prepositions</h1>
+            <h2>Conjugated</h2>
+            <ul class="grid not-prose gap-2">
+                {prepositions.map(preposition => (
+                        <li class="grid grid-cols-1 sm:grid-cols-2">
+                            <a
+                                    href={`/prepositions/${preposition.slug}`}
+                                    class="p-4 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-brand-primary/50 hover:bg-slate-900 transition-all"
+                            >
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium text-slate-300 group-hover:text-white transition-colors">
+                                        {preposition.data.title || preposition.slug.split('/').pop()}
+                                    </span>
+                                    <svg class="w-4 h-4 text-slate-600 group-hover:text-brand-primary group-hover:translate-x-1 transition-all"
+                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                            </a>
+                        </li>
+                ))}
+            </ul>
+        </section>
+    </main>
 </Layout>

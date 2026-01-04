@@ -3,13 +3,34 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-    --font-sans: "Plus Jakarta Sans Variable", "Plus Jakarta Sans"
+    --font-sans: "Plus Jakarta Sans Variable", "Plus Jakarta Sans";
+    --font-mono: "JetBrains Mono", monospace;
+
+    --color-background: var(--color-white);
+    --color-background-brand: var(--color-emerald-50);
+    --color-background-border: var(--color-gray-100);
+
+    --color-background-dark: var(--color-gray-800);
+    --color-background-brand-dark: var(--color-emerald-500);
+    --color-background-border-dark: var(--color-gray-700);
+
+    --color-text-hover: var(--color-gray-50);
+    --color-text-main: var(--color-gray-100);
+    --color-text-muted: var(--color-gray-300);
+    --color-text-brand: var(--color-emerald-700);
+
+    --color-brand-glow: rgba(52, 211, 153, 0.1);
+
+    --color-brand-primary: var(--color-emerald-400);
+    --color-brand-primary-hover: var(--color-emerald-700);
+
+    --color-brand-primary-dark: var(--color-emerald-500);
+    --color-brand-primary-dark-hover: var(--color-emerald-500);
 }
 
 body {
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "cv11", "ss01";
-    -webkit-font-smoothing: antialiased;
 }
 
 h1 {
@@ -17,23 +38,16 @@ h1 {
 }
 
 h2, h3, h4, h5, h6, p {
-    @apply tracking-normal
+    @apply tracking-normal scroll-mt-24
 }
 
-@layer components {
-    html {
-        @apply bg-white dark:bg-gray-800
-    }
-
-    .highlight {
-        @apply text-emerald-600 font-bold underline decoration-emerald-200 decoration-2 underline-offset-4;
-        @apply dark:text-emerald-400 dark:decoration-emerald-500/40;
-    }
+html {
+    @apply bg-background dark:bg-background-dark
 }
 
-code {
-    @apply bg-emerald-50 text-emerald-700 p-1 rounded-md text-xs font-bold px-1.5 transition-colors duration-300;
-    @apply dark:bg-emerald-500/10 dark:text-emerald-400 dark:border dark:border-emerald-500/20;
+code, span.tag {
+    @apply bg-background-brand text-text-brand rounded-md text-xs font-bold py-1 px-1.5 transition-colors duration-300;
+    @apply dark:bg-background-brand-dark/10 dark:text-emerald-400 dark:border dark:border-emerald-500/20;
 }
 
 code::before {
