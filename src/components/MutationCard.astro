@@ -9,17 +9,18 @@ interface Props {
 const {title, before, after, rule} = Astro.props;
 ---
 
-<div class="bg-slate-900 dark:bg-slate-900/50 rounded-xl px-6 py-5 my-8 text-white relative overflow-hidden border border-slate-800 shadow-2xl" role="region" aria-label={`Grammar mutation example: ${title}`}>
+<div class="bg-slate-900 dark:bg-slate-900/50 rounded-xl px-6 py-5 my-8 text-white relative overflow-hidden border border-slate-800 shadow-2xl"
+     role="region" aria-label={`Grammar mutation example: ${title}`}>
     <div class="relative z-10">
-        <h4 class="text-emerald-400 font-extrabold text-xs uppercase tracking-[0.2em] mb-6">{title}</h4>
+        <h4 class="text-brand-primary font-extrabold text-xs uppercase tracking-[0.2em] mb-6">{title}</h4>
 
-        <div class="flex flex-wrap items-center gap-4 sm:gap-8 mb-6">
+        <div class="flex flex-wrap flex-col sm:flex-row gap-4 sm:gap-8 mb-6">
             <div class="flex flex-col">
                 <span class="text-[10px] text-slate-400 font-bold uppercase mb-1 tracking-wider">Base</span>
                 <span class="text-lg sm:text-xl font-mono text-slate-200">{before}</span>
             </div>
 
-            <div class="text-emerald-500" aria-hidden="true">
+            <div class="text-brand-primary sm:rotate-0 rotate-90 self-center" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M5 12h14"/>
@@ -28,14 +29,14 @@ const {title, before, after, rule} = Astro.props;
             </div>
 
             <div class="flex flex-col">
-                <span class="text-[10px] text-emerald-400 font-bold uppercase mb-1 tracking-wider">Mutated</span>
+                <span class="text-[10px] text-brand-primary font-bold uppercase mb-1 tracking-wider">Mutated</span>
                 <span class="text-lg sm:text-xl font-mono font-bold text-white tracking-wide decoration-emerald-500/50">{after}</span>
             </div>
         </div>
 
         <div class="border-t border-slate-800 pt-4">
-            <p class="text-sm text-slate-300 leading-relaxed">
-                <span class="text-emerald-400 font-bold uppercase text-[10px] mr-2 tracking-widest">Rule</span>
+            <p class="text-sm text-slate-300 leading-relaxed flex flex-col gap-1">
+                <span class="text-brand-primary font-bold uppercase text-[10px] tracking-widest">Rule</span>
                 <span class="italic text-slate-400">{rule}</span>
             </p>
         </div>
