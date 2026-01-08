@@ -8,7 +8,7 @@ const { title } = Astro.props;
 
 <div class="my-6">
     <details
-            class="group border border-text-colour-muted/20 rounded-xl bg-background-colour dark:bg-background-colour-dark shadow-sm overflow-hidden transition-all duration-200"
+            class="group border rounded-xl border-background-border dark:border-background-border-dark bg-background-colour dark:bg-background-colour-dark overflow-hidden transition-all duration-200"
     >
         <summary
                 class="flex justify-between items-center px-5 py-3 cursor-pointer hover:bg-brand-primary/5 list-none select-none transition-colors"
@@ -26,7 +26,7 @@ const { title } = Astro.props;
             </div>
         </summary>
 
-        <div class="px-5 py-4 border-t border-text-colour-muted/10 bg-brand-glow/5">
+        <div class="px-5 py-4 border-t border-background-border dark:border-background-border-dark bg-brand-glow/5">
             <div class="prose prose-sm dark:prose-invert max-w-none text-text-colour-muted dark:text-text-colour-muted-dark leading-relaxed">
                 <slot/>
             </div>

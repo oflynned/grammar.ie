@@ -3,28 +3,32 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-    --font-sans: "Plus Jakarta Sans Variable", "Plus Jakarta Sans";
-    --font-mono: "JetBrains Mono", monospace;
+    --font-sans: "Plus Jakarta Sans Variable";
 
     --color-background: var(--color-white);
     --color-background-brand: var(--color-emerald-50);
-    --color-background-border: var(--color-gray-100);
+    --color-background-border: var(--color-slate-200);
 
     --color-background-dark: var(--color-gray-800);
     --color-background-brand-dark: var(--color-emerald-500);
-    --color-background-border-dark: var(--color-gray-700);
+    --color-background-border-dark: var(--color-slate-700);
 
     --color-text-hover: var(--color-gray-50);
     --color-text-main: var(--color-gray-100);
     --color-text-muted: var(--color-gray-300);
-    --color-text-brand: var(--color-emerald-700);
+    --color-text-brand: var(--color-emerald-600);
+    --color-text-brand-hover: var(--color-emerald-400);
+    --color-text-brand-dark: var(--color-emerald-400);
+    --color-text-brand-dark-hover: var(--color-emerald-600);
 
     --color-brand-glow: rgba(52, 211, 153, 0.1);
 
-    --color-brand-primary: var(--color-emerald-400);
+    --color-brand-primary: var(--color-emerald-500);
+    --color-brand-primary-border: var(--color-emerald-400);
     --color-brand-primary-hover: var(--color-emerald-700);
 
-    --color-brand-primary-dark: var(--color-emerald-500);
+    --color-brand-primary-dark: var(--color-emerald-400);
+    --color-brand-primary-border-dark: var(--color-emerald-500);
     --color-brand-primary-dark-hover: var(--color-emerald-500);
 }
 
@@ -34,15 +38,24 @@ body {
 }
 
 h1 {
-    @apply tracking-tight
+    @apply tracking-tight;
 }
 
 h2, h3, h4, h5, h6, p {
-    @apply tracking-normal scroll-mt-24
+    @apply tracking-normal scroll-mt-24;
 }
 
 html {
-    @apply bg-background dark:bg-background-dark
+    @apply bg-background dark:bg-background-dark;
+}
+
+pre {
+    @apply bg-background-brand text-text-brand rounded-md text-xs font-bold py-2 px-3 transition-colors duration-300;
+    @apply dark:bg-background-brand-dark/10 dark:text-emerald-400 dark:border dark:border-emerald-500/20;
+}
+
+pre > code {
+    @apply bg-transparent border-0
 }
 
 code, span.tag {
