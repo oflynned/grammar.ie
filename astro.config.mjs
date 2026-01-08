@@ -9,5 +9,8 @@ export default defineConfig({
         plugins: [tailwindcss()]
     },
     output: 'static',
-    integrations: [mdx()]
+    integrations: [mdx()],
+    markdown: {
+        syntaxHighlight: false
+    }
 });

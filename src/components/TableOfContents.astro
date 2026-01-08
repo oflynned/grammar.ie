@@ -1,6 +1,7 @@
 ---
 const {headings} = Astro.props;
-const relevantHeaders = headings.filter(heading => heading.depth <= 3)
+const MAX_HEADING_DEPTH = 3
+const relevantHeaders = headings.filter(heading => heading.depth <= MAX_HEADING_DEPTH)
 ---
 
 <nav class="toc">
@@ -20,7 +21,7 @@ const relevantHeaders = headings.filter(heading => heading.depth <= 3)
 
                     <a
                             href={`#${heading.slug}`}
-                            class="toc-link pb-6 text-sm leading-6 text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200"
+                            class="toc-link pb-6 text-sm leading-6 text-slate-500 dark:text-slate-400 hover:text-brand-primary-hover dark:hover:text-brand-primary-dark-hover transition-colors duration-200"
                             data-slug={heading.slug}
                     >
                         {heading.text}
@@ -38,11 +39,11 @@ const relevantHeaders = headings.filter(heading => heading.depth <= 3)
     }
 
     .toc-link.active {
-        @apply text-emerald-600 dark:text-emerald-400 font-bold;
+        @apply text-brand-primary dark:text-brand-primary-dark font-bold;
     }
 
     .dot.active {
-        @apply border-emerald-500 bg-emerald-500 scale-125;
+        @apply border-brand-primary bg-brand-primary scale-125 border;
         box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
     }
 </style>

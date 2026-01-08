@@ -1,24 +1,32 @@
 ---
-interface Props {
-    category: string;
+export type Breadcrumb = {
+    title: string;
     url: string;
 }
 
-const {category, url} = Astro.props
+interface Props {
+    breadcrumbs?: Breadcrumb[]
+}
+
+const {breadcrumbs} = Astro.props
 ---
 
-<nav class="z-20 sticky top-0 text-sm font-medium transition-colors duration-300 border-b  bg- bg-background/80 dark:bg-background-dark/80 backdrop-blur-md text-slate-600 dark:text-slate-200 border-slate-200 dark:border-gray-700">
+<nav class="z-20 sticky top-0 text-sm font-medium transition-colors duration-300 border-b  bg- bg-background/80 dark:bg-background-dark/80 backdrop-blur-md text-slate-600 dark:text-slate-200 border-background-border dark:border-background-border-dark">
     <section class="mx-auto flex justify-between items-center max-w-6xl px-4 py-4">
         <div class="flex items-center gap-1 py-3">
             <a href="/"
                class="hover:text-brand-primary-hover dark:hover:text-brand-primary-dark-hover flex items-center transition-colors">
                 Home
             </a>
-            <span class="text-text-muted" aria-hidden="true">/</span>
-            <a href={url}
-               class="hover:text-brand-primary-hover dark:hover:text-brand-primary-dark-hover flex items-center transition-colors">
-                {category}
-            </a>
+            {breadcrumbs ? breadcrumbs.map(({url, title}) => (
+                    <>
+                        <span class="text-text-muted" aria-hidden="true">/</span>
+                        <a href={url}
+                           class="hover:text-brand-primary-hover dark:hover:text-brand-primary-dark-hover flex items-center transition-colors">
+                            {title}
+                        </a>
+                    </>
+            )) : null}
         </div>
     </section>
 </nav>
