@@ -1,6 +1,7 @@
 ---
 import type {CollectionEntry} from "astro:content";
 import PageContent from "../../layouts/PageContent.astro";
+import Card from '../../components/Card.astro'
 import {getCollection} from 'astro:content';
 
 const prepositions = await getCollection('prepositions');
@@ -43,20 +44,11 @@ const toSentenceCase = (name: string) => {
                                                 href={`/prepositions/${preposition.slug}`}
                                                 class="block p-6 h-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 rounded-2xl no-underline"
                                         >
-                                            <div class="flex justify-between items-center">
-                                    <span class="font-bold text-xl text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors capitalize">
-                                        {preposition.data.title}
-                                    </span>
-
-                                                <div class="p-2 rounded-full bg-brand-primary/5 group-hover:bg-brand-primary/10 transition-all duration-300 group-hover:translate-x-1">
-                                                    <svg class="w-4 h-4 text-brand-primary"
-                                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                              stroke-width="2.5"
-                                                              d="M9 5l7 7-7 7"></path>
-                                                    </svg>
-                                                </div>
-                                            </div>
+                                            <Card>
+                                                <span class="font-bold text-xl text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors capitalize">
+                                                    {preposition.data.title}
+                                                </span>
+                                            </Card>
                                         </a>
                                     </li>
                             ))}
