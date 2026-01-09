@@ -1,40 +1,67 @@
 ---
+import type {CollectionEntry} from "astro:content";
 import PageContent from "../../layouts/PageContent.astro";
 import {getCollection} from 'astro:content';
 
 const prepositions = await getCollection('prepositions');
+
+const groupedPrepositions = prepositions.reduce<Record<string, CollectionEntry<'prepositions'>[]>>((acc, preposition) => {
+    const parts = preposition.slug.split('/');
+    const folder = parts.length > 1 ? parts[0] : 'General';
+
+    if (!acc[folder]) {
+        acc[folder] = [];
+    }
+
+    acc[folder].push(preposition);
+
+    return acc;
+}, {});
+
+const folders = Object.keys(groupedPrepositions).toSorted();
+
+const toSentenceCase = (name: string) => {
+    return name
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (l) => l.toUpperCase());
+}
 ---
 
 <PageContent title="Prepositions">
-    <section class="mx-auto w-full max-w-6xl px-4 py-12 flex-1">
-        <header class="prose dark:prose-invert mb-12 max-w-none">
-            <h1>Prepositions</h1>
-            <h2>Conjugated</h2>
-        </header>
+    <section class="mx-auto w-full max-w-6xl px-4 py-12 flex-1 prose dark:prose-invert">
+        <h1>Prepositions</h1>
 
-        <ul class="not-prose grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0">
-            {prepositions.map(preposition => (
-                    <li class="group list-none">
-                        <a
-                                href={`/prepositions/${preposition.slug}`}
-                                class="block p-6 h-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 rounded-2xl no-underline"
-                        >
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-xl text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors capitalize">
-                                    {preposition.data.title}
-                                </span>
+        {folders.map(folder => (
+                <>
+                    <h2>{toSentenceCase(folder)}</h2>
+                    <ol class="not-prose grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0">
+                        {groupedPrepositions[folder]
+                            .toSorted((a, b) => a.data.title.localeCompare(b.data.title))
+                            .map(preposition => (
+                                    <li class="group list-none">
+                                        <a
+                                                href={`/prepositions/${preposition.slug}`}
+                                                class="block p-6 h-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 rounded-2xl no-underline"
+                                        >
+                                            <div class="flex justify-between items-center">
+                                    <span class="font-bold text-xl text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors capitalize">
+                                        {preposition.data.title}
+                                    </span>
 
-                                <div class="p-2 rounded-full bg-brand-primary/5 group-hover:bg-brand-primary/10 transition-all group-hover:translate-x-1">
-                                    <svg class="w-4 h-4 text-brand-primary group-hover:text-brand-primary"
-                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                              d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-            ))}
-        </ul>
+                                                <div class="p-2 rounded-full bg-brand-primary/5 group-hover:bg-brand-primary/10 transition-all duration-300 group-hover:translate-x-1">
+                                                    <svg class="w-4 h-4 text-brand-primary"
+                                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2.5"
+                                                              d="M9 5l7 7-7 7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                            ))}
+                    </ol>
+                </>
+        ))}
     </section>
 </PageContent>
