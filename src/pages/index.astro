@@ -1,7 +1,47 @@
 ---
-import Page from "../layouts/Page.astro";
+import PageContent from "../layouts/PageContent.astro";
+import Card from "../components/Card.astro";
+
+const modules = [
+    {
+        title: {
+            en: 'Prepositions',
+            ga: 'Na Réamhfhocail'
+        },
+        url: '/prepositions',
+        description: 'Master the logic of conjugated forms, mutations, and the genitive case.',
+    },
+];
 ---
 
-<Page title="Index">
-    <main>Index</main>
-</Page>
+<PageContent title="Irish Grammar Home">
+    <section class="mx-auto w-full flex-1">
+        <header class="mb-16">
+            <h1 class="text-6xl font-black tracking-tight mb-4">
+                Foghlaim <span class="text-brand-primary">Gaeilge.</span>
+            </h1>
+            <p class="text-lg max-w-xl leading-relaxed">
+                A structured approach to Irish grammar, built for clarity and speed.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 gap-6">
+            {modules.map(module => (
+                    <a href={module.url}
+                       class="group relative md:flex-row md:items-center justify-between p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl hover:border-brand-primary transition-all duration-300 no-underline shadow-sm hover:shadow-xl hover:shadow-emerald-500/5">
+                        <Card>
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-brand-primary dark:text-brand-primary-dark">
+                                    {module.title.ga}
+                                </span>
+                                <h2 class="text-3xl font-bold mb-3 group-hover:text-brand-primary-hover transition-colors">
+                                    {module.title.en}
+                                </h2>
+                                <p>{module.description}</p>
+                            </div>
+                        </Card>
+                    </a>
+            ))}
+        </div>
+    </section>
+</PageContent>
