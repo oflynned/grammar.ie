@@ -4,7 +4,7 @@ const MAX_HEADING_DEPTH = 3
 const relevantHeaders = headings.filter(heading => heading.depth <= MAX_HEADING_DEPTH)
 ---
 
-<nav class="toc">
+<nav class="toc not-prose">
     <ul class="flex flex-col">
         {relevantHeaders.map((heading) => (
                 <li class={`group flex gap-4 depth-${heading.depth}`}>
