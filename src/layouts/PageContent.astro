@@ -9,7 +9,6 @@ interface Props {
 }
 
 const {title} = Astro.props
-
 const segments = Astro.url.pathname.split('/').filter(Boolean);
 const breadcrumbs = segments.map<Breadcrumb>((segment, index) => {
     const url = '/' + segments.slice(0, index + 1).join('/');
@@ -17,7 +16,7 @@ const breadcrumbs = segments.map<Breadcrumb>((segment, index) => {
         .replace(/-/g, ' ')
         .replace(/\b\w/g, (l) => l.toUpperCase());
 
-    return {title, url};
+    return { title, url };
 });
 ---
 
@@ -25,7 +24,7 @@ const breadcrumbs = segments.map<Breadcrumb>((segment, index) => {
     <main class="flex flex-col min-h-screen transition-colors duration-300">
         <Navigation breadcrumbs={breadcrumbs}/>
 
-        <section class="flex flex-1 mx-auto w-full max-w-6xl gap-12 px-4 py-12">
+        <section class="prose dark:prose-invert flex flex-1 mx-auto w-full max-w-6xl gap-12 px-4 py-12">
             <slot/>
         </section>
 

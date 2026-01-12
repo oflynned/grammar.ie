@@ -22,22 +22,4 @@ interface Props {
 const {entry} = Astro.props;
 ---
 
-<MarkdownContent entry={entry}>
-    <article class="flex-1 min-w-0 prose dark:prose-invert">
-        <header class="mb-12 pb-8">
-            <h1 class="text-5xl font-bold mb-4 tracking-tight">
-                {entry.data.title}
-            </h1>
-
-            <p class="leading-relaxed text-lg">
-                {entry.data.description}
-            </p>
-
-            <div class="flex gap-2 mt-6">
-                {entry.data.tags.map(tag => (
-                        <Tag tag={tag}/>
-                ))}
-            </div>
-        </header>
-    </article>
-</MarkdownContent>
+<MarkdownContent entry={entry} />
