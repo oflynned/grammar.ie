@@ -19,7 +19,7 @@ const breadcrumbs = segments.map<Breadcrumb>((segment, index) => {
     return {title, url};
 })
 
-const formattedBreadcrumbs = breadcrumbs.length > 2 ? breadcrumbs.slice(0, -1).concat({title}) : breadcrumbs
+const formattedBreadcrumbs = breadcrumbs.length > 1 ? breadcrumbs.slice(0, -1).concat({title}) : breadcrumbs
 ---
 
 <Page title={title}>
