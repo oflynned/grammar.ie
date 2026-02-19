@@ -1,151 +1,214 @@
 ---
 title: "Ar"
+description: "The preposition 'ar' primarily means 'on' but has a wide range of uses, including possession of states, obligation, and temporal expressions."
 category: "Prepositions"
-description: "Ar primarily denotes being spatially \"on\" something, but is also used to express emotion and abstract state."
-tags: ["Preposition", "Conjugated", "Dative"]
+tags: ["preposition", "conjugated", "dative", "lenition", "eclipsis"]
 ---
-
-import LogicSection from "../../../components/LogicSection.astro"
-import MutationCard from "../../../components/MutationCard.astro"
+import MutationCard from '../../../components/MutationCard.astro';
 
 ## Overview
-`Ar` takes the dative case.
 
-### Forms
+The preposition `ar` is one of the most versatile in Irish. While its core meaning is "on", it has a vast range of other functions. It is usually pronounced as if written `oir` or `eir`.
 
-| Pronoun      | Form   | Contrast Form | Translation |
-|:-------------|:-------|:--------------|:------------|
-| **I**        | orm    | ormsa         | on me       |
-| **You**      | ort    | ortsa         | on you      |
-| **He**       | air    | airsean       | on him      |
-| **She**      | uirthi | uirthise      | on her      |
-| **We**       | orainn | orainne       | on us       |
-| **You (pl)** | oraibh | oraibhse      | on you      |
-| **They**     | orthu  | orthusan      | on them     |
+Historically, `ar` is a merger of three distinct Old Irish prepositions: *ar* ("in front of"), *for* ("on"), and *iar* ("after"). This merger explains its wide variety of meanings today.
 
-| Pronoun      | Possessive Pronoun | Translation |
-|:-------------|:-------------------|:------------|
-| **I**        | ar mo              | on my       |
-| **You**      | ar do              | on your     |
-| **He**       | ar a/arna*         | on his      |
-| **She**      | ar a/arna*         | on her      |
-| **We**       | ar ár/arnár*       | on our      |
-| **You (pl)** | ar bhur            | on your     |
-| **They**     | ar a/arna*         | on their    |
+Like most simple prepositions, `ar` governs the dative case.
 
-<LogicSection title="What is arna?">
-    The forms `arna` and `arnár` are only used in connection with the verbal noun (meaning "after"). Otherwise, `ar a`
-    and `ar ár` are used. `Arna` also appears in the specific phrase `an lá arna mhárach` ("the following day").
+### Forms of Ar
 
-    Additionally, the forms `arna` and `arnar` ("on which" or "on all that") occasionally appear in connection with
-    reflexive and generalised relative pronouns.
-</LogicSection>
+When used with personal pronouns, `ar` combines to form a single word.
 
-### Interrogatives
+| Person    | Standard | Emphatic   |
+|:----------|:---------|:-----------|
+| I         | `orm`    | `ormsa`    |
+| You       | `ort`    | `ortsa`    |
+| He        | `air`    | `airsean`  |
+| She       | `uirthi` | `uirthise` |
+| We        | `orainn` | `orainne`  |
+| You (pl.) | `oraibh` | `oraibhse` |
+| They      | `orthu`  | `orthusan` |
 
-| Question     | Meaning  | What happens next? | Example                        |
-|:-------------|:---------|:-------------------|:-------------------------------|
-| **Cé + ar**  | On who?  | `Indirect`         | Cé air a bhfuil an t-ainm sin? |
-| **Cad + ar** | On what? | `Indirect`         | Cad air a bhfuil an leabhar?   |
+When followed by a possessive pronoun, `ar` remains separate.
 
-### Mutations
+| Person     | Standard  | With Verbal Noun |
+|:-----------|:----------|:-----------------|
+| My         | `ar mo`   | -                |
+| Your       | `ar do`   | -                |
+| His        | `ar a`    | `arna`           |
+| Her        | `ar a`    | `arna`           |
+| Our        | `ar ár`   | `arnár`          |
+| Your (pl.) | `ar bhur` | -                |
+| Their      | `ar a`    | `arna`           |
 
-<MutationCard title="General State (Set Phrases)" before="Ar + cíos" after="Ar cíos"
-              rule="No mutation occurs in fixed or general adverbial states (e.g., for rent, on foot)."/>
+The forms `arna` and `arnár` are primarily used with a verbal noun to mean "after", replacing the older *iar n-a* and *iar n-ár*. For example, *arna chríochnú dom* means "after I had finished it".
 
-<MutationCard title="Qualified Indefinite Nouns" before="Ar + cíos mór" after="Ar chíos mór"
-              rule="Even in set phrases, if the noun is qualified by an adjective, lenition is usually triggered."/>
+### Question Forms
 
-<MutationCard title="Indefinite Nouns (No Article)" before="Ar + bord" after="Ar bhord"
-              rule="Causes lenition on the following noun when no article is present."/>
+- **On whom?**: `cé air...?` (+ indirect relative clause)
+- **On what?**: `cad air...?` / `cé air...?` / `cá hair...?` (+ indirect relative clause)
 
-<MutationCard title="Definite Nouns (With Article)" before="Ar + an + bord" after="Ar an mbord"
-              rule="Causes eclipsis when followed by the singular article."/>
+## Initial Mutations
 
----
+The preposition `ar` causes different initial mutations depending on whether the definite article `an` is present.
 
-## Physical & Spatial Domain
-Used where things are located, how they are attached, and how they are oriented in space.
+<MutationCard
+  title="Lenition without the Article"
+  before="ar + bord (non-generic)"
+  after="ar bhord"
+  rule="Lenites non-generic nouns when the article is not present."
+/>
 
-### Placement & Proximity
-* **Topographic:** *ar an mbord* — on the table; *ar an mbaile* — in the town.
-* **Attached/Held:** *ar teaghrán* — on a string/leash; *ar srian* — on a bridle/rein.
-* **Relative Distance:** *ar amharc* — within sight; *ar éisteacht* — within earshot.
-* **Orientation:** *thuas air* — south of it/above it; *ar aghaidh* — forward.
-* **Exit/Entry:** *amach ar an doras* — out through the door.
+- *ar mhuir* (on a sea)
+- *ar chíos mór* (for a high rent)
 
-### Appearance & Physical State
-* **Clothing (Wearing):** *Tá cóta air* — He is wearing a coat.
-* **Clothing (Action):** *Cuir ort do chóta* — Put on your coat.
-* **Inherent Features:** *Tá dath dearg air* — It has a red color; *ar dháth an róis* — rosen-colored.
-* **Structural Parts:** *tá doirse ar an teach* — the house has doors.
-* **Similes:** *ar dhéanamh báid* — boat-shaped; *ar ghile an tsneachta* — snow-white.
+<MutationCard
+  title="No Mutation without the Article"
+  before="ar + bord (generic)"
+  after="ar bord"
+  rule="No mutation occurs with abstract or generic nouns, especially in descriptions of state."
+/>
 
----
+- *ar muir* (at sea)
+- *ar cíos* (for rent)
 
-## Experiential Domain
-Experiences are viewed as forces acting upon a person.
+<MutationCard
+  title="Eclipsis with the Singular Article"
+  before="ar + an + bord"
+  after="ar an mbord"
+  rule="Causes eclipsis on nouns following the singular article, except for 'd' and 't'."
+/>
 
-### Internal States & Emotions
-* **Sensations:** *tá áthas orm* — I am happy; *tá eagla orm* — I am afraid.
-* **Ailments:** *tá tinneas cinn orm* — I have a headache.
-* **Identity:** *Máirtín atá air* — His name is Martin.
-* **Triggers:** *Chuir sé fearg orm* — He made me angry.
+- *ar an mbord* (on the table)
 
-### Situational Conditions
-* **Abstract States:** *ar meisce* — drunk; *ar buile* — furious/mad; *ar fheabhas* — excellent.
-* **Active Status:** *ar an obair* — at work/working.
-* **Probabilities:** *Tá báisteach air* — It looks like rain; *Tá cogadh air* — War is likely.
+### Dialectal Variations with the Article
 
----
+- **Munster**: Eclipsis applies to all consonants, including `d` and `t`.
+- **Connacht**: A t-prefix is added to feminine nouns starting with `s-`. For example, *ar an tsúil* (on the eye).
+- **Ulster**: Lenition is used instead of eclipsis. For example, *ar an bhord* (on the table).
 
-## Social & Economic Domain
-Used to handle interactions involving money, authority, and obligation.
+## Core Functions
 
-### Finance & Measurement
-* **Price:** *ar phunt* — for a pound; *tá punt ar an úll* — the apple costs a pound.
-* **Dimensions:** *ar airde* — in height; *ar fad* — in length.
-* **Calculations:** *a sé ar a trí sin a dó* — 6 divided by 3 is 2.
-* **Counting:** *duine ar fhichid* — 21 (one on twenty).
+### Spatial and Positional
 
-### Obligation & Authority
-* **Necessity:** *tá orm bainne a ól* — I must drink milk.
-* **Liability:** *tá a báis ort* — you are responsible for her death.
-* **Power:** *rí ar Sasana* — King over England.
-* **Financial Debt:** *tá airgead agam ort* — you owe me money.
+`Ar` is used to describe physical location and direction.
 
----
+- **On top of something**: *ar an mbord* (on the table)
+- **In a town or place**: *ar an mbaile* (in the town)
+- **Fastened to or held by**: *ar teaghrán* (by a rope), *ar srian* (by the reins)
+- **Within range**: *ar amharc* (within sight), *ar éisteacht* (within earshot)
+- **Direction**: *ar aghaidh* (forwards), *amach ar an doras* (out through the door)
 
-## Comparative & Logical Domain
-Used for identifying a person's place within a group or their relation to others.
+### Temporal
 
-### Groups & Rankings
-* **Membership:** *tá sé ar na fir is mó* — he is among the biggest men.
-* **Superlative:** *tá sé ar an bhfear is mó acu* — he is the biggest/greater man of them.
-* **Order:** *bhí sé ar an dara fear a tháinig* — he was the 2nd man who came.
+`Ar` can specify points in time or sequence.
 
-### Comparisons
-* **Advantage:** *tá bliain agam air* — I am 1 year older; *bhí deich nóiméad aige orm* — he had a 10m lead.
-* **Identity:** *fear ar d’ainm* — a man of your name / named like you.
+- **At or on a specific time**: *ar maidin* (in the morning), *ar a dó a chlog* (at 2 o'clock)
+- **After an action (with verbal noun)**: *arna críochnú dom* (after I had finished it)
 
----
+### Possession of States and Attributes
 
-## Phrasal Domain
-Used for specific structures where `ar` serves a functional grammatical purpose.
+A key function of `ar` is to express having states, feelings, or attributes, often translated using "to have" or "to be" in English. The structure is typically `Tá [state] ar [person]`.
 
-### The Dative of Disadvantage
-When an action negatively impacts a person, `ar` identifies that person.
+- **Physical or psychological states**: *Tá áthas orm* (I am happy, lit. "Joy is on me"). This applies to illnesses, sorrow, joy, thirst, fear, and regret.
+- **External appearance**: Used to describe colours, looks, or special features.
+- **Parts of an object**: *Tá doirse ar an teach* (The house has doors).
+- **Having a name**: *Máirtín atá air* (He is called Martin, lit. "Martin is what is on him").
 
-* **Malicious Intent:** *spóirt ag Cáit ar Seán* — Cáit's fun at Seán's expense.
-* **Accidental/Adverse Damage:** *Bhris sé an claí uirthi* — He broke her fence / the fence on her.
-* **Property:** *Bhí sé ag briseadh fuinneogaí ort* — He was breaking your windows.
+### Wearing and Acquiring
 
-### Set Verbal Pairings
-* **Social Verbs:** *iarr ar...* — ask; *glaoigh ar...* — call; *féach ar...* — look at.
-* **Cognitive Verbs:** *tá aithne agam ar Cháit* — I know/am acquainted with Kate; *tá eolas agat ar Éirinn* — you know/have information on Ireland.
+Related to possession, `ar` is used for clothing and the acquisition of states.
 
-### Time & Emphasis
-* **Temporal:** *ar maidin* — in the morning; *ar a dó a chlog* — at 2 o'clock.
-* **Causality:** *ar ghrá Dé* — for the love of God; *ar a thuarastal* — for his salary; *ar a iarratas* — at his request; *ar thoil Dé* — at God's will.
-* **Post-Perfect:** *arna críochnú dom* — after it was finished by me.
-* **Imperative Booster:** *scríobh ort!* — write on! / just write!
+- **Wearing clothes**: The structure `Tá [clothing] ar [person]` means someone is wearing something.
+- **Putting on clothes**: The structure `Cuir [clothing] ar [person]` means to put something on.
+- **Acquiring a state**: The verb `cuir` with `ar` can mean to cause a state in someone. *Chuir sé fearg orm* (He made me angry).
+
+## Abstract and Idiomatic Usage
+
+### Obligation and Responsibility
+
+`Ar` is used to express duty, necessity, and accountability.
+
+- **To have to / must**: The structure `Tá ar [person]` indicates obligation. *Tá orm bainne a ól* (I have to drink milk).
+- **Responsibility for**: *Tá a báis ort* (You are responsible for her death).
+- **Authority over**: *Rí ar Sasana* (King of England).
+
+### Indirect Objects and Common Verbs
+
+`Ar` serves as the indirect object for many common verbs and expressions.
+
+| Concept                 | Formula                     | Example                     | Translation (Literal)           |
+|:------------------------|:----------------------------|:----------------------------|:--------------------------------|
+| To love                 | `tá grá ag [X] ar [Y]`      | *Tá grá agam ort*           | I have love on you              |
+| To know (a person)      | `tá aithne ag [X] ar [Y]`   | *Tá aithne agam ar Cháit*   | I have knowledge on Cáit        |
+| To know (a place/topic) | `tá eolas ag [X] ar [Y]`    | *Tá eolas agat ar Éirinn*   | You have information on Ireland |
+| To be thankful to       | `tá buíochas ag [X] ar [Y]` | *Tá buíochas agam ar Cháit* | I have thanks on Cáit           |
+| To owe money to         | `tá airgead ag [X] ar [Y]`  | *Tá airgead agam ort*       | I have money on you             |
+
+Common verbs that take `ar`:
+- `iarr ar...`: to ask someone
+- `féach ar...`: to look at something
+- `tosaigh ar...`: to begin something
+- `glaoigh ar...`: to call someone
+
+### Advantage and Disadvantage
+
+`Ar` can indicate that an action benefits or harms someone, a concept sometimes called the dative of advantage or disadvantage.
+
+- **Disadvantage**: *Bhí sé ag briseadh fuinneogaí ort* (He was breaking your windows, to your detriment).
+- **Advantage**: *Tá bliain agam air* (I am one year older than him, lit. "I have a year's advantage over him").
+
+## Classification and Description
+
+### Similarity and Sameness
+
+`Ar` can be used to form descriptive phrases indicating similarity.
+
+- **Likeness**: *ar dhath an róis* (rose-coloured), *ar dhéanamh báid* (boat-shaped)
+- **Sameness**: *fear ar d’ainm* (a man with the same name as you)
+
+### Measurement and Price
+
+- **Dimensions**: *ar airde* (in height), *ar fad* (in length)
+- **Price**: *ar phunt* (for a pound), *Tá punt ar an úll* (The apple costs a pound).
+
+### Classification and Identification
+
+`Ar` is used in non-copular sentences to identify something as part of a group or as a specific instance.
+
+- **Part of a set**: *Tá sé ar na fir is mó* (He is one of the biggest men).
+- **With a superlative**: *Tá sé ar an bhfear is mó acu* (He is the biggest man of them).
+- **With ordinal numbers**: *Bhí sé ar an dara fear a tháinig* (He was the second man who came).
+
+### Numbers and Arithmetic
+
+- **Counting**: `ar` is used for numbers 21-29, 31-39, etc. *Duine ar fhichid* (21 people, lit. "one on twenty").
+- **Arithmetic**: `ar` means "divided by". *A sé ar a trí sin a dó* (6 ÷ 3 = 2).
+
+## Specialised Functions
+
+### State and Activity
+
+`Ar` combines with abstract nouns to describe a state of being or an ongoing activity.
+
+- **State of being**: *ar meisce* (drunk), *ar buile* (mad, enraged), *ar fheabhas* (excellent)
+- **Activity (with verbal noun)**: *ar an obair* (at work, working)
+
+### Cause, Result, and Dependence
+
+- **Cause**: *ar ghrá Dé* (for the love of God), *ar a thuarastal* (for his salary)
+- **Result**: *ar a iarratas* (upon his application)
+- **Dependence**: *ar arán* (to live on bread), *ar thoil Dé* (dependent on the will of God)
+
+### About and Concerning
+
+`Ar` can mean "about" or "concerning" in certain contexts.
+
+- *scéal ar...*: a story about...
+- *ainm ar...*: a name for...
+- *cúis dlí ar...*: a legal case against...
+
+### Other Uses
+
+- **With adjectives**: *santach ar...* (greedy for...), *maith ar...* (good at...)
+- **Probability**: *Tá báisteach air* (It looks like rain).
+- **Emphasising the Imperative**: *Scríobh ort!* (Go on, write!).

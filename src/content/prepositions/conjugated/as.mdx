@@ -1,113 +1,136 @@
 ---
 title: "As"
+description: "The preposition 'as' primarily indicates origin or movement 'out of' or 'from'. It is also used to express composition, source, and various idiomatic states."
 category: "Prepositions"
-description: "As primarily translates to \"out\", \"out of\" or \"from\". It is used to indicate origin, composition, and various states of being or absence."
-tags: ["Preposition", "Conjugated", "Dative"]
+tags: ["preposition", "conjugated", "dative", "eclipsis"]
 ---
 
 import MutationCard from '../../../components/MutationCard.astro';
-import LogicSection from '../../../components/LogicSection.astro';
 
 ## Overview
 
-### Forms
+The preposition `as` indicates movement 'out of' or origin 'from'. Historically, it was often written as `a`, which can still be seen in older texts and some dialects. In some Munster dialects, `a` (often written `a'`) is still used before a consonant, e.g., *a' ceann*.
 
-| Pronoun      | Form   | Contrast Form | Translation |
-|:-------------|:-------|:--------------|:------------|
-| **I**        | asam   | asamsa        | out of me   |
-| **You**      | asat   | asatsa        | out of you  |
-| **He**       | as     | as-san        | out of him  |
-| **She**      | aisti  | aistise       | out of her  |
-| **We**       | asainn | asainne       | out of us   |
-| **You (pl)** | asaibh | asaibhse      | out of you  |
-| **They**     | astu   | astusan       | out of them |
+`As` requires the dative case.
 
-### Mutations
+### Conjugated Forms
 
-<MutationCard before={"As + baile"} after={"As baile"} title={"Without an article"} rule={"No mutation"}/>
+When combined with personal pronouns, `as` takes the following forms:
 
-<MutationCard before={"As + an + baile"} after={"As an mbaile"} title={"With an article"} rule={"Eclipsis"}/>
+| Person   | Standard Form | Emphatic Form | Translation     |
+|:---------|:--------------|:--------------|:----------------|
+| I        | `asam`        | `asamsa`      | out of me       |
+| You (sg) | `asat`        | `asatsa`      | out of you      |
+| He / It  | `as`          | `as-san`      | out of him / it |
+| She      | `aisti`       | `aistise`     | out of her      |
+| We       | `asainn`      | `asainne`     | out of us       |
+| You (pl) | `asaibh`      | `asaibhse`    | out of you      |
+| They     | `astu`        | `astusan`     | out of them     |
 
-* **With the article (Munster)** — *as an ndoras* — out of the door — In Munster, even d and t are eclipsed.
-* **With the article (Connacht)** — *as an tsúil* — out of the eye — A t-prefix is added to feminine nouns starting with s-.
-* **With the article (Ulster)** — *as an bhaile* — out of the city — Ulster uses lenition after the article.
+### Question Forms
 
-### Interrogatives
+*   `cé as`? = from whom?
+*   `cad as` / `cé as` / `cá has`? = from what?
+*   `cad as` / `cé as` / `cá has`? = where is ... from? (in a copular clause)
 
-| Question     | Meaning      | What happens next? | Example                       |
-|:-------------|:-------------|:-------------------|:------------------------------|
-| **Cé + as**  | Out of whom? | `Indirect`         | Cé as ar baineadh an t-eolas? |
-| **Cad + as** | Out of what? | `Indirect`         | Cad as ar déanadh an bosca?   |
-| **Cá + as**  | From where?  | `Copula`           | Cá as duit?                   |
-| **Cé + as**  | From where?  | `Copula`           | Cé as thú?                    |
-| **Cad + as** | From where?  | `Copula`           | Cad as don eitleán sin?       |
+## Initial Mutations
 
-<LogicSection title={"Why is do there?"}>
-    `Do` is not required, but is preferred as a way to structure copula questions. Irish often prefers to assign a
-    quality or origin "to" a person rather than saying they "are" it directly. This is similar to how you say:
+The noun following `as` is mutated based on whether the definite article `an` is present.
 
-    * *Seán is ainm dom* — My name is Seán — Lit. Seán is name to-me.
-    * *Is as Éirinn dom* — I am from Ireland — Lit. It is out-of Ireland to-me.
-</LogicSection>
+<MutationCard
+    title="Without the Definite Article"
+    before="as + baile"
+    after="as baile"
+    rule="No mutation occurs when 'as' is followed by a noun without the definite article."
+/>
+<MutationCard
+    title="With the Definite Article (Standard)"
+    before="as + an + baile"
+    after="as an mbaile"
+    rule="Eclipsis is applied to the noun following 'as an'. This rule does not apply to words beginning with 'd' or 't' in the standard language. In Munster, 'd' and 't' are also eclipsed. In Connacht, t-prothesis occurs before feminine nouns beginning with s-, e.g., 'as an tsúil'."
+/>
+<MutationCard
+    title="With the Definite Article (Ulster)"
+    before="as + an + baile"
+    after="as an bhaile"
+    rule="In Ulster Irish, lenition is applied to the noun following 'as an' instead of eclipsis."
+/>
 
----
+## Core Functions: Movement and Origin
 
-## Physical World
+### Spatial Movement
+Describes movement 'out of' a place, state, or situation.
+*   *as guais* = out of danger
+*   *as an imirt* = out of the game
 
-### Spatial Motion & Material
-* **Movement** — *as an mbosca* — out of the box — Indicates movement from the inside to the outside.
-* **Starting Point** — *as sin go Éirinn* — from there to Ireland — Marking the beginning of a journey.
-* **Proximity** — *i bhfad as seo* — far from here — Establishing spatial distance.
-* **Material/Constitution** — *as an éadach* — out of fabric / material — What an object is constructed from.
+### Origin
+Indicates where a person or thing is from, typically used with the copula.
+*   *Is as Béal Feirste é.* = He is from Belfast.
 
-### Sensory Origin
-* **Smell** — *Tá boladh as an madra* — the dog smells — Lit. "there is a smell out of the dog."
-* **Motion** — *Tá cor as an cáca* — the cake is moving — Indicates a physical movement originating from the object.
+### Starting Point
+Marks the beginning of a journey or range.
+*   *as sin go hÉirinn* = from there to Ireland
+*   *i bhfad as seo* = far from here
 
----
+### Selection
+Used to denote choosing one thing from a group.
+*   *bain rogha as* = to select from
+*   *duine as béirt* = one of two
 
-## Experiential Domain
+## Source and Composition
 
-### Psychologically & Intellectual Origin
-* **Emotion** — *as fearg* — out of anger — The internal motivation for an action.
-* **Knowledge/Recognition** — *aithním as a shúil é* — I recognised him by his stride — The source of information used to identify someone.
-* **Deduction** — *tuigim as* — that's how I understand it — Deriving meaning from a source.
+### Material Composition
+Indicates the material something is made 'of'.
+*   *as an éadach* = of the fabric
 
-### Language & Medium
-* **Language** — *as Gaeilge* — in Irish — Using a language as the medium of communication.
-* **Medium** — *nigh as uisce é* — wash it in (with) water — Using a substance as the medium for an action.
+### Source of Information or Action
+Identifies the source of a perception, name, conclusion, or emotion.
+*   **Perception**: *Tá baladh as an madadh.* = The dog smells.
+*   **Name**: *Baisteadh as a athair é.* = He was named after his father.
+*   **Knowledge**: *Aithním as a shúil é.* = I recognised him by his walk.
+*   **Conclusion**: *Tuigim as.* = From that I understand.
+*   **Emotion**: *as fearg* = out of anger.
 
-### Possession & Pride Logic
-* **Pride** — *tá bród orm asat* — I am proud of you — (Pride is *on* me *out of* you).
-* **Gratitude** — *go raibh maith agat as an obair seo* — thank you for this work — (Goodness be *at* you *out of* this work).
+### Idiomatic Sources
+`As` is a key part of several common idiomatic structures.
 
----
+| Concept | Formula                     | Example                    | Translation (Literal)                    |
+|:--------|:----------------------------|:---------------------------|:-----------------------------------------|
+| Pride   | `Tá bród orm asat`          | *I am proud of you.*       | Is pride on-me out-of-you                |
+| Thanks  | `Go raibh maith agat as...` | *Thank you for this work.* | That be good at-you out-of the work this |
+| Trust   | `Tá muinín agam aisti`      | *I trust her.*             | Is trust at-me out-of-her                |
 
-## Social & Economic Domain
+## State and Condition
 
-### Status & Employment
-* **Employment** — *as obair* — out of work — Indicating a state of unemployment.
-* **Selection** — *duine as beirt* — one of the two — Choosing from a specific group.
-* **Selection** — *bain rogha as* — choose out of — The act of picking from options.
+### Being Outside a State
+`As` can describe being outside of a certain condition or range.
+*   **General**: *as amharc* = out of sight
+*   **Functional**: *as ordú* = out of order
+*   **Employment**: *as obair* = without work / unemployed
+*   **Condition**: *as cuimse* = beyond measure
 
-### Identity
-* **Origin/Heritage** — *Is as Béal Feirste é* — He is from Belfast — Used with the copula to define where someone belongs.
-* **Naming** — *baisteadh as a athair é* — one named him after his father — Origin of a name.
+### Being Off or Out
+Used adverbially to mean 'off' or 'out'.
+*   **To be off (deactivated)**: *Tá an raidió as.* = The radio is off.
+*   **To turn off**: *Chas mé an tine as.* = I turned the fire off.
+*   **To be out (not present)**: *Tá mé as.* = I am out.
 
----
+### Being Alone
+Used with `féin` to express being alone.
+*   *Tá mé ag siúl as féin.* = I am walking alone.
+*   *Tá asainn féin anois.* = We are alone now.
 
-## Domain of State & Function
+## Other Uses
 
-### Functional Status
-* **Operational** — *as ordú* — out of order — A machine or system that is not functioning.
-* **Usage** — *as úsaid* — out of use — Something no longer being utilised.
-* **Correctness** — *as bealach* — off-track — Being wrong or following a misconception.
-* **Safety** — *as guais* — out of danger — Being removed from a state of peril.
-* **Participation** — *as an imirt* — out of the game — No longer involved in the activity.
+### Medium or Language
+Indicates the medium used for an action or the language something is in.
+*   *nigh as uisce é* = wash it in (with) water
+*   *as Gaeilge* = in Irish
 
-### Adverbial States (The "Off" Logic)
-* **Electronics** — *Tá an raidió as* — the radio is off — The state of being deactivated.
-* **Extinguishing** — *Chas mé an tine as* — I put out the fire — To turn something "off."
-* **Solitude** — *tá mé ag súil as féin* — I walk alone — (Walking "out of" oneself/independently).
-* **Isolation** — *Tá asainn féin anois* — we're alone now — The state of being by ourselves.
-* **Absence** — *tá ... as ...* — to not have — This is the functional opposite of *tá ... ag* (to have). It describes a lack or a state of being "out" of a resource.
+### Specific Location
+Specifies a quality at a particular point on an object.
+*   *géar as an mbarr* = sharp at the tip
+
+### Involvement
+Indicates being involved in something.
+*   *tá as rud* = to be involved in something

@@ -4,22 +4,21 @@ import PageContent from "../../layouts/PageContent.astro";
 import Card from '../../components/Card.astro'
 import {getCollection} from 'astro:content';
 
-const prepositions = await getCollection('prepositions');
+const pages = await getCollection('prepositions');
 
-const groupedPrepositions = prepositions.reduce<Record<string, CollectionEntry<'prepositions'>[]>>((acc, preposition) => {
-    const parts = preposition.slug.split('/');
-    const folder = parts.length > 1 ? parts[0] : 'General';
+const groups = pages.reduce<Record<string, CollectionEntry<'prepositions'>[]>>((acc, page) => {
+    const [folder] = page.slug.split('/');
 
     if (!acc[folder]) {
         acc[folder] = [];
     }
 
-    acc[folder].push(preposition);
+    acc[folder].push(page);
 
     return acc;
 }, {});
 
-const folders = Object.keys(groupedPrepositions).toSorted();
+const folders = Object.keys(groups).toSorted();
 
 const toSentenceCase = (name: string) => {
     return name
@@ -28,7 +27,7 @@ const toSentenceCase = (name: string) => {
 }
 ---
 
-<PageContent title="Prepositions">
+<PageContent title="Prepositions" slug="/prepositions">
     <section class="mx-auto w-full max-w-6xl flex-1 prose dark:prose-invert">
         <h1>Prepositions</h1>
 
@@ -36,7 +35,7 @@ const toSentenceCase = (name: string) => {
                 <>
                     <h2>{toSentenceCase(folder)}</h2>
                     <ol class="not-prose grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0">
-                        {groupedPrepositions[folder]
+                        {groups[folder]
                             .toSorted((a, b) => a.data.title.localeCompare(b.data.title))
                             .map(preposition => (
                                     <li class="group list-none">
@@ -45,7 +44,7 @@ const toSentenceCase = (name: string) => {
                                                 class="block p-6 h-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 rounded-2xl no-underline"
                                         >
                                             <Card>
-                                                <span class="font-bold text-xl text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors capitalize">
+                                                <span class="font-bold text-xl text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                                                     {preposition.data.title}
                                                 </span>
                                             </Card>

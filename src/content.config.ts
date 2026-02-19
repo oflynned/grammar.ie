@@ -1,7 +1,7 @@
 // src/content/config.ts
-import { defineCollection, z } from 'astro:content';
+import {defineCollection, z} from 'astro:content';
 
-const prepositions = defineCollection({
+const content = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
@@ -11,6 +11,19 @@ const prepositions = defineCollection({
     }),
 });
 
+const orderedContent = defineCollection({
+    type: 'content',
+    schema: z.object({
+        index: z.number(),
+        title: z.string(),
+        category: z.string(),
+        description: z.string().optional(),
+        tags: z.array(z.string()),
+    }),
+})
+
 export const collections = {
-    'prepositions': prepositions,
+    'prepositions': content,
+    'verbs': content,
+    'copula': orderedContent,
 };

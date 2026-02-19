@@ -8,7 +8,20 @@ type Module = {
 }
 
 const modules: Module[] = [
-    {title: {en: 'Prepositions', ga: 'Na Réamhfhocail'}, url: '/prepositions',},
+    {title: {en: 'Nouns', ga: 'AN tAINMFHOCAL'}, url: '/nouns',},
+    {title: {en: 'Articles', ga: 'AN CÓNASC'}, url: '/articles',},
+    {title: {en: 'Adjectives', ga: 'AN AIDIACHT'}, url: '/adjectives',},
+    {title: {en: 'Copula', ga: 'AN CHOPAIL'}, url: '/copula',},
+    {title: {en: 'Verbs', ga: 'AN BRIATHAR'}, url: '/verbs',},
+    {title: {en: 'Adverbs', ga: 'AN DOBRIATHAR'}, url: '/adverbs',},
+    {title: {en: 'Prepositions', ga: 'AN RÉAMHFHOCAL'}, url: '/prepositions',},
+    {title: {en: 'Pronouns', ga: 'AN FORAINM PEARSANTA'}, url: '/pronouns',},
+    {title: {en: 'Interrogatives', ga: 'AN CHEIST'}, url: '/interrogatives',},
+    {title: {en: 'Syntax', ga: 'AN CHÓMHRÉIR'}, url: '/syntax',},
+    {title: {en: 'Conjunctions', ga: 'AN CÓNASC'}, url: '/conjunctions',},
+    {title: {en: 'Mutations', ga: 'NA hATHRUITHE TOSAIGH'}, url: '/mutations',},
+    {title: {en: 'Inflections', ga: 'INFHILLEADH NA FRÉIMHE'}, url: '/inflections',},
+    {title: {en: 'Counting', ga: 'NA hUIMHREACHA'}, url: '/counting',},
 ];
 ---
 
@@ -28,7 +41,7 @@ const modules: Module[] = [
                     <a href={module.url}
                        class="group relative md:flex-row md:items-center justify-between p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl hover:border-brand-primary transition-all duration-300 no-underline shadow-sm hover:shadow-xl hover:shadow-emerald-500/5">
                         <Card>
-                            <span class="text-xs font-bold uppercase tracking-widest text-brand-primary dark:text-brand-primary-dark">
+                            <span class="text-xs font-bold tracking-widest text-brand-primary dark:text-brand-primary-dark">
                                 {module.title.ga}
                             </span>
                             <h2 class="mt-3 text-3xl font-bold group-hover:text-brand-primary transition-colors">

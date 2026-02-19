@@ -1,109 +1,155 @@
 ---
 title: "Do"
+description: "A preposition primarily used to indicate the indirect object, possession, and purpose. It also appears in modal constructions and with verbal nouns."
 category: "Prepositions"
-description: "Do primarily translates to \"to\" or \"for\". It is used to mark the indirect object, express possession with the copula, and indicate closeness or necessity."
-tags: ["Preposition", "Conjugated", "Dative"]
+tags: ["preposition", "conjugated", "dative", "lenition"]
 ---
 
 import MutationCard from '../../../components/MutationCard.astro';
-import LogicSection from '../../../components/LogicSection.astro';
 
 ## Overview
 
-### Forms
+The preposition `do` governs the dative case.
 
-| Pronoun      | Form   | Contrast Form | Translation |
-|:-------------|:-------|:--------------|:------------|
-| **I**        | dom    | domhsa        | to/for me   |
-| **You**      | duit   | duitse        | to/for you  |
-| **He**       | dó     | dósan         | to/for him  |
-| **She**      | di     | dise          | to/for her  |
-| **We**       | dúinn  | dúinne        | to/for us   |
-| **You (pl)** | daoibh | daoibhse      | to/for you  |
-| **They**     | dóibh  | dóibhsean     | to/for them |
+In most dialects, `do` and `de` are pronounced identically: as `[gə]` in Connacht and `[də]` elsewhere. The Connacht pronunciation is distinguished from the preposition `go` by the lenition that follows `do`.
 
-Dialect variations are common. You may hear `dhom` or `damh` for "dom", and `dhá` for "dá". In Connemara, short forms like `'om`, `'uit` are often heard.
+Before a vowel or `fh`, `do` contracts to `d’`, as in *d’Úna* (to Úna) or *d’fhear* (to a man).
 
-| Pronoun      | Possessive Pronoun | Translation |
-|:-------------|:-------------------|:------------|
-| **I**        | do mo/dom          | to my       |
-| **You**      | do do/dod          | to your     |
-| **He**       | dá                 | to his      |
-| **She**      | dá                 | to her      |
-| **We**       | dár                | to our      |
-| **You (pl)** | do bhur            | to your     |
-| **They**     | dá                 | to their    |
+### Forms and Interrogatives
 
-### Mutations
+| Type                    | Form      | Translation       |
+|-------------------------|-----------|-------------------|
+| With singular article   | `don`     | to the            |
+| With plural article     | `do na`   | to the            |
+| Interrogative (person)  | `cé dó?`  | to whom?          |
+| Interrogative (purpose) | `cad dó?` | for what purpose? |
 
-<MutationCard before={"Do + Seán"} after={"Do Sheán"} title={"Without an article"} rule={"Lenition"}/>
+### Conjugated Forms
 
-<MutationCard before={"Do + an + máthair"} after={"Don mháthair"} title={"With an article"} rule={"Lenition"}/>
+| Person      | Standard | Emphatic    |
+|-------------|----------|-------------|
+| 1st sg.     | `dom`    | `domhsa`    |
+| 2nd sg.     | `duit`   | `duitse`    |
+| 3rd sg. (m) | `dó`     | `dósan`     |
+| 3rd sg. (f) | `di`     | `dise`      |
+| 1st pl.     | `dúinn`  | `dúinne`    |
+| 2nd pl.     | `daoibh` | `daoibhse`  |
+| 3rd pl.     | `dóibh`  | `dóibhsean` |
 
-* **General Rule** — *do Sheán* — to Seán — `do` causes lenition on nouns without the article.
-* **With the article (General)** — *don mháthair* — to the mother — `do` combines with `an` to form `don`, causing lenition.
-* **The "S" Rule** — *don tsagart* — to the priest — If the noun begins with `s`, `don` causes a t-prefix instead of lenition.
-* **Vowel Start** — *d'Úna* — to Úna — Before a vowel or `fh`, `do` becomes `d'`.
+### Combinations with Pronouns
 
-### Interrogatives
+| Type                     | Combination        | Translation      |
+|--------------------------|--------------------|------------------|
+| Possessive (1st sg.)     | `do mo` (or `dom`) | to my            |
+| Possessive (2nd sg.)     | `do do` (or `dod`) | to your          |
+| Possessive (3rd sg./pl.) | `dá`               | to his/her/their |
+| Possessive (1st pl.)     | `dár`              | to our           |
+| Possessive (2nd pl.)     | `do bhur`          | to your (pl.)    |
+| Indirect Relative        | `dá` / `dár`       | to which         |
 
-| Question     | Meaning   | Example                |
-|:-------------|:----------|:-----------------------|
-| **Cé + do**  | To whom?  | Cé dó a thug tú é?     |
-| **Cad + do** | What for? | Cad dó é sin?          |
-| **Cá + do**  | Where to? | Cá dó a ndeachaigh sé? |
+Dialectal variations are common. In Ulster, one might hear `damh` instead of `dom`. In Connemara, short forms like `’om` (for `dom`) and `’uit` (for `duit`) are used.
 
-<LogicSection title={"De vs Do"}>
-    In many dialects, the simple prepositions `de` (of/off) and `do` (to/for) sound nearly identical (often pronounced as *gə* or *də*). However, their conjugated forms (like *díom* vs *dom*) usually remain distinct.
-</LogicSection>
+## Initial Mutations
 
----
+<MutationCard
+  title="Lenition"
+  before="do + Séan"
+  after="do Shéan"
+  rule="Do lenites the following noun when used without the article."
+/>
+<MutationCard
+  title="Lenition (with article)"
+  before="do + an + máthair"
+  after="don mháthair"
+  rule="Do lenites the following noun when used with the singular article."
+/>
+<MutationCard
+  title="t-Prothesis (with article)"
+  before="do + an + sagart"
+  after="don tsagart"
+  rule="Do causes t-prothesis on masculine nouns beginning with 's' when used with the singular article."
+/>
 
-## Interaction & Benefit
+## Core Functions
 
-### The Indirect Object
-* **Giving/Telling** — *thug mé leabhar duit* — I gave a book to you — Marking the recipient of an action.
-* **Benefit (For)** — *rud a dhéanamh duit* — to do something for you — When an action is done in someone's favour.
-* **Wishes** — *oíche mhaith duit* — good night to you — Used in greetings and well-wishing.
+### Indirect Object
 
-#### Note on Detriment
-If an action harms or disadvantages someone, Irish typically uses `ar` instead of `do`.
+`Do` marks the indirect object of a verb, indicating the person or thing affected by an action. This is often translated as "to" or "for".
 
-* *Rinne sé obair dom* (He did work for me).
-* *Bhris sé an bord orm* (He broke the table on me/to my detriment).
+- *Scríobh mé litir duit.* (I wrote you a letter.)
+- *Thug sé an leabhar dom.* (He gave the book to me.)
+- *Inis an scéal dóibh.* (Tell them the story.)
 
-### Feelings & Attitude
-* **Attitude** — *bheith go maith do dhuine* — to be good to someone — Expressing kindness or behavior toward others.
-* **Pity** — *tá trua agam duit* — I have pity for you / I feel sorry for you.
+When an action benefits someone, `do` is used. When it disadvantages them, `ar` is used instead.
 
----
+- *Rinne sé obair an tí dom.* (He did the housework for me.)
+- *Bhris sé an cupán orm.* (He broke the cup on me.)
 
-## Identity & State
+### Spatial and Temporal Use
 
-### Copula Constructions
-* **Naming** — *Seán is ainm dom* — My name is Seán — Lit. "Seán is name to-me."
-* **Age** — *Cá haois duit?* — What age are you? — Lit. "What age to-you?"
-* **Relationship** — *is mac dom é* — he is a son of mine — Establishing kinship using `do` (often used with indefinite nouns like "a friend", "a brother").
-* **Origin** — *Is as Éirinn dom* — I am from Ireland — Lit. "It is from Ireland to-me" (Using `do` to identify the person the origin belongs to).
+While less common than `chun` or `chuig` for spatial goals, `do` can indicate direction. It is also used when telling time.
 
-### Necessity & Modals
-* **Necessity** — *b’éigean do* — it was necessary for... — Used to express "must" or "had to".
-* **Obligation** — *is ceart do* — it is right for... — Used to express "should" or "ought".
-* **Worth** — *is fiú do* — it is worth it for... — Indicating value.
+- *Téigh don siopa.* (Go to the shop.)
+- *Don diabhal leat!* (To hell with you!)
+- *Tá sé ceathrú don a trí.* (It is a quarter to three.)
 
----
+## Possession and Relationship
 
-## Time & Connection
+`Do` is used to express relationship, proximity, and a type of partitive possession ("a friend of mine").
 
-### Temporal Logic
-* **Time** — *ceathrú don trí* — a quarter to three — Marking time remaining until the hour.
-* **Verbal Noun Timing** — *tar éis é a dhéanamh dom* — after I had done it — Lit. "after doing it to-me". Used to mark the subject (agent) of a verbal noun in time clauses.
+- *Is cara dom é.* (He is a friend of mine.)
+- *Sin mac di.* (That is a son of hers.)
+- *Tá an teach cóngarach don scoil.* (The house is near to the school.)
+- *Ba mhaith liom seomra dom féin.* (I would like a room for myself.)
 
-### Connection & Proximity
-* **Proximity** — *cóngarach do* — close to — Indicating physical closeness.
-* **Relation** — *gaolmhar do* — related to — Indicating family or logical connection.
-* **Exclusive** — *seomra dom féin* — a room for myself — Indicating exclusivity or possession.
+## Copular and Modal Constructions
 
-### Progressive Construction
-* **Action directed at object** — *tá mé do do bhualadh* — I am hitting you — Lit. "I am to your hitting."
-* **Passive State** — *tá mé do mo bhualadh aige* — I am being hit by him — Lit. "I am to my hitting at-him."
+### Subject in Copular Sentences
+
+`Do` often indicates the subject in certain common questions and statements with the copula.
+
+- *Cad is ainm duit?* (What is your name?)
+- *Séamas is ainm dom.* (My name is Séamas.)
+- *Cá haois duit?* (How old are you?)
+- *Cárb as duit?* (Where are you from?)
+
+### Modal Expressions of Obligation
+
+`Do` is a key component in phrases that express necessity or obligation, functioning like modal verbs such as "must" or "should".
+
+| Concept           | Formula        | Example                                | Translation                 |
+|-------------------|----------------|----------------------------------------|-----------------------------|
+| Must / Have to    | `is éigean do` | *Is éigean dom imeacht.*               | I have to go.               |
+| Must / Have to    | `ní mór do`    | *Ní mór duit éisteacht.*               | You must listen.            |
+| Should / Ought to | `is ceart do`  | *Is ceart dóibh an fhírinne a insint.* | They should tell the truth. |
+| Should / Ought to | `ba chóir do`  | *Ba chóir daoibh a bheith anseo.*      | You (pl.) should be here.   |
+
+### With Adjectives
+
+`Do` can be used with adjectives in copular sentences to describe how something affects a person.
+
+- *Is breá liom an aimsir.* (The weather is fine for me / I love the weather.)
+- *Ní gá duit a bheith buartha.* (It is not necessary for you to be worried.)
+- *Is fiú duit an leabhar sin a léamh.* (It is worthwhile for you to read that book.)
+
+## Verbal Noun Constructions
+
+### Agent Marking
+
+`Do` is used to mark the agent (the person performing the action) in certain verbal noun phrases, particularly those involving time.
+
+| Concept  | Formula                       | Example                     | Translation (Literal)   |
+|----------|-------------------------------|-----------------------------|-------------------------|
+| After X  | `tar éis` + VN + `do` + Agent | *tar éis é a dhéanamh dom*  | after its doing to-me   |
+| While X  | `le linn` + VN + `do` + Agent | *le linn é a dhéanamh duit* | during its doing to-you |
+| Before X | `roimh` + VN + `do` + Agent   | *roimh é a dhéanamh dó*     | before its doing to-him |
+
+### Progressive Aspect
+
+In the progressive (continuous) aspect, `do` + a possessive pronoun is used to represent the object of the verb.
+
+- *Tá mé do do bhualadh.* (I am hitting you.)
+- *Tá sí dá ghortú.* (She is hurting him.)
+- *Tá mé do mo bhualadh aige.* (I am being hit by him.)
+
+In Munster, `do` is sometimes used instead of the modern short form `a` in infinitive constructions, as in *chun Gaeilge d’fhoghlaim* (to learn Irish).

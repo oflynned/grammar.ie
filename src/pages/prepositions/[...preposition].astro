@@ -5,9 +5,9 @@ import Tag from "../../components/Tag.astro";
 import MarkdownContent from "../../components/MarkdownContent.astro";
 
 export async function getStaticPaths() {
-    const prepositionEntries = await getCollection('prepositions');
+    const entries = await getCollection('prepositions');
 
-    return prepositionEntries.map((entry: CollectionEntry<'prepositions'>) => {
+    return entries.map((entry) => {
         return {
             params: {preposition: entry.slug},
             props: {entry},

@@ -1,3 +1,6 @@
+tooling/assets/**
+grammar/
+
 # build output
 dist/
 

@@ -1,80 +1,162 @@
 ---
 title: "Chuig"
+description: "The preposition 'chuig' primarily indicates motion towards a person, place, or thing. It also expresses purpose, time, and reason."
 category: "Prepositions"
-description: "Chuig translates to \"to\", \"towards\", or \"for\". It indicates movement toward a destination, purpose, or specific temporal states."
-tags: ["Preposition", "Conjugated", "Dative", "Standard", "Connacht", "Ulster"]
+tags: ["preposition", "conjugated", "dative", "genitive"]
 ---
 
 import MutationCard from '../../../components/MutationCard.astro';
-import LogicSection from '../../../components/LogicSection.astro';
 
 ## Overview
 
-### Forms
+The preposition `chuig` and its variant `chun` both indicate "to" or "towards". Their usage depends on dialect and the grammatical case they govern.
 
-| Pronoun      | Form     | Contrast Form | Translation |
-|--------------|----------|---------------|-------------|
-| **I**        | chugam   | chugamsa      | to me       |
-| **You**      | chugat   | chugatsa      | to you      |
-| **He**       | chuige   | chuigesean    | to him      |
-| **She**      | chuici   | chuicise      | to her      |
-| **We**       | chugainn | chugainne     | to us       |
-| **You (pl)** | chugaibh | chugaibhse    | to you      |
-| **They**     | chucu    | chucusan      | to them     |
+Historically, `chun` derives from the Old Irish verbal noun `dochum`, meaning "a stepping towards", which explains its requirement for the genitive case. The form `chuig` is a back-formation from the 3rd person conjugated form, `chuige`.
 
-### Mutations
+### Case Requirements
 
-<MutationCard before={"Chuig + cailín"} after={"Chuig cailín"} title={"Without an article"}
-              rule={"No mutation"}/>
+The choice between `chun` and `chuig` affects the case of the following noun.
 
-<MutationCard before={"Chuig + an + cailín"} after={"Chuig an gcailín"} title={"With an article"}
-              rule={"Eclipsis"}/>
+- **chun**: Requires the **genitive case**. This form is more common in Munster and the official standard.
+- **chuig**: Requires the **dative case** (which is identical to the nominative for most nouns). This form is common in Connacht and Ulster. In the dialect of Clare, `chuig` historically required the genitive.
 
-* **With the article (Munster)** — *chuig an ndoras* — to the door — In Munster, even d and t are eclipsed after *chuig*.
-* **With the article (Connacht)** — *chuig an tsúil* — to the eye — A t-prefix is added to feminine nouns starting with s-.
-* **With the article (Ulster)** — *chuig an chailín* — to the girl — Ulster uses lenition after the article.
+### Question Forms
 
-<LogicSection title={"Chun vs Chuig"}>
-    The choice between these two often depends on dialect and the grammatical case required:
-    * **Chun** (Standard/Munster) requires the **genitive**.
-    * **Chuig** (Connacht/Ulster) requires the **dative**.
-    * In Connacht/Ulster, `chuig` is often replaced by `ag` in speech (e.g., *hagam* instead of *chugam*).
-</LogicSection>
+The preposition is used to form several common interrogatives.
 
-### Interrogatives
+- **Cé chuige?**: To whom?
+- **Cad chuige? / Cá chuige?**: Why?
+- **Tuige?**: A common contraction of `cad chuige` in Connacht and Ulster, also meaning "Why?".
 
-| Question         | Meaning       | What happens next? | Example                         |
-|------------------|---------------|--------------------|---------------------------------|
-| **Cé + chuige**  | To whom?      | `Indirect`         | Cé chuige ar scríobh tú?        |
-| **Cad + chuige** | Why/For what? | `Indirect`         | Cad chuige a bhfuil tú anseo?   |
-| **Cá + chuige**  | Whereto?      | `Indirect`         | Cá chuige a bhfuil an rith ort? |
+## Conjugation and Mutations
 
-<LogicSection title={"Dialect note: Tuige"}>
-    In Connacht and Ulster, the phrase **cad chuige** (for what/why) is frequently shortened to the single word **tuige**.
-</LogicSection>
+Like all prepositions, `chuig` combines with personal pronouns to form a single word. It also causes initial mutations on the noun that follows it, with rules that differ between `chuig` and `chun`.
 
----
+### Conjugated Forms
 
-## Physical World
+| Person      | Standard Form | Contrastive Form | Translation |
+|:------------|:--------------|:-----------------|:------------|
+| 1st sg.     | `chugam`      | `chugamsa`       | to me       |
+| 2nd sg.     | `chugat`      | `chugatsa`       | to you      |
+| 3rd sg. (m) | `chuige`      | `chuigesean`     | to him      |
+| 3rd sg. (f) | `chuici`      | `chuicise`       | to her      |
+| 1st pl.     | `chugainn`    | `chugainne`      | to us       |
+| 2nd pl.     | `chugaibh`    | `chugaibhse`     | to you      |
+| 3rd pl.     | `chucu`       | `chucusan`       | to them     |
 
-### Spatial Motion & Destination
+### Mutations after Chuig
 
-* **Movement** — *dul chuig an dochtúir* — going to the doctor — Indicates movement toward a person or place.
-* **Postal/Correspondence** — *scríobh chugam* — write to me — Sending information toward a recipient.
+The preposition `chuig` causes the following mutations.
 
-### Purpose & Intent
+<MutationCard
+    title="Chuig without an Article"
+    before="chuig + cailín"
+    after="chuig cailín"
+    rule="When 'chuig' is followed by a noun without an article, no mutation occurs."
+/>
+<MutationCard
+    title="Chuig with the Singular Article"
+    before="chuig + an + cailín"
+    after="chuig an gcailín"
+    rule="Standard Irish eclipses a noun following 'chuig an'. D and T are not eclipsed. Dialectal rules vary."
+/>
 
-* **Goal** — *rinne muid chuig glóire Dé é* — we did it for the glory of God — The motivation or reason for an action.
+Note on dialectal mutations with `chuig an`:
+- **Ulster**: Lenition is used instead of eclipsis (e.g., *chuig an chailín*).
+- **Connacht**: T-prothesis occurs before feminine nouns starting with 's' (e.g., *chuig an tsúil*).
+- **Munster**: D and T are also eclipsed.
 
----
+### Mutations after Chun
 
-## Experiential Domain
+The preposition `chun` requires the genitive case, and its mutations are determined by the article.
 
-### Time & Sequence
+<MutationCard
+    title="Chun without an Article"
+    before="chun + buachaill"
+    after="chun buachalla"
+    rule="A noun following 'chun' takes the genitive case but is not mutated."
+/>
+<MutationCard
+    title="Chun with the Masculine Singular Article"
+    before="chun + an + buachaill"
+    after="chun an bhuachalla"
+    rule="A masculine singular noun following 'chun an' is lenited and takes the genitive case."
+/>
+<MutationCard
+    title="Chun with the Feminine Singular Article"
+    before="chun + an + bean"
+    after="chun na mná"
+    rule="A feminine singular noun following 'chun na' is not mutated but takes the genitive case."
+/>
+<MutationCard
+    title="Chun with the Plural Article"
+    before="chun + na + mná"
+    after="chun na mban"
+    rule="A plural noun following 'chun na' is eclipsed and takes the genitive case."
+/>
 
-* **Future/Upcoming** — *an Luan seo chugainn* — next Monday — Lit. "this Monday coming to-us."
+## Usage and Functions
 
-### Idiomatic States
+`Chuig` and `chun` have a wide range of uses, from indicating physical motion to expressing abstract concepts like purpose and time.
 
-* **Dismissal** — *chugat leat* — away with you — An idiomatic command to leave.
-* **Adverbial** — *chuige* — at all / anyway — Used as a general adverb in specific contexts.
+### Motion and Direction
+
+The primary function is to indicate movement towards a person, place, or state.
+
+- *Scríobh chugam.* (Write to me.)
+- *Dul chuig an dochtúir.* (To go to the doctor.)
+- *Chun na Fraince.* (To France.)
+- *Cuir chun báis.* (To put to death.)
+- *Dul chun olcais.* (To go to the bad.)
+
+### Purpose and Reason
+
+It can be used to explain the reason for an action or the purpose of an object.
+
+- *Rinne muid chuig glóire Dé é.* (We did it for the glory of God.)
+
+When used with a verbal noun, it expresses intention or purpose, similar to "in order to". In this structure, `chun` does not require the genitive.
+
+| Concept            | Formula            | Example                    | Translation (Literal) |
+|:-------------------|:-------------------|:---------------------------|:----------------------|
+| Expressing Purpose | chun + verbal noun | *Chun teanga a fhoghlaim.* | To learn a language.  |
+
+### Temporal Expressions
+
+`Chuig` and `chun` are used in various time-related phrases.
+
+- **Until/Before**: *Chun gur ghlaoigh an coileach.* (Before the cock crowed.)
+- **Telling Time**: *Ceathrú chun a dó.* (A quarter to two.)
+- **Approaching Time**: *Tá sé chun a dó.* (It is almost 2 o'clock.)
+- **Future Events**: *Dé Luan seo chugainn.* (Next Monday; "this Monday to-us".)
+
+### State and Proximity
+
+It can describe proximity or a state of readiness.
+
+- **Proximity**:
+    - *Chun na gaoithe.* (Close to the wind.)
+    - *Chun mo laimhe.* (Close to my hand.)
+- **Readiness/Suitability**:
+    - *Tá an féar chun bainte.* (The grass is ready to be mown.)
+    - *Fear chun cainte.* (A man for talking.)
+    - *Lá chun taistil.* (A day for travelling.)
+
+### Idiomatic Expressions
+
+- **chuige**: Used as an adverb to mean "at all".
+- **chugat leat**: An idiom meaning "be off with you!".
+
+## Dialectal Variations
+
+Significant differences exist in the pronunciation and usage of `chuig` and `chun` across the main dialects.
+
+### Pronunciation of Chun
+
+- **Munster**: Pronounced [xun] or [xun′], sometimes spelled `chuin`.
+- **Connacht/Ulster**: Often reduced to [un], [ən], or just [ə]. This leads to the spelling `’un`, as in *’un an aonaigh* (to the fair). In Ulster, `chun an` can merge to `’na`, as in *’na bhaile* (home).
+
+### Alternative Forms
+
+- **Connacht/Ulster**: The preposition `ag` is often used as a substitute for `chuig`. The conjugated forms may appear with a prefixed 'h', such as `hagam` instead of `chugam`.
+- **Munster**: The conjugated forms are often lenited, e.g., `chugham`, `chughat`, `chuichi`. The 3rd person masculine `chuige` is an exception and is not lenited.

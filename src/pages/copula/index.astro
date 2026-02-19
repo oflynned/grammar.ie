@@ -1,0 +1,30 @@
+---
+import PageContent from "../../layouts/PageContent.astro";
+import Card from '../../components/Card.astro'
+import {getCollection} from 'astro:content';
+
+const pages = await getCollection('copula');
+---
+
+<PageContent title="Copula">
+    <section class="mx-auto w-full max-w-6xl flex-1 prose dark:prose-invert">
+        <h1>Copula</h1>
+
+        <ul class="not-prose grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0">
+            {pages.toSorted((a, b) => a.data.index - b.data.index).map(page => (
+                    <li class="group list-none">
+                        <a
+                                href={`/copula/${page.slug}`}
+                                class="block p-6 h-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 rounded-2xl no-underline"
+                        >
+                            <Card>
+                            <span class="font-bold text-xl text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                {page.data.title}
+                            </span>
+                            </Card>
+                        </a>
+                    </li>
+            ))}
+        </ul>
+    </section>
+</PageContent>

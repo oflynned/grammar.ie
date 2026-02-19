@@ -1,7 +1,7 @@
 ---
 export type Breadcrumb = {
     title: string;
-    url: string;
+    url?: string;
 }
 
 interface Props {
@@ -18,7 +18,7 @@ const {breadcrumbs} = Astro.props
                class="hover:text-brand-primary-hover dark:hover:text-brand-primary-dark-hover flex items-center transition-colors">
                 Home
             </a>
-            {breadcrumbs ? breadcrumbs.map(({url, title}) => (
+            {(breadcrumbs ?? []).map(({url, title}) => (
                     <>
                         <span class="text-text-muted" aria-hidden="true">/</span>
                         <a href={url}
@@ -26,7 +26,7 @@ const {breadcrumbs} = Astro.props
                             {title}
                         </a>
                     </>
-            )) : null}
+            ))}
         </div>
     </section>
 </nav>

@@ -55,12 +55,18 @@ pre {
 }
 
 pre > code {
-    @apply bg-transparent border-0
+    @apply bg-transparent border-0;
 }
 
 code, span.tag {
-    @apply bg-background-brand text-text-brand rounded-md text-xs font-bold py-1 px-1.5 transition-colors duration-300;
+    @apply inline-block whitespace-nowrap bg-background-brand text-text-brand rounded-md text-xs font-bold py-0.5 px-1.5 transition-colors duration-300;
     @apply dark:bg-background-brand-dark/10 dark:text-emerald-400 dark:border dark:border-emerald-500/20;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    code, span.tag {
+        @apply text-[0.8em] mx-2 align-baseline;
+    }
 }
 
 code::before {
