@@ -58,6 +58,13 @@ pre > code {
     @apply bg-transparent border-0;
 }
 
+.prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
 code, span.tag {
     @apply inline-block whitespace-nowrap bg-background-brand text-text-brand rounded-md text-xs font-bold py-0.5 px-1.5 transition-colors duration-300;
     @apply dark:bg-background-brand-dark/10 dark:text-emerald-400 dark:border dark:border-emerald-500/20;

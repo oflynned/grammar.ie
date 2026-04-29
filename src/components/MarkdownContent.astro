@@ -4,6 +4,7 @@ import PageContent from '../layouts/PageContent.astro';
 import TableOfContents from './TableOfContents.astro';
 import Tag from "./Tag.astro";
 import {collections} from "../content.config";
+import {entryPath} from '../lib/contentTree';
 
 interface Props {
     entry: CollectionEntry<keyof typeof collections>;
@@ -11,14 +12,23 @@ interface Props {
 
 const {entry} = Astro.props;
 const {Content, headings} = await entry.render();
+const hasTableOfContents = headings && Array.isArray(headings) && headings.length > 1;
+const pageTitle = entry.data.title ?? entryPath(entry)
+    .split('/')
+    .at(-1)
+    ?.replace(/-/g, ' ')
+    .replace(/\b\w/g, (letter) => letter.toUpperCase()) ?? 'Grammar';
+const tags = entry.data.tags ?? [];
+const prerequisiteTopics = entry.data.prerequisiteTopics ?? [];
+const relatedTopics = entry.data.relatedTopics ?? [];
 ---
 
-<PageContent title={entry.data.title}>
+<PageContent title={pageTitle}>
     <section class="flex mx-auto w-full max-w-6xl gap-12">
         <article class="flex-1 min-w-0 prose dark:prose-invert">
             <header class="mb-8">
                 <h1 class="text-5xl font-bold mb-4 tracking-tight">
-                    {entry.data.title}
+                    {pageTitle}
                 </h1>
 
                 <p class="leading-relaxed text-lg">
@@ -26,21 +36,57 @@ const {Content, headings} = await entry.render();
                 </p>
 
                 <div class="flex gap-2 mt-6 flex-wrap">
-                    {entry.data.tags.map(tag => (
+                    {tags.map(tag => (
                             <Tag tag={tag}/>
                     ))}
                 </div>
+
+                {(prerequisiteTopics.length || relatedTopics.length) ? (
+                        <div class="not-prose mt-6 grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm dark:border-slate-700 dark:bg-slate-900/40 sm:grid-cols-2">
+                            {prerequisiteTopics.length ? (
+                                    <section>
+                                        <h2 class="mb-2 text-xs font-bold uppercase tracking-normal text-slate-500 dark:text-slate-400">
+                                            Prerequisites
+                                        </h2>
+                                        <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+                                            {prerequisiteTopics.map(topic => (
+                                                    <li class="rounded-md bg-white px-2 py-1 font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+                                                        <a href={`/${topic}`}>{topic}</a>
+                                                    </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                            ) : null}
+
+                            {relatedTopics.length ? (
+                                    <section>
+                                        <h2 class="mb-2 text-xs font-bold uppercase tracking-normal text-slate-500 dark:text-slate-400">
+                                            Related
+                                        </h2>
+                                        <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+                                            {relatedTopics.map(topic => (
+                                                    <li class="rounded-md bg-white px-2 py-1 font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+                                                        <a href={`/${topic}`}>{topic}</a>
+                                                    </li>
+                                            ))}
+                                        </ul>
+                                    </section>
+                            ) : null}
+                        </div>
+                ) : null}
             </header>
 
             <hr/>
 
+            {hasTableOfContents ? <TableOfContents headings={headings} variant="mobile"/> : null}
+
             <Content/>
         </article>
 
-        {headings && Array.isArray(headings) && headings.length > 1 ?
+        {hasTableOfContents ?
                 <aside class="hidden md:block w-64 shrink-0">
                     <div class="sticky top-32">
-                        <TableOfContents headings={headings}/>
+                        <TableOfContents headings={headings} variant="desktop"/>
                     </div>
                 </aside> : null}
     </section>

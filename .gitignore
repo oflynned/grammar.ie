@@ -1,5 +1,6 @@
 tooling/assets/**
-grammar/
+/grammar/
+tooling/grammar/
 
 # build output
 dist/

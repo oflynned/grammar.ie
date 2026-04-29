@@ -1,45 +1,105 @@
 ---
-const {headings} = Astro.props;
+const {headings, variant = 'desktop'} = Astro.props;
 const MAX_HEADING_DEPTH = 3
 const relevantHeaders = headings.filter(heading => heading.depth <= MAX_HEADING_DEPTH)
+const isMobile = variant === 'mobile'
 ---
 
-<nav class="toc not-prose">
-    <ul class="flex flex-col">
-        {relevantHeaders.map((heading) => (
-                <li class={`group flex gap-4 depth-${heading.depth}`}>
-                    <div class="relative w-4 flex flex-col items-center shrink-0">
-                        <div class="absolute inset-0 flex justify-center">
-                            <div class="w-px h-full bg-slate-100 dark:bg-slate-700 group-first:mt-3 group-first:h-[calc(100%-12px)] group-last:h-3">
-                            </div>
-                        </div>
-                        <span
-                                class="dot relative z-10 w-2.5 h-2.5 rounded-full border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 transition-all duration-300 shrink-0 mt-[7px]"
-                                data-dot-slug={heading.slug}
-                        />
-                    </div>
+<nav class:list={[
+    'toc not-prose',
+    isMobile ? 'toc-mobile md:hidden sticky top-20 z-10 mb-8' : 'toc-desktop'
+]} aria-label="Table of contents" data-toc-root data-toc-variant={variant}>
+    {isMobile ? (
+            <details
+                    class="rounded-md border border-background-border bg-background/95 shadow-sm backdrop-blur-md transition-colors duration-300 dark:border-background-border-dark dark:bg-background-dark/95"
+                    data-toc-details
+            >
+                <summary
+                        class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors duration-200 hover:text-brand-primary-hover dark:text-slate-200 dark:hover:text-brand-primary-dark-hover [&::-webkit-details-marker]:hidden">
+                    <span>On this page</span>
+                    <span class="flex min-w-0 items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+                        <span class="truncate" data-toc-current>Sections</span>
+                        <svg class="toc-chevron h-4 w-4 shrink-0 transition-transform duration-200" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </span>
+                </summary>
 
-                    <a
-                            href={`#${heading.slug}`}
-                            class="toc-link pb-6 text-sm leading-6 text-slate-500 dark:text-slate-400 hover:text-brand-primary-hover dark:hover:text-brand-primary-dark-hover transition-colors duration-200"
-                            data-slug={heading.slug}
-                    >
-                        {heading.text}
-                    </a>
-                </li>
-        ))}
-    </ul>
+                <ul class="flex flex-col border-t border-background-border px-2 py-2 dark:border-background-border-dark"
+                    data-toc-scroll>
+                    {relevantHeaders.map((heading) => (
+                            <li class={`depth-${heading.depth}`}>
+                                <a
+                                        href={`#${heading.slug}`}
+                                        class="toc-link block rounded-md px-3 py-2 text-sm leading-5 text-slate-600 transition-colors duration-200 hover:bg-background-brand hover:text-brand-primary-hover dark:text-slate-300 dark:hover:bg-background-brand-dark/10 dark:hover:text-brand-primary-dark-hover"
+                                        data-slug={heading.slug}
+                                >
+                                    {heading.text}
+                                </a>
+                            </li>
+                    ))}
+                </ul>
+            </details>
+    ) : (
+            <div class="max-h-[calc(100vh-10rem)] overflow-y-auto pr-2 pb-4" data-toc-scroll>
+                <p class="mb-4 text-xs font-bold uppercase tracking-normal text-slate-400 dark:text-slate-500">On this
+                    page</p>
+                <ul class="flex flex-col">
+                    {relevantHeaders.map((heading) => (
+                            <li class={`group flex gap-4 depth-${heading.depth}`}>
+                                <div class="relative w-4 flex flex-col items-center shrink-0">
+                                    <div class="absolute inset-0 flex justify-center">
+                                        <div class="w-px h-full bg-slate-100 dark:bg-slate-700 group-first:mt-3 group-first:h-[calc(100%-12px)] group-last:h-3">
+                                        </div>
+                                    </div>
+                                    <span
+                                            class="dot relative z-10 w-2.5 h-2.5 rounded-full border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 transition-all duration-300 shrink-0 mt-[7px]"
+                                            data-dot-slug={heading.slug}
+                                    />
+                                </div>
+
+                                <a
+                                        href={`#${heading.slug}`}
+                                        class="toc-link pb-6 text-sm leading-6 text-slate-500 dark:text-slate-400 hover:text-brand-primary-hover dark:hover:text-brand-primary-dark-hover transition-colors duration-200"
+                                        data-slug={heading.slug}
+                                >
+                                    {heading.text}
+                                </a>
+                            </li>
+                    ))}
+                </ul>
+            </div>
+    )}
 </nav>
 
 <style>
     @reference "../styles/global.css";
 
-    .depth-3 .toc-link {
+    .toc-desktop .depth-3 .toc-link {
         @apply ml-4 text-xs;
     }
 
-    .toc-link.active {
-        @apply text-brand-primary dark:text-brand-primary-dark font-bold;
+    .toc-desktop .toc-link.active {
+        @apply text-brand-primary dark:text-brand-primary-dark;
+    }
+
+    .toc-mobile [data-toc-scroll] {
+        max-height: min(22rem, calc(100vh - 8rem));
+        overflow-y: auto;
+    }
+
+    .toc-mobile .depth-3 .toc-link {
+        @apply pl-7 text-xs;
+    }
+
+    .toc-mobile .toc-link.active {
+        @apply bg-background-brand text-brand-primary dark:bg-background-brand-dark/10 dark:text-brand-primary-dark;
+    }
+
+    .toc-mobile details[open] .toc-chevron {
+        @apply rotate-180;
     }
 
     .dot.active {
@@ -49,41 +109,140 @@ const relevantHeaders = headings.filter(heading => heading.depth <= MAX_HEADING_
 </style>
 
 <script>
-    const observerOptions = {
-        root: null,
-        rootMargin: '-128px 0px -75% 0px',
-        threshold: [0, 1]
-    };
+    const tocWindow = window as Window & { grammarTocInitialized?: boolean };
 
-    const handleActiveState = (id: string | null) => {
-        if (id) {
-            document.querySelectorAll('.toc-link, .dot').forEach(el => el.classList.remove('active'));
-            document.querySelector(`.toc-link[data-slug="${id}"]`)?.classList.add('active');
-            document.querySelector(`.dot[data-dot-slug="${id}"]`)?.classList.add('active');
+    if (!tocWindow.grammarTocInitialized) {
+        tocWindow.grammarTocInitialized = true;
+
+        const articleHeadings = Array.from(document.querySelectorAll<HTMLElement>('article h2, article h3'))
+            .filter((heading) => heading.id);
+
+        const scrollLinkIntoToc = (link: Element) => {
+            const scrollContainer = link.closest('[data-toc-scroll]');
+            if (!(scrollContainer instanceof HTMLElement)) return;
+            if (scrollContainer.clientHeight === 0 || scrollContainer.scrollHeight <= scrollContainer.clientHeight) return;
+
+            const containerRect = scrollContainer.getBoundingClientRect();
+            const linkRect = link.getBoundingClientRect();
+            const padding = 12;
+
+            if (linkRect.top < containerRect.top + padding) {
+                scrollContainer.scrollTop -= containerRect.top - linkRect.top + padding;
+            }
+
+            if (linkRect.bottom > containerRect.bottom - padding) {
+                scrollContainer.scrollTop += linkRect.bottom - containerRect.bottom + padding;
+            }
+        };
+
+        const handleActiveState = (id: string | null) => {
+            if (id) {
+                document.querySelectorAll('[data-toc-root]').forEach((toc) => {
+                    toc.querySelectorAll('.toc-link, .dot').forEach(el => el.classList.remove('active'));
+
+                    const activeLinks = Array.from(toc.querySelectorAll<HTMLElement>('.toc-link'))
+                        .filter(link => link.dataset.slug === id);
+                    const activeDots = Array.from(toc.querySelectorAll<HTMLElement>('.dot'))
+                        .filter(dot => dot.dataset.dotSlug === id);
+
+                    activeLinks.forEach(link => {
+                        link.classList.add('active');
+                        scrollLinkIntoToc(link);
+                    });
+                    activeDots.forEach(dot => dot.classList.add('active'));
+
+                    const currentLabel = toc.querySelector('[data-toc-current]');
+                    if (currentLabel && activeLinks[0]) {
+                        currentLabel.textContent = activeLinks[0].textContent?.trim() ?? 'Sections';
+                    }
+                });
+            }
+        };
+
+        const getActiveHeadingId = () => {
+            if (articleHeadings.length === 0) return null;
+
+            const maxScrollY = document.documentElement.scrollHeight - window.innerHeight;
+            const isAtDocumentEnd = window.scrollY >= maxScrollY - 2;
+            if (isAtDocumentEnd) {
+                return articleHeadings[articleHeadings.length - 1].id;
+            }
+
+            const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+            const hashHeading = articleHeadings.find((heading) => heading.id === hash);
+            if (hashHeading) {
+                const hashHeadingTop = hashHeading.getBoundingClientRect().top;
+                if (hashHeadingTop >= 64 && hashHeadingTop <= 160) {
+                    return hashHeading.id;
+                }
+            }
+
+            const activationViewportY = Math.min(window.innerHeight * 0.35, 280);
+            const visibleBandTop = 96;
+            const visibleBandBottom = window.innerHeight * 0.75;
+            let closestVisibleHeading: HTMLElement | null = null;
+            let closestVisibleDistance = Number.POSITIVE_INFINITY;
+
+            for (const heading of articleHeadings) {
+                const headingTop = heading.getBoundingClientRect().top;
+                if (headingTop < visibleBandTop || headingTop > visibleBandBottom) continue;
+
+                const distance = Math.abs(headingTop - activationViewportY);
+                if (distance < closestVisibleDistance) {
+                    closestVisibleDistance = distance;
+                    closestVisibleHeading = heading;
+                }
+            }
+
+            if (closestVisibleHeading) {
+                return closestVisibleHeading.id;
+            }
+
+            const activationY = window.scrollY + activationViewportY;
+            let activeHeading = articleHeadings[0];
+
+            for (const heading of articleHeadings) {
+                if (heading.offsetTop > activationY) break;
+                activeHeading = heading;
+            }
+
+            return activeHeading.id;
+        };
+
+        let activeStateFrame: number | null = null;
+        const scheduleActiveStateUpdate = () => {
+            if (activeStateFrame !== null) return;
+
+            activeStateFrame = window.requestAnimationFrame(() => {
+                activeStateFrame = null;
+                handleActiveState(getActiveHeadingId());
+            });
+        };
+
+        const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+        if (hash) {
+            handleActiveState(hash);
+        } else {
+            handleActiveState(getActiveHeadingId());
         }
-    };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                handleActiveState(entry.target.getAttribute('id'));
+        document.addEventListener('click', (event) => {
+            const target = event.target;
+            if (!(target instanceof Element)) return;
+
+            const link = target.closest('.toc-link');
+            const details = link?.closest('[data-toc-details]');
+
+            if (link instanceof HTMLElement && link.dataset.slug) {
+                handleActiveState(link.dataset.slug);
+            }
+
+            if (details instanceof HTMLDetailsElement) {
+                details.open = false;
             }
         });
-    }, observerOptions);
 
-    document.querySelectorAll('article h2, article h3').forEach((h) => observer.observe(h));
-
-    window.addEventListener('scroll', () => {
-        const scrollPosition = window.innerHeight + window.scrollY;
-        const bodyHeight = document.documentElement.scrollHeight;
-
-        if (scrollPosition >= bodyHeight - 64) {
-            const allLinks = document.querySelectorAll('.toc-link');
-            const lastLink = allLinks[allLinks.length - 1];
-            if (lastLink) {
-                const id = lastLink.getAttribute('data-slug');
-                handleActiveState(id);
-            }
-        }
-    });
+        window.addEventListener('scroll', scheduleActiveStateUpdate, {passive: true});
+        window.addEventListener('resize', scheduleActiveStateUpdate);
+    }
 </script>
