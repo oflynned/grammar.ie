@@ -1,10 +1,11 @@
 ---
 import type {CollectionEntry} from 'astro:content';
+import {getCollection} from 'astro:content';
 import PageContent from '../layouts/PageContent.astro';
 import TableOfContents from './TableOfContents.astro';
 import Tag from "./Tag.astro";
 import {collections} from "../content.config";
-import {entryPath} from '../lib/contentTree';
+import {entryPath, formatSegment, titleForPath} from '../lib/contentTree';
 
 interface Props {
     entry: CollectionEntry<keyof typeof collections>;
@@ -21,6 +22,26 @@ const pageTitle = entry.data.title ?? entryPath(entry)
 const tags = entry.data.tags ?? [];
 const prerequisiteTopics = entry.data.prerequisiteTopics ?? [];
 const relatedTopics = entry.data.relatedTopics ?? [];
+const entries = await getCollection('grammar');
+
+const relationForTopic = (topic: string) => {
+    const topicEntry = entries.find((candidate) => entryPath(candidate) === topic);
+    const fallbackTitle = topic
+        .split('/')
+        .filter(Boolean)
+        .slice(-2)
+        .map(formatSegment)
+        .join(' / ');
+
+    return {
+        href: `/${topic}`,
+        title: topicEntry?.data.navTitle ?? topicEntry?.data.title ?? titleForPath(entries, topic) ?? fallbackTitle,
+        path: topic,
+    };
+}
+
+const prerequisiteLinks = prerequisiteTopics.map(relationForTopic);
+const relatedLinks = relatedTopics.map(relationForTopic);
 ---
 
 <PageContent title={pageTitle}>
@@ -41,39 +62,7 @@ const relatedTopics = entry.data.relatedTopics ?? [];
                     ))}
                 </div>
 
-                {(prerequisiteTopics.length || relatedTopics.length) ? (
-                        <div class="not-prose mt-6 grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm dark:border-slate-700 dark:bg-slate-900/40 sm:grid-cols-2">
-                            {prerequisiteTopics.length ? (
-                                    <section>
-                                        <h2 class="mb-2 text-xs font-bold uppercase tracking-normal text-slate-500 dark:text-slate-400">
-                                            Prerequisites
-                                        </h2>
-                                        <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
-                                            {prerequisiteTopics.map(topic => (
-                                                    <li class="rounded-md bg-white px-2 py-1 font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200">
-                                                        <a href={`/${topic}`}>{topic}</a>
-                                                    </li>
-                                            ))}
-                                        </ul>
-                                    </section>
-                            ) : null}
 
-                            {relatedTopics.length ? (
-                                    <section>
-                                        <h2 class="mb-2 text-xs font-bold uppercase tracking-normal text-slate-500 dark:text-slate-400">
-                                            Related
-                                        </h2>
-                                        <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
-                                            {relatedTopics.map(topic => (
-                                                    <li class="rounded-md bg-white px-2 py-1 font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200">
-                                                        <a href={`/${topic}`}>{topic}</a>
-                                                    </li>
-                                            ))}
-                                        </ul>
-                                    </section>
-                            ) : null}
-                        </div>
-                ) : null}
             </header>
 
             <hr/>

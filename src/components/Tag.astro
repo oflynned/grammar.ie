@@ -4,7 +4,11 @@ interface Props {
 }
 
 const {tag} = Astro.props
+const label = tag
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
 ---
-<span class="tag px-3 py-1 rounded-md font-xs font-bold border uppercase tracking-wider">
-    {tag}
+
+<span class="tag">
+    {label}
 </span>
