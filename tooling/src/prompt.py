@@ -656,59 +656,12 @@ def tokenise_irish_content(llm: BaseChatModel, markdown: str):
 
 
 CONTENT_PLAN_SYSTEM_PROMPT = """
-        Design the content architecture for an advanced-reference Irish grammar site.
+        Source-preserving content plans are generated deterministically by the pipeline.
 
-        You receive JSON containing translated source briefs. Each source has a stable source slug, title,
-        headings, source units, excerpts, and content hashes. Create a coherent reference taxonomy and page plan.
-
-        Requirements:
-        - Optimise for advanced reference use, not a beginner course.
-        - The LLM owns pedagogy, taxonomy, page shape, and routing.
-        - Do not preserve legacy German source filenames as public route names.
-        - Preserve complete source-unit coverage: every unitId from every source must appear exactly once
-          in one page's sourceRefs.
-        - Pages may synthesize related units from multiple source files when that creates better reference UX.
-        - sourceSlug is the primary source for compatibility; sourceSlugs and sourceRefs define full coverage.
-        - Split sources into multiple planned pages when that improves reference UX.
-        - Prefer compact contextual slugs: overview, forms, usage, grammar, dialect-notes, mutation-rules.
-        - Use sectionSlug and topicSlug to provide URL context so page slugs do not repeat parent context.
-        - Include prerequisiteTopics and relatedTopics for reference-learning navigation.
-        - Include canonicalExamples when the source brief reveals useful examples.
-        - Include expectedLayout to guide page generation, e.g. "compact paradigm table", "reference entries",
-          "usage guide", "advanced notes".
-
-        Output raw JSON only, with this exact shape:
-        {
-          "version": 2,
-          "audience": "advanced-reference",
-          "pages": [
-            {
-              "sourceSlug": "source-slug",
-              "sourceSlugs": ["source-slug", "another-source-slug"],
-              "sourceRefs": [
-                {"sourceSlug": "source-slug", "unitIds": ["u001-heading", "u002-heading"]},
-                {"sourceSlug": "another-source-slug", "unitIds": ["u001-heading"]}
-              ],
-              "title": "Page title",
-              "slug": "page-slug",
-              "navTitle": "Short navigation label",
-              "description": "One or two sentence summary.",
-              "category": "Prepositions | Verbs | Nouns | Adjectives | Initial Mutations | Syntax | Other",
-              "section": "Learner-facing section name",
-              "sectionSlug": "section-slug",
-              "topic": "Parent topic or empty string",
-              "topicSlug": "parent-topic-slug-or-empty-string",
-              "difficulty": "beginner | intermediate | advanced | reference",
-              "order": 10,
-              "tags": ["tag"],
-              "prerequisiteTopics": ["topic"],
-              "relatedTopics": ["topic"],
-              "canonicalExamples": ["example"],
-              "expectedLayout": "compact paradigm table | usage guide | reference entries | advanced notes",
-              "pagePurpose": "What this page should help an advanced-reference user do."
-            }
-          ]
-        }
+        The source page order, source page boundaries, source-unit coverage, and legacy internal link graph
+        are canonical. The LLM must not invent a new taxonomy, merge unrelated source pages, or move units
+        between pages. This text is kept only as a versioned contract for cache invalidation and manifest
+        freshness; content planning no longer calls an LLM.
     """
 
 
@@ -724,12 +677,12 @@ def generate_content_plan(llm: BaseChatModel, source_briefs, cache_dir=None, cac
 
 
 IMPROVE_UX_SYSTEM_PROMPT = """
-        Transform translated Markdown about Irish grammar into polished MDX for learners.
+        Refine translated Markdown about Irish grammar into polished MDX for learners.
         Preserve every source fact, table entry, form, exception, dialect note, and example. Do not invent grammar.
 
         Output contract:
-        - You may output one MDX page or split the source into several coherent MDX pages.
-        - Split when the source covers several distinct reference topics, or when a table would dominate the page.
+        - Output exactly the page requested by the supplied source-preserving content plan.
+        - Do not split, merge, reorder across source pages, or create extra pages.
         - Every page, including a single-page output, must start with an HTML comment marker:
           <!-- page: concise-kebab-case-slug -->
         - After the page marker, every page must start with frontmatter exactly in this shape:
@@ -756,8 +709,8 @@ IMPROVE_UX_SYSTEM_PROMPT = """
         - The page marker slug and frontmatter slug must match.
 
         Structure:
-        - Build pages for reference use, not for preserving the old page layout.
-        - Choose categories, sections, titles, slugs, and page splits from the supplied content plan when present, not from the German source filenames or original page boundaries.
+        - Build pages for reference use while preserving the old page's content order and source boundary.
+        - Use categories, sections, titles, slugs, and page splits from the supplied content plan.
         - Use human section names that would make sense in navigation: "Irregular verbs", "Verb conjugation", "Verb tenses", "Verbal nouns", "Conjugated prepositions", "Relative clauses", "Numbers", and similar.
         - Use sectionSlug to decide the actual URL folder. This is where you may use shorter context labels like "conjugated" for the displayed section "Conjugated prepositions".
         - Use stable page slugs based on the page's role within its URL context, not on the source filename.
@@ -767,12 +720,11 @@ IMPROVE_UX_SYSTEM_PROMPT = """
         - Use navTitle for compact cards and breadcrumbs. Prefer "bí", "Present tense", "Lenition after particles", "Forms", or "Usage" over long page titles.
         - Use order to place beginner/core overview pages first, common practical forms next, and advanced/dialectal reference pages later. Use gaps of 10 so future pages can slot in.
         - Capitalise learner-facing titles and navTitle as page labels, but keep the Irish preposition `i` lowercase when it stands alone so it is not confused with the English pronoun "I".
-        - Put essential beginner material first: a short overview, the core idea, and the most useful forms.
-        - Add intermediate detail next: patterns, classifications, exceptions, and usage notes.
-        - Put advanced, historical, dialectal, etymological, and orthographic material near the end.
+        - Keep page and section headings concise. Do not append Irish names in backticks when the English heading already identifies the concept.
+        - Keep the source order. Within each source unit, preserve the order of rules, examples, exceptions, dialectal notes, and tables.
         - Convert numbered source lists into meaningful H2/H3 sections.
         - Do not number headings. Do not put Markdown styling inside headings.
-        - If one source contains multiple natural subtopics, split them into separate pages with clear titles.
+        - Do not omit source-unit comments. Keep each <!-- source-unit: source:unit --> marker immediately before the refined content for that unit.
 
         Table and dense-reference rules:
         - Prefer tables for compact paradigms with short repeated forms and a small fixed number of columns.
@@ -783,6 +735,8 @@ IMPROVE_UX_SYSTEM_PROMPT = """
         - Avoid tables with more than 4 columns.
         - Avoid table cells that contain long phrases, multiple alternatives, or explanatory notes.
         - For large paradigms, create one compact overview table with only the highest-value columns, then move full detail into H3 entries.
+        - If a source table is too wide, keep every row and cell by converting it into grouped subsections or mobile-friendly entry lists.
+        - If a compact summary table is added, it must be in addition to the complete source detail, not a replacement.
         - For noun or verb reference entries with several notes per item, prefer repeated entry sections:
           ### `Irish form` (English meaning)
           - Gender/class: ...
@@ -806,7 +760,7 @@ IMPROVE_UX_SYSTEM_PROMPT = """
         - <MutationCard /> requires title, before, after, and rule props. No children.
         - Props must be plain text, with no Markdown.
         - If and only if MutationCard is used, import it immediately after frontmatter:
-          import MutationCard from '../../../components/MutationCard.astro';
+          import MutationCard from '@components/MutationCard.astro';
 
         Style:
         - British spelling.
@@ -838,8 +792,7 @@ Content plan contract:
   expectedLayout, and pagePurpose.
 - Use pagePurpose and expectedLayout to decide structure and tables.
 - Use every supplied source unit in the generated page. The sourceRefs list is the coverage contract.
-- If several source files are supplied, synthesize them into one coherent reference page instead of describing
-  each legacy file separately.
+- Preserve source-unit comments, source order, and complete detail. Do not move content into unrelated topics.
 
 {json.dumps(planned_pages, ensure_ascii=False, indent=2)}
         """

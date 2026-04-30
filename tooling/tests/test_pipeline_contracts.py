@@ -110,7 +110,7 @@ class PipelineContractTests(unittest.TestCase):
             [pipeline.content_route_path(planned_page) for planned_page in content_plan["pages"]],
             [
                 "verbs/irregular/teigh/overview",
-                "prepositions/conjugated/faoi/overview",
+                "prepositions/simple/faoi/overview",
                 "pronouns/possessive/overview",
             ],
         )
@@ -263,7 +263,7 @@ class PipelineContractTests(unittest.TestCase):
 
             pipeline.validate_content_plan(content_plan, targets)
 
-    def test_content_plan_repair_adds_missing_unit_pages(self):
+    def test_content_plan_repair_does_not_create_coverage_review_pages(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             step_3_path = Path(temp_dir) / "verb1.md"
             step_3_path.write_text("# Overview\n\nOne.\n\n## Forms\n\nTwo.", encoding="utf-8")
@@ -282,10 +282,10 @@ class PipelineContractTests(unittest.TestCase):
 
             repaired = pipeline.repair_content_plan_coverage(content_plan, targets)
 
-            pipeline.validate_content_plan(repaired, targets)
-            self.assertGreater(len(repaired["pages"]), 1)
+            with self.assertRaisesRegex(ValueError, "does not cover source unit"):
+                pipeline.validate_content_plan(repaired, targets)
             self.assertFalse(any(
-                pipeline.hash_like_route_segments(pipeline.content_route_segments(planned_page))
+                "coverage-review" in pipeline.content_route_path(planned_page)
                 for planned_page in repaired["pages"]
             ))
 
@@ -314,7 +314,115 @@ class PipelineContractTests(unittest.TestCase):
             repaired = pipeline.repair_content_plan_coverage(content_plan, targets)
 
             self.assertEqual(repaired["pages"][0]["sourceRefs"][0]["sourceSlug"], "clois")
-            pipeline.validate_content_plan(repaired, targets)
+            with self.assertRaisesRegex(ValueError, "does not cover source"):
+                pipeline.validate_content_plan(repaired, targets)
+
+    def test_source_preserving_plan_preserves_chapter_order_and_links(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            input_dir = temp_path / "input"
+            step_3_dir = temp_path / "step_3"
+            input_dir.mkdir()
+            step_3_dir.mkdir()
+
+            (input_dir / "gramadac.html").write_text(
+                '<a href="subst1.html" title="Kapitel 1">Nouns</a>'
+                '<a href="adjekt1.html" title="Kapitel 2">Adjectives</a>',
+                encoding="iso-8859-1",
+            )
+            (input_dir / "subst1.html").write_text('<a href="subst2.html">Case</a>', encoding="iso-8859-1")
+            (input_dir / "subst2.html").write_text("", encoding="iso-8859-1")
+            (input_dir / "adjekt1.html").write_text("", encoding="iso-8859-1")
+            for slug in ["gramadac", "subst1", "subst2", "adjekt1"]:
+                (step_3_dir / f"{slug}.md").write_text(f"# {slug}\n\nBody.", encoding="utf-8")
+
+            targets = [
+                {
+                    "slug": slug,
+                    "html_path": str(input_dir / f"{slug}.html"),
+                    "step_3_path": str(step_3_dir / f"{slug}.md"),
+                }
+                for slug in ["adjekt1", "gramadac", "subst2", "subst1"]
+            ]
+
+            plan = pipeline.build_source_preserving_content_plan(targets)
+
+            self.assertEqual(plan["sourceOrder"][:4], ["subst1", "adjekt1", "subst2", "gramadac"])
+            self.assertEqual([page["sourceSlug"] for page in plan["pages"][:3]], ["subst1", "adjekt1", "subst2"])
+            subst1_page = next(page for page in plan["pages"] if page["sourceSlug"] == "subst1")
+            self.assertIn("nouns/grammar/case-number/overview", subst1_page["relatedTopics"])
+            pipeline.validate_content_plan(plan, targets)
+
+    def test_source_preserving_plan_splits_large_pages_within_source_topic(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            step_3_path = Path(temp_dir) / "verbnom1.md"
+            step_3_path.write_text(
+                "# Verbal noun syntax\n\nIntro."
+                "\n\n## Objects\n\n" + ("Object detail. " * 60)
+                + "\n\n## Purpose\n\n" + ("Purpose detail. " * 60),
+                encoding="utf-8",
+            )
+            html_path = Path(temp_dir) / "verbnom1.html"
+            html_path.write_text("", encoding="iso-8859-1")
+            targets = [{"slug": "verbnom1", "html_path": str(html_path), "step_3_path": str(step_3_path)}]
+            previous = os.environ.get("PIPELINE_SOURCE_PAGE_SPLIT_MAX_CHARS")
+            try:
+                os.environ["PIPELINE_SOURCE_PAGE_SPLIT_MAX_CHARS"] = "300"
+                plan = pipeline.build_source_preserving_content_plan(targets)
+            finally:
+                if previous is None:
+                    os.environ.pop("PIPELINE_SOURCE_PAGE_SPLIT_MAX_CHARS", None)
+                else:
+                    os.environ["PIPELINE_SOURCE_PAGE_SPLIT_MAX_CHARS"] = previous
+
+            self.assertGreater(len(plan["pages"]), 1)
+            self.assertEqual({page["sourceSlug"] for page in plan["pages"]}, {"verbnom1"})
+            self.assertEqual({page["topicSlug"] for page in plan["pages"]}, {plan["pages"][0]["topicSlug"]})
+            pipeline.validate_content_plan(plan, targets)
+
+    def test_source_preserving_plan_rejects_unresolved_source_links(self):
+        content_plan = {
+            "version": pipeline.CONTENT_PLAN_VERSION,
+            "strategy": "source-preserving",
+            "pages": [page(sourceLinks=["missing"])],
+        }
+
+        with self.assertRaisesRegex(ValueError, "unknown source"):
+            pipeline.validate_content_plan(content_plan, [target("ar")])
+
+    def test_source_preserving_titles_drop_redundant_irish_glosses(self):
+        self.assertEqual(
+            pipeline.english_title_text("The Declension of Nouns `Díochlaonadh na nAinmfhocal`"),
+            "The Declension of Nouns",
+        )
+        self.assertEqual(
+            pipeline.english_title_text("The Preposition <ga>ag</ga>", preserve_irish_term=True),
+            "The Preposition ag",
+        )
+
+    def test_source_preserving_routes_use_english_slug_for_legacy_source_name(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            step_3_path = Path(temp_dir) / "perftar.md"
+            step_3_path.write_text("# Perftar\n\nBody.", encoding="utf-8")
+            html_path = Path(temp_dir) / "perftar.html"
+            html_path.write_text("", encoding="iso-8859-1")
+            targets = [{"slug": "perftar", "html_path": str(html_path), "step_3_path": str(step_3_path)}]
+
+            plan = pipeline.build_source_preserving_content_plan(targets)
+
+            self.assertEqual(
+                pipeline.content_route_path(plan["pages"][0]),
+                "verbs/verbal-system/perfect-aspect-tar-eis/overview",
+            )
+            pipeline.validate_content_plan(plan, targets)
+
+    def test_component_imports_are_rewritten_to_alias(self):
+        rewritten = pipeline.rewrite_component_imports(
+            "import MutationCard from '../../../../components/MutationCard.astro';",
+            Path("prepositions/simple/do.mdx"),
+        )
+
+        self.assertEqual(rewritten, "import MutationCard from '@components/MutationCard.astro';")
 
     def test_mixed_italic_code_is_rejected(self):
         content = """---
