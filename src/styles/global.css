@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @plugin "@tailwindcss/typography";
 
 @theme {
@@ -55,12 +57,25 @@ pre {
 }
 
 pre > code {
-    @apply bg-transparent border-0
+    @apply bg-transparent border-0;
 }
 
-code, span.tag {
-    @apply bg-background-brand text-text-brand rounded-md text-xs font-bold py-1 px-1.5 transition-colors duration-300;
+.prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+code {
+    @apply inline-block whitespace-nowrap bg-background-brand text-text-brand rounded-md text-xs font-bold py-0.5 px-1.5 transition-colors duration-300;
     @apply dark:bg-background-brand-dark/10 dark:text-emerald-400 dark:border dark:border-emerald-500/20;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    code {
+        @apply text-[0.8em] mx-2 align-baseline;
+    }
 }
 
 code::before {
@@ -69,4 +84,42 @@ code::before {
 
 code::after {
     content: none;
+}
+
+.tag {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 shadow-sm shadow-emerald-950/5 transition-colors duration-200 dark:border-emerald-500/25 dark:bg-emerald-500/10 dark:text-emerald-300;
+}
+
+.tag-icon {
+    @apply h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.theme-mode-button {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-slate-500 transition-colors duration-200 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-slate-400 dark:hover:text-white;
+}
+
+.theme-mode-button[aria-pressed="true"] {
+    @apply bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white;
+}
+
+.theme-mode-icon {
+    @apply h-4 w-4;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.relation-link-icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }

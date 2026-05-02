@@ -1,7 +1,7 @@
 ---
 export type Breadcrumb = {
     title: string;
-    url: string;
+    url?: string;
 }
 
 interface Props {
@@ -11,14 +11,14 @@ interface Props {
 const {breadcrumbs} = Astro.props
 ---
 
-<nav class="z-20 sticky top-0 text-sm font-medium transition-colors duration-300 border-b  bg- bg-background/80 dark:bg-background-dark/80 backdrop-blur-md text-slate-600 dark:text-slate-200 border-background-border dark:border-background-border-dark">
-    <section class="mx-auto flex justify-between items-center max-w-6xl px-4 py-4">
-        <div class="flex items-center gap-1 py-3">
+<nav class="z-20 sticky top-0 text-sm font-medium transition-colors duration-300 border-b bg-background/80 dark:bg-background-dark/80 backdrop-blur-md text-slate-600 dark:text-slate-200 border-background-border dark:border-background-border-dark">
+    <section class="mx-auto flex justify-between items-center gap-4 max-w-6xl px-4 py-4">
+        <div class="flex min-w-0 items-center gap-1 overflow-x-auto whitespace-nowrap py-3">
             <a href="/"
                class="hover:text-brand-primary-hover dark:hover:text-brand-primary-dark-hover flex items-center transition-colors">
                 Home
             </a>
-            {breadcrumbs ? breadcrumbs.map(({url, title}) => (
+            {(breadcrumbs ?? []).map(({url, title}) => (
                     <>
                         <span class="text-text-muted" aria-hidden="true">/</span>
                         <a href={url}
@@ -26,7 +26,101 @@ const {breadcrumbs} = Astro.props
                             {title}
                         </a>
                     </>
-            )) : null}
+            ))}
+        </div>
+
+        <div class="flex shrink-0 items-center">
+            <div class="theme-mode-control inline-flex rounded-lg border border-background-border bg-slate-100 p-1 dark:border-background-border-dark dark:bg-slate-900"
+                 role="group"
+                 aria-label="Theme mode">
+                <button type="button" class="theme-mode-button" data-theme-option="light" aria-label="Light theme" aria-pressed="false" title="Light theme">
+                    <svg class="theme-mode-icon lucide lucide-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="m4.93 4.93 1.41 1.41"></path>
+                        <path d="m17.66 17.66 1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="m6.34 17.66-1.41 1.41"></path>
+                        <path d="m19.07 4.93-1.41 1.41"></path>
+                    </svg>
+                </button>
+                <button type="button" class="theme-mode-button" data-theme-option="system" aria-label="System theme" aria-pressed="false" title="System theme">
+                    <svg class="theme-mode-icon lucide lucide-monitor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+                        <path d="M8 21h8"></path>
+                        <path d="M12 17v4"></path>
+                    </svg>
+                </button>
+                <button type="button" class="theme-mode-button" data-theme-option="dark" aria-label="Dark theme" aria-pressed="false" title="Dark theme">
+                    <svg class="theme-mode-icon lucide lucide-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </section>
 </nav>
+
+<script is:inline>
+    (() => {
+        const storageKey = 'grammar.ie.theme';
+        const systemQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const modes = ['light', 'system', 'dark'];
+        const buttons = Array.from(document.querySelectorAll('[data-theme-option]'));
+
+        const getStoredTheme = () => {
+            try {
+                return localStorage.getItem(storageKey);
+            } catch {
+                return null;
+            }
+        };
+
+        const setStoredTheme = (theme) => {
+            try {
+                localStorage.setItem(storageKey, theme);
+            } catch {
+                // Theme choice still applies for this page load when storage is unavailable.
+            }
+        };
+
+        const getTheme = () => {
+            const theme = getStoredTheme();
+            return modes.includes(theme ?? '') ? theme : 'system';
+        };
+
+        const applyTheme = (theme, persist = true) => {
+            const normalizedTheme = modes.includes(theme) ? theme : 'system';
+            const isDark = normalizedTheme === 'dark' || (normalizedTheme === 'system' && systemQuery.matches);
+
+            document.documentElement.classList.toggle('dark', isDark);
+            document.documentElement.dataset.theme = normalizedTheme;
+            document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+
+            if (persist) {
+                setStoredTheme(normalizedTheme);
+            }
+
+            buttons.forEach((button) => {
+                const isSelected = button.dataset.themeOption === normalizedTheme;
+                button.setAttribute('aria-pressed', String(isSelected));
+            });
+        };
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                applyTheme(button.dataset.themeOption);
+            });
+        });
+
+        systemQuery.addEventListener('change', () => {
+            if (getTheme() === 'system') {
+                applyTheme('system', false);
+            }
+        });
+
+        applyTheme(getTheme(), false);
+    })();
+</script>

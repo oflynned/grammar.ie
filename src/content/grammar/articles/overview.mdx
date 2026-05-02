@@ -1,0 +1,305 @@
+---
+enTitle: "Overview"
+gaTitle: "An t-alt Cinnte"
+description: "How to use the Irish definite article 'an' and 'na', including the initial mutations it causes on nouns."
+tags: ["article", "grammar", "mutations", "nouns"]
+---
+
+import Note from '@components/Note.astro';
+import Dialect from '@components/Dialect.astro';
+import Details from '@components/Details.astro';
+
+Irish has a definite article, `an`, which corresponds to "the" in English. However, it has no indefinite article for "a" or "an". This means a noun on its own can be translated as either the singular noun or with an indefinite article.
+
+*   `fear` - man / a man
+*   `an fear` - the man
+
+Because of this, Irish grammar discussions about the article almost always refer to the definite article.
+
+## Forms of the Article
+
+The definite article has two basic forms: `an` and `na`. The form used depends on the number, gender, and case of the noun that follows.
+
+*   **`an`** is used for:
+    *   Nominative singular (masculine and feminine)
+    *   Genitive singular (masculine only)
+    *   Dative singular (masculine and feminine)
+    *   Dual (used with the number two, `dá`)
+*   **`na`** is used for:
+    *   Genitive singular (feminine only)
+    *   Nominative, Genitive, and Dative plural (masculine and feminine)
+
+The main complexity of the article is not its own form, but the initial mutations it causes on the following noun. These mutations—lenition, eclipsis, or adding a prefix like `t-`, `n-`, or `h-`—are a core part of the article's function. This guide focuses on the nominative and genitive cases, as the dative case is handled in the section on prepositions.
+
+### Masculine Nouns
+
+| Context | Singular | Plural |
+| :--- | :--- | :--- |
+| | **Nom.** | **Gen.** | **Nom.** | **Gen.** |
+| Before a consonant | `an` | `an` + Lenition | `na` | `na` + Eclipsis |
+| Before `d`, `t` | `an` | `an` | `na` | `na` + Eclipsis |
+| Before `s` + vowel | `an` | `an t-` | `na` | `na` |
+| Before a vowel | `an t-` | `an` | `na h-` | `na n-` |
+
+### Feminine Nouns
+
+| Context | Singular | Plural |
+| :--- | :--- | :--- |
+| | **Nom.** | **Gen.** | **Nom.** | **Gen.** |
+| Before a consonant | `an` + Lenition | `na` | `na` | `na` + Eclipsis |
+| Before `d`, `t` | `an` | `na` | `na` | `na` + Eclipsis |
+| Before `s` + vowel | `an t-` | `na` | `na` | `na` |
+| Before a vowel | `an` | `na h-` | `na h-` | `na n-` |
+
+<Note>
+  The consonants `d` and `t` are not lenited after the `n` of `an`. This is due to the "dentals rule," which prevents lenition when certain consonants like `d, n, t, l, s` appear next to each other.
+</Note>
+
+The `t-` prefix is added before `s` only when `s` is followed by a vowel or by `l`, `n`, or `r`.
+
+*   *an tsláinte* - the health
+*   *an scian* - the knife
+
+### Examples of Declension
+
+#### Masculine Nouns
+
+| Context | Nominative Singular | Genitive Singular | Nominative Plural | Genitive Plural |
+| :--- | :--- | :--- | :--- | :--- |
+| **Consonant** | *an fear* - the man | *an fhir* - of the man | *na fir* - the men | *na bhfear* - of the men |
+| **d, t** | *an teach* - the house | *an tí* - of the house | *na tithe* - the houses | *na dtithe* - of the houses |
+| **s + vowel** | *an sagart* - the priest | *an tsagairt* - of the priest | *na sagairt* - the priests | *na sagart* - of the priests |
+| **Vowel** | *an t-éan* - the bird | *an éin* - of the bird | *na héin* - the birds | *na n-éan* - of the birds |
+
+#### Feminine Nouns
+
+| Context | Nominative Singular | Genitive Singular | Nominative Plural | Genitive Plural |
+| :--- | :--- | :--- | :--- | :--- |
+| **Consonant** | *an ghloine* - the glass | *na gloine* - of the glass | *na gloiní* - the glasses | *na ngloiní* - of the glasses |
+| **d, t** | *an teist* - the test | *na teiste* - of the test | *na teisteacha* - the tests | *na dteisteacha* - of the tests |
+| **s + vowel** | *an tsúil* - the eye | *na súile* - of the eye | *na súile* - the eyes | *na súl* - of the eyes |
+| **Vowel** | *an áit* - the place | *na háite* - of the place | *na háiteacha* - the places | *na n-áiteacha* - of the places |
+
+## The Article with Numbers
+
+The article behaves in specific ways when used with numbers.
+
+### Cardinal Numbers
+
+*   **1 and 11 (`aon`, `aon ... déag`)**
+    The singular article is used. A `t-` prefix appears before `aon` in the nominative for both genders: `an t-aon`.
+    *   *an t-aon fhear amháin* - the one man
+    *   *an t-aon bhean amháin* - the one woman
+    In the genitive, masculine nouns use `an aon`, while feminine nouns use `na haon`.
+    *   *bád an aon fhir amháin* - the boat of the one man
+    *   *bád na haon mhná amháin* - the boat of the one woman
+    In the dative (after a preposition), the `t-` prefix is dropped: `ar an aon fhear amháin`.
+
+*   **2 and 12 (`dhá`, `dhá ... déag`)**
+    The numeral `dhá` becomes `dá` after the article. The dual form of the article, `an`, is used for all genders and cases.
+    *   *an dá bhád* - the two boats
+    *   *clann an dá dheirfiúr* - the children of the two sisters
+    The noun that follows is in the singular or dual form.
+
+*   **3–10 and 13–19**
+    The plural article `na` is used. It adds an `h-` prefix to `ocht` (eight).
+    *   *na trí bhád* - the three boats
+    *   *na hocht mbád* - the eight boats
+    In the genitive, `na` causes eclipsis of the numeral.
+    *   *praghas na dtrí bhád* - the price of the three boats
+    *   *praghas na n-ocht mbád* - the price of the eight boats
+
+*   **20, 30, 40, etc. (`fiche`, `tríocha`, `daichead`)**
+    These numbers are treated as masculine singular nouns, so they take the singular article `an`. In the nominative, `an t-` is used before `ochtó` (80).
+    *   *an fiche bád* - the twenty boats
+    *   *an t-ochtó bád* - the eighty boats
+    In the genitive, the numeral is lenited (with some exceptions like `tríocha` due to the dentals rule).
+    *   *dath an fhiche bád* - the colour of the twenty boats
+
+#### Examples with Cardinal Numbers
+
+| Number | Nominative | Genitive | Dative |
+| :--- | :--- | :--- | :--- |
+| **1** | *an t-aon bhád* | *an aon bháid* (m) / *na haon choda* (f) | *ar an aon bhád* |
+| **2** | *an dá bhád* | *an dá bhád* | *ar an dá bhád* |
+| **3** | *na trí bhád* | *na dtrí bhád* | *ar na trí bhád* |
+| **4** | *na ceithre bhád* | *na gceithre bhád* | *ar na ceithre bhád* |
+| **5** | *na cúig bhád* | *na gcúig bhád* | *ar na cúig bhád* |
+| **6** | *na sé bhád* | *na sé bhád* | *ar na sé bhád* |
+| **7** | *na seacht mbád* | *na seacht mbád* | *ar na seacht mbád* |
+| **8** | *na hocht mbád* | *na n-ocht mbád* | *ar na hocht mbád* |
+| **9** | *na naoi mbád* | *na naoi mbád* | *ar na naoi mbád* |
+| **10** | *na deich mbád* | *na ndeich mbád* | *ar na deich mbád* |
+| **11** | *an t-aon bhád déag* | *an aon bháid déag* (m) / *na haon chuid déag* (f) | *ar an aon bhád déag* |
+| **12** | *an dá bhád déag* | *an dá bhád déag* | *ar an dá bhád déag* |
+| **20** | *an fiche bád* | *an fhiche bád* | *ar an bhfiche bád* |
+| **80** | *an t-ochtó bád* | *an ochtó bád* | *ar an ochtó bád* |
+| **100** | *an céad bád* | *an chéad bád* | *ar an gcéad bád* |
+| **300** | *an trí chéad bád* | *an thrí chéad bád* | *ar an dtrí chéad bád* |
+
+<Dialect>
+  In some dialects and older texts, the noun following numbers 3-6 in the genitive plural is also eclipsed (e.g., *na dtrí mbád*). Conversely, some dialects omit the eclipsis on the numeral itself (e.g., *na trí bhád* for "of the three boats").
+</Dialect>
+
+### Ordinal Numbers
+
+When the article is used with an ordinal number (first, second, third), the entire phrase is usually treated as masculine, except for `chéad` (first).
+
+*   **Nominative:** A `t-` prefix appears before ordinal numbers starting with a vowel (`ochtú`, `aonú déag`), regardless of the noun's gender.
+    *   *an t-ochtú banríon* - the eighth queen
+    *   *an cúigiú haithne* - the fifth commandment
+
+*   **Genitive:** The phrase is usually treated as masculine, so the article is `an`. The ordinal number is lenited, and any `t-` prefix is dropped.
+    *   *dath an ochtú bád* - the colour of the eighth boat
+    *   *tábhacht an chúigiú haithne* - the importance of the fifth commandment
+
+*   **`chéad` (first):** This is an exception. `chéad` is always lenited after the article, as is the following noun. In the genitive, the article and noun follow the noun's actual gender.
+    *   *an chéad bhád* - the first boat
+    *   *an chéad bhean* - the first woman
+    *   *dath an chéad bháid* - the colour of the first boat (masculine genitive)
+    *   *ainm na chéad mhná* - the name of the first woman (feminine genitive)
+
+## The Article with Prepositions
+
+When a preposition is followed by the article, two things can happen:
+1.  The preposition may change its form (e.g., `le` becomes `leis`).
+2.  The preposition and article may merge into a single word (e.g., `de` + `an` becomes `den`).
+
+The initial mutation (lenition or eclipsis) on the noun that follows depends heavily on the dialect.
+
+### Before a Vowel
+
+With masculine nouns starting with a vowel, the `t-` prefix is dropped after most prepositions.
+*   *an t-úll* - the apple
+*   *ar an úll* - on the apple
+
+With feminine nouns starting with a vowel, there is no change.
+*   *an eachtra* - the adventure
+*   *ag an eachtra* - at the adventure
+
+### Before a Consonant
+
+The following table shows the standard forms and the general mutation rule. Dialectal variations are significant and are explained below.
+
+| Preposition | With `an` (sg.) | With `na` (pl.) | Standard Mutation (sg.) |
+| :--- | :--- | :--- | :--- |
+| `ag` | `ag an` | `ag na` | Eclipsis or Lenition |
+| `ar` | `ar an` | `ar na` | Eclipsis or Lenition |
+| `as` | `as an` | `as na` | Eclipsis or Lenition |
+| `chuig` | `chuig an` | `chuig na` | Eclipsis or Lenition |
+| `de` | **`den`** | `de na` | Lenition |
+| `do` | **`don`** | `do na` | Lenition |
+| `faoi` | **`faoin`** | `faoi na` | Eclipsis or Lenition |
+| `i` | **`sa`** / **`san`** | **`sna`** | Lenition |
+| `le` | **`leis an`** | **`leis na`** | Eclipsis or Lenition |
+| `ó` | **`ón`** | `ó na` | Eclipsis or Lenition |
+| `roimh` | `roimh an` | `roimh na` | Eclipsis or Lenition |
+| `trí` | **`tríd an`** | `trí na` | Eclipsis or Lenition |
+| `thar` | `thar an` | `thar na` | Eclipsis or Lenition |
+
+<Note>
+  The form `san` is used instead of `sa` before a vowel or `fh-`.
+</Note>
+
+#### Dialectal Variations in Mutations
+
+The choice between lenition and eclipsis after a preposition and the article is one of the most prominent dialectal differences in Irish.
+
+*   **Standard Irish:** For most prepositions, either lenition or eclipsis is acceptable (e.g., *ar an bhád* or *ar an mbád*). However, after `den`, `don`, and `sa(n)`, only lenition is used. Nouns beginning with `s-` get a `t-` prefix only if they are feminine. Nouns beginning with `d-` or `t-` are not changed.
+
+*   <Dialect region="Ulster">
+    Lenition is strongly preferred.
+    *   *ag an fhear* - at the man
+    *   *as an teach* - out of the house
+    </Dialect>
+
+*   <Dialect region="Connacht">
+    Eclipsis is common in Conamara, while lenition is more common further north in Mayo (Achill).
+    *   Conamara: *sa mbád* - in the boat
+    *   Achill: *sa bhád* - in the boat
+    </Dialect>
+
+*   <Dialect region="Munster">
+    Eclipsis is the dominant form and is also applied to `d` and `t`.
+    *   *as an dteach* - out of the house
+    *   *ar an ndoras* - on the door
+    </Dialect>
+
+<Details summary="Historical Note">
+  The special preposition forms ending in `-s` (like `leis`, `trís`) come from Old Irish, where the article began with an `s-`. For example, `leis an` evolved from `leth` + `sindu` (the dative form of the article). The modern distinction between lenition and eclipsis after prepositions reflects an older system where some prepositions took the dative case (causing lenition) and others took the accusative case (causing eclipsis). This case distinction has been lost, but its effects on mutations remain, varying by dialect.
+</Details>
+
+### Other Prepositions
+
+A few prepositions do not cause any mutation on the noun when followed by the article. The noun behaves as it would in the nominative case.
+
+| Preposition | With Singular Article | With Plural Article |
+| :--- | :--- | :--- |
+| `gan` | `gan an` | `gan na` |
+| `go dtí` | `go dtí an` | `go dtí na` |
+| `idir` | `idir an` | `idir na` |
+| `mar` | `mar an` | `mar na` |
+
+## The Article with Interrogatives
+
+The article merges with the interrogative word `cé` (what/which).
+
+*   `cé` + `an` = `cén`
+*   `cé` + `na` = `cé na`
+
+*   *Cén fear?* - Which man?
+*   *Cé na fir?* - Which men?
+*   *Cén fáth?* - What reason? / Why?
+
+<Dialect region="Munster">
+  In Munster, you may occasionally see `pé` (whichever) merge with the article to form `pén`: *pén áit* (whichever place).
+</Dialect>
+
+## Pronunciation of the Article
+
+The vowel in `an` and `na` is unstressed and pronounced as a schwa [ə].
+
+*   **`an`**: The final `-n` is often silent when between two consonants (*an fear* is pronounced [ə f′ar]). It is pronounced before a vowel (*an obair* is pronounced [ən obər′]). The sound of the `-n` often assimilates to the following consonant, becoming [m] before `b` or `p`, and [ŋ] before `g` or `c`.
+
+*   **`na`**: This is pronounced [nə].
+
+## Usage of the Article
+
+The article is used in several contexts where it might not be in English.
+
+### General Nouns and Concepts
+The article is used with abstract nouns, generic nouns, and to describe a class of people.
+*   *an tsláinte* - health
+*   *an duine* - man (in general)
+*   *an saidhbhir* - the rich
+
+### Proper Nouns and Titles
+It is used with titles, organisations, many place names, and surnames used without a first name.
+*   *an Dochtúir Ó Murchú* - Dr. Murphy
+*   *An Roinn Sláinte* - The Department of Health
+*   *an Fhrainc* - France
+*   *an Breatnach* - Walsh (Mr. Walsh)
+
+<Note>
+  Some place names, like `Éire` (Ireland) and `Albain` (Scotland), only take the article in the genitive case.
+  *   *Poblacht na hÉireann* - The Republic of Ireland
+</Note>
+
+### Time and Festivals
+The article is used with seasons, days of the week, months, and major festivals.
+*   *an tEarrach* - Spring
+*   *an Luan* - Monday
+*   *an Nollaig* - Christmas
+
+### Specific Grammatical Constructions
+*   **With demonstratives:** The article is required with `seo`, `sin`, and `úd`.
+    *   *an teach seo* - this house
+*   **In genitive phrases:** The article appears only before the second noun (the possessor).
+    *   *teach an dochtúra* - the doctor's house (literally "house of the doctor")
+*   **Meaning "per":**
+    *   *deich bpunt an ceann* - ten pounds per head
+*   **In copula sentences:** It can appear with an indefinite predicate.
+    *   *Is deas an duine é* - He is a nice person.
+*   **As a substitute for possessives:**
+    *   *an teach seo agamsa* - this house of mine
+    *   *an iníon is óige aici* - her youngest daughter

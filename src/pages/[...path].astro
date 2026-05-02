@@ -1,0 +1,89 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import {getCollection} from 'astro:content';
+import Card from '../components/Card.astro';
+import MarkdownContent from '../components/MarkdownContent.astro';
+import PageContent from '../layouts/PageContent.astro';
+import {directChildrenForPath, entryPath, titleForPath, type TreeChild} from '../lib/contentTree';
+
+type GrammarEntry = CollectionEntry<'grammar'>;
+
+export async function getStaticPaths() {
+    const entries = await getCollection('grammar');
+    const folderPaths = new Set<string>();
+
+    for (const entry of entries) {
+        const parts = entryPath(entry).split('/');
+        for (let index = 1; index < parts.length; index += 1) {
+            folderPaths.add(parts.slice(0, index).join('/'));
+        }
+    }
+
+    const paths = new Set([
+        ...entries.map((entry) => entryPath(entry)),
+        ...folderPaths,
+    ]);
+
+    return Array.from(paths).map((path) => {
+        const entry = entries.find((entry) => entryPath(entry) === path);
+
+        return {
+            params: {path},
+            props: {
+                path,
+                entry,
+                title: entry?.data.title ?? titleForPath(entries, path),
+                children: directChildrenForPath(entries, path),
+            },
+        };
+    });
+}
+
+interface Props {
+    path: string;
+    entry?: GrammarEntry;
+    title: string;
+    children: TreeChild[];
+}
+
+const {entry, title, children} = Astro.props;
+---
+
+{entry ? (
+<MarkdownContent entry={entry}/>
+    ) : (
+<PageContent title={title}>
+    <section class="mx-auto w-full max-w-6xl flex-1 prose dark:prose-invert">
+        <header class="mb-10">
+            <h1>{title}</h1>
+            <p class="text-lg text-slate-600 dark:text-slate-400">
+                Browse the folders and pages in this section.
+            </p>
+        </header>
+
+        <ol class="not-prose grid grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {children.map((child) => (
+                    <li class="group list-none">
+                        <a
+                                href={child.href}
+                                class="group relative flex flex-col justify-center p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl hover:border-brand-primary dark:hover:border-brand-primary transition-all duration-300 no-underline shadow-sm hover:shadow-xl hover:shadow-emerald-500/5"
+                        >
+                            <Card>
+                                        <span class="flex flex-col gap-2">
+                                            <span class="text-xl font-bold text-slate-800 transition-colors group-hover:text-emerald-600 dark:text-slate-100 dark:group-hover:text-emerald-400">
+                                                {child.title}
+                                            </span>
+                                            {child.description ? (
+                                                    <span class="line-clamp-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                                                        {child.description}
+                                                    </span>
+                                            ) : null}
+                                        </span>
+                            </Card>
+                        </a>
+                    </li>
+            ))}
+        </ol>
+    </section>
+</PageContent>
+    )}

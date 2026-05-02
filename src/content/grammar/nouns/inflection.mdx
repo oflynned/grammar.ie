@@ -1,0 +1,181 @@
+---
+order: 6
+enTitle: "Inflection"
+gaTitle: "Athruithe ar an Tamhan"
+description: "An overview of the main ways word stems change in Irish grammar, including palatalisation, depalatalisation, syncope, and devoicing."
+tags: ["grammar", "inflection", "palatalisation", "syncope", "devoicing"]
+---
+
+import Dialect from '@components/Dialect.astro';
+import Details from '@components/Details.astro';
+import Note from '@components/Note.astro';
+import Warning from '@components/Warning.astro';
+
+In Irish, words do not just change by adding endings; the core of the word, or the "stem", can also change. This is known as internal inflection. These changes, which affect consonants and vowels inside a word, are fundamental to forming plurals, possessives, and different verb tenses. The main types are palatalisation, depalatalisation, syncope, and devoicing.
+
+## Palatalisation (An Caolú)
+
+Palatalisation, or `caolú` ("slenderisation"), is the process where a "broad" consonant becomes a "slender" consonant. In writing, this is usually shown by inserting an `i` next to the consonant to mark it as slender. This simple spelling change often reflects a shift in pronunciation where the consonant is articulated further forward in the mouth, towards the hard palate.
+
+*   *bád* [bɑːd] (a boat) becomes *báid* [bɑːdʲ] (of a boat; boats)
+
+Here, the broad `d` in `bád` becomes a slender `d` in `báid`, indicated by the new `i`.
+
+Sometimes, making a consonant slender requires more significant changes to the vowels in the stem. The primary goal is always to change the quality of the final consonant, but this can trigger a domino effect on the surrounding vowels to maintain the "slender with slender, broad with broad" spelling rule.
+
+| Vowel Change | Example Word | Nominative (Broad) | Palatalised Form |
+| :--- | :--- | :--- | :--- |
+| `ea` → `i` | man | `fear` | `fir` |
+| `ea` → `ei` | horse | `each` | `eich` |
+| `éa` → `éi` | bird | `éan` | `éin` |
+| `ia` → `éi` | fish | `iasc` | `éisc` |
+| `ia` → `iai` | Brian | `Brian` | `Briain` |
+| `ío` → `í` | chirping | `bóg` | `bíge` |
+| `io` → `i` | bright | `fionn` | `finn` |
+| `iu` → `i` | wet | `fliuch` | `fliche` |
+
+For example, the change from `fear` (a man) to `fir` (of a man; men) involves changing the broad `r` to a slender `r`. This forces the vowel `ea` to change to `i` to keep the spelling consistent.
+
+Some vowel changes are irregular and do not follow the common patterns.
+*   *mac* (son) becomes *mic*, not the expected `*maic`.
+*   *mall* (slow) becomes *moille*, not `*maille`.
+
+<Dialect region="Connacht">
+  The insertion of an `i` can also change the pronunciation of the preceding vowel. In Connemara, for example, `cnoc` (hill) is pronounced [kruk], but its genitive form `cnoic` is pronounced [krikʲ].
+</Dialect>
+
+The ending `-ach` or `-each` in multi-syllable words becomes `-aigh` or `-igh` through palatalisation.
+*   *báisteach* (rain) → *báistigh*
+*   *bacach* (lame person) → *bacaigh*
+
+However, in single-syllable words, a final `-ch` is retained, and the vowel before it changes.
+*   *déach* (a pair) → *déich*
+*   *moch* (early) → *moiche*
+
+<Details summary="Historical Note: The -ui- spelling">
+  In older orthography, a common vowel shift during palatalisation was from `-o-` to `-ui-`. You may still encounter these spellings in older texts.
+  - `long` → `luinge` (now `loinge`)
+  - `poll` → `puill` (now `poill`)
+  - `cnoc` → `cnuic` (now `cnoic`)
+  This change was standard for nouns in the first and second declensions, with some exceptions like `cos` → `coise` (not `*cuise`).
+</Details>
+
+### When Palatalisation is Used
+
+Palatalisation is a key mechanism for forming different grammatical cases and forms:
+- **Genitive and vocative singular** of first declension nouns: *an fear* (the man) → *an fhir* (of the man) → *a fhir!* (man!)
+- **Weak plural** of first declension nouns: *an fear* (the man) → *na fir* (the men)
+- **Genitive singular** of second declension nouns (with an `-e` ending): *an lámh* (the hand) → *na láimhe* (of the hand)
+- **Dative and dual** of second declension nouns (in older/formal usage): *ar an láimh* (on the hand), *dhá láimh* (two hands)
+- **Comparative and feminine genitive** of first declension adjectives (with an `-e` ending): *fliuch* (wet) → *fliche* (wetter)
+- **Diminutives** with the ending `-ín`: *fear* (man) → *firín* (little man)
+
+## Depalatalisation (An Leathnú)
+
+Depalatalisation, or `leathnú` ("broadening"), is the opposite of palatalisation. It involves changing a slender consonant to its broad equivalent. In writing, this is often as simple as dropping an `i` that was marking the consonant as slender.
+
+*   *abhainn* (a river) becomes *abhann* (of rivers)
+
+Here, the slender `-nn` in `abhainn` becomes a broad `-nn` in `abhann`.
+
+Just like with palatalisation, this process can also require more complex vowel changes, which are often the reverse of the palatalisation patterns.
+
+| Vowel Change | Example Word | Nominative (Slender) | Depalatalised Form |
+| :--- | :--- | :--- | :--- |
+| `ei` → `ea` | bite | `greim` | `greama` |
+| `éi` → `éa` | tinker | `tincéir` | `tincéara` |
+| `i` → `ea` | honey | `mil` | `meala` |
+| `io` → `ea` | knowledge | `fios` | `feasa` |
+| `í` → `ío` | whistling | `feadaíl` | `feadaíola` |
+| `ui` → `o` | blood | `fuil` | `fola` |
+| `ui` → `u` | put | `cuir` | `cur` |
+
+For example, the change from `Éirinn` (Ireland) to `Éireann` (of Ireland) involves changing the slender `-nn` to a broad `-nn`, which forces the preceding vowel to change from `i` to `ea`.
+
+### When Depalatalisation is Used
+
+Depalatalisation is used to form:
+- The **genitive** of third declension nouns: *mil* (honey) → *meala* (of honey)
+- The **genitive** of many fifth declension nouns: *Éirinn* (Ireland) → *Éireann* (of Ireland)
+- The **genitive** of second declension adjectives: *bródúil* (proud) → *bródúla* (of a proud...)
+- The form of some **verbal nouns**: *cuir* (put) → *cur* (putting)
+- The stem of some multi-syllable verbs before an ending: *sábháil* (save) → *sábhálann* (saves)
+
+## Syncope (An Coimriú)
+
+Syncope, or `coimriú` ("shortening"), occurs in words with two or more syllables when an ending is added. It involves dropping the vowel of the stem's final syllable, effectively merging that syllable with the new ending. This shortens the stem from two syllables to one.
+
+*   *imir* (to play) becomes *imríonn* (plays)
+
+The stem `imir-` becomes `imr-` when the ending `-íonn` is added.
+
+Syncope happens only when all three of the following conditions are met:
+1.  The vowel to be dropped is in the last syllable of the stem, and it is **short, unstressed, and unaccented** (like the second `i` in `imir`).
+2.  This vowel is positioned between a liquid consonant (`l`, `m`, `n`, `r`) and another consonant.
+3.  A grammatical **ending** (for tense, case, or plural) is added to the word.
+
+Syncope can cause several other changes:
+- **Vowel changes in the first syllable:** To obey the "slender with slender" rule, the first syllable's vowel may need to change.
+  *   *ramhar* (fat) → *raimhre*
+  *   *domhain* (deep) → *doimhne*
+- **Consonant shortening:** The double consonants `ll`, `nn`, and `rr` become single `l`, `n`, and `r`.
+  *   *aoibhinn* (delightful) → *aoibhne*
+- **Consonant assimilation:** Certain consonant combinations are simplified. `ln`, `nl`, or `dl` become `ll`, while `dn` or `nd` become `nn`.
+  *   *álainn* (beautiful) → *áille* (instead of `*áilne`)
+  *   *ólann* (drinks) → *ólla* (a form used in verbal adjectives)
+
+<Note>
+  An exception to consonant assimilation is `codail` (sleep), which becomes `codladh` (sleeping). Although spelled with `-dl-`, the pronunciation is often [koLə], as if it were written `*colladh`.
+</Note>
+
+- **Spreading palatalisation:** If the final consonant becomes slender, all adjacent consonants in the new cluster also become slender.
+  *   *bóthar* (road) → *bóithre* (roads)
+  *   *athair* (father) → *aithreacha* (fathers)
+- **Devoicing:** A `d` can become a `t` if it follows an `s`.
+  *   *fearsaid* (spindle) → *feirste*
+  *   *sluasaid* (shovel) → *sluaiste*
+
+### When Syncope is Used
+
+Syncope is common in:
+- **Verbs of the second conjugation** ending in `-il`, `-ir`, `-in`, and some in `-is`.
+  *   *cosain* (defend) → *cosnaíonn* (defends)
+  *   *imir* (play) → *imríonn* (plays)
+  *   *inis* (tell) → *insíonn* (tells)
+- **Adjective declension**, especially for the feminine genitive (`-e`) and plural (`-a`, `-e`).
+  *   *an bhean ramhar* (the fat woman) → *na mná raimhre* (of the fat woman) → *na mná ramhra* (the fat women)
+
+<Dialect region="Munster">
+  In Munster Irish, the effect of syncope is often neutralised in speech. A strong tendency to insert an epenthetic vowel (a short, unstressed vowel) reintroduces a sound where syncope removed one. For example, `imrím` (I play) is pronounced [ˈimʲrʲiːmʲ] in other dialects but often [imʲəˈrʲiːmʲ] in Munster, sounding closer to the original stem `imir`.
+</Dialect>
+
+## Devoicing (An Díghlórú)
+
+Devoicing is the process where a voiced consonant (like `b`, `d`, `g`) changes to its voiceless counterpart (`p`, `t`, `k`).
+
+In Irish, this primarily happens to the final consonant of a word stem when it is followed by an ending that begins with an `[h]` sound. This is different from the automatic final devoicing found in languages like German. A voiced consonant can happily exist at the end of a word in Irish (e.g., `scuab` [skuəb], `póg` [poːg]).
+
+The main endings that trigger devoicing are:
+- **Future/Conditional** endings with `f-` (e.g., `-faidh`, `-fadh`), where the `f` is pronounced `[h]`.
+- **Verbal adjective/past participle** endings with `th-` (e.g., `-tha`), where `th` is pronounced `[h]`.
+
+When a voiced consonant meets this `[h]` sound, they merge into a single voiceless consonant, and the `[h]` sound itself disappears. Spelling reforms have sometimes updated the orthography to reflect this change.
+
+| Original Sound | Before `-f-` | Before `-th-` | Pronunciation | Example (Verbal Adjective) |
+| :--- | :--- | :--- | :--- | :--- |
+| `b` | `-bf-` | `-bth-` | `[p]` | `scuabtha` (swept) |
+| `d` | `-df-` | `-dt-` | `[t]` | `goidte` (stolen) |
+| `g` | `-gf-` | `-gth-` | `[k]` | `pógtha` (kissed) |
+| `bh` | `-bhf-` | `-f-` | `[f]` | `scríofa` (written) |
+| `mh` | `-mhf-` | `-f-` | `[f]` | `snáfa` (swum) |
+
+Examples with the future tense:
+*   *scuabfaidh sé* - he will sweep
+*   *pógfaidh sé* - he will kiss
+*   *scríobhfaidh sé* - he will write
+
+The consonants `l`, `n`, and `r` also become voiceless before an `[h]` sound, though this is not always reflected in spelling.
+
+<Warning>
+  Do not confuse the word-internal letter sequence `-bhf-` (pronounced `[f]`) with the eclipsis of `f-`, which is also written `bhf-` but pronounced `[v]` or `[w]`. Eclipsis is the opposite process, where a voiceless sound becomes voiced.
+</Warning>

@@ -1,0 +1,75 @@
+---
+interface Props {
+    region?: string;
+}
+
+const {region} = Astro.props;
+
+const specificRegions = ['Munster', 'Connacht', 'Ulster'] as const;
+type SpecificRegion = (typeof specificRegions)[number];
+
+type RegionConfig = {
+    label: string;
+    classes: {
+        wrapper: string;
+        header: string;
+    };
+};
+
+const regionConfig: Record<SpecificRegion, RegionConfig> = {
+    Munster: {
+        label: 'Munster Irish',
+        classes: {
+            wrapper: 'border-emerald-200 bg-emerald-50 dark:border-emerald-500/25 dark:bg-emerald-500/10',
+            header: 'text-emerald-700 dark:text-emerald-400',
+        },
+    },
+    Connacht: {
+        label: 'Connacht Irish',
+        classes: {
+            wrapper: 'border-teal-200 bg-teal-50 dark:border-teal-500/25 dark:bg-teal-500/10',
+            header: 'text-teal-700 dark:text-teal-400',
+        },
+    },
+    Ulster: {
+        label: 'Ulster Irish',
+        classes: {
+            wrapper: 'border-indigo-200 bg-indigo-50 dark:border-indigo-500/25 dark:bg-indigo-500/10',
+            header: 'text-indigo-700 dark:text-indigo-400',
+        },
+    },
+};
+
+const getSpecificRegion = (region: Props['region']): SpecificRegion | undefined =>
+    specificRegions.find((specificRegion) => specificRegion.toLowerCase() === region?.trim().toLowerCase());
+
+const specificRegion = getSpecificRegion(region);
+const config = specificRegion ? regionConfig[specificRegion] : {
+    label: region?.trim() || 'Dialectal Note',
+    classes: {
+        wrapper: 'border-emerald-200 bg-emerald-50 dark:border-emerald-500/25 dark:bg-emerald-500/10',
+        header: 'text-emerald-700 dark:text-emerald-400',
+    },
+};
+---
+
+<aside
+        role="note"
+        aria-label={`Dialect note: ${config.label}`}
+        class:list={[
+            'my-5 grid gap-1.5 rounded-lg border px-4 py-3.5 text-[0.9375rem] leading-relaxed text-slate-700 dark:text-slate-300',
+            config.classes.wrapper,
+        ]}
+>
+    <div class:list={['flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest', config.classes.header]}>
+        <svg class="size-4 shrink-0" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+            <ellipse cx="8" cy="8" rx="2.5" ry="6.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M1.5 6h13M1.5 10h13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        {config.label}
+    </div>
+    <div class="[&_p]:m-0 [&_p+p]:mt-2">
+        <slot/>
+    </div>
+</aside>

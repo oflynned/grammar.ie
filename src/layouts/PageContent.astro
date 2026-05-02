@@ -9,20 +9,36 @@ interface Props {
 }
 
 const {title} = Astro.props
+const formatSegment = (segment: string) => {
+    const labelOverrides: Record<string, string> = {
+        bi: 'Bí',
+        conjugated: 'Conjugated Prepositions',
+        dean: 'Déan',
+        i: 'i',
+        o: 'Ó',
+        tri: 'Trí',
+    };
+
+    if (labelOverrides[segment]) return labelOverrides[segment];
+
+    return segment
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
 const segments = Astro.url.pathname.split('/').filter(Boolean);
 const breadcrumbs = segments.map<Breadcrumb>((segment, index) => {
     const url = '/' + segments.slice(0, index + 1).join('/');
-    const title = segment
-        .replace(/-/g, ' ')
-        .replace(/\b\w/g, (l) => l.toUpperCase());
+    const title = formatSegment(segment)
 
-    return { title, url };
-});
+    return {title, url};
+})
+
+const formattedBreadcrumbs = breadcrumbs.length > 1 ? breadcrumbs.slice(0, -1).concat({title}) : breadcrumbs
 ---
 
 <Page title={title}>
     <main class="flex flex-col min-h-screen transition-colors duration-300">
-        <Navigation breadcrumbs={breadcrumbs}/>
+        <Navigation breadcrumbs={formattedBreadcrumbs}/>
 
         <section class="prose dark:prose-invert flex flex-1 mx-auto w-full max-w-6xl gap-12 px-4 py-12">
             <slot/>
