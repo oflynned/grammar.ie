@@ -356,7 +356,7 @@ class PipelineContractTests(unittest.TestCase):
     def test_source_preserving_plan_matches_original_html_page_count(self):
         tooling_dir = Path(__file__).resolve().parents[1]
         input_dir = tooling_dir / "assets" / "test" / "input"
-        step_3_dir = tooling_dir / "assets" / "test" / "output_copy" / "step_3"
+        step_3_dir = tooling_dir / "assets" / "test" / "output" / "step_3"
         html_files = sorted(input_dir.glob("*.html"))
         targets = [
             {
@@ -804,7 +804,7 @@ Body.
                     return cached
 
                 calls.append(content)
-                output = f"cached-output_copy-{len(calls)}"
+                output = f"cached-output-{len(calls)}"
                 pipeline.prompt._write_cached_llm_output(cache_path, output)
                 return output
 
