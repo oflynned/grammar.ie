@@ -116,6 +116,18 @@ code::after {
     stroke-linejoin: round;
 }
 
+.search-results-panel {
+    width: min(28rem, calc(100vw - 2rem));
+}
+
+.search-results-panel mark {
+    @apply rounded-sm bg-emerald-100 px-0.5 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-200;
+}
+
+.search-results-panel a[data-selected="true"] {
+    @apply bg-emerald-50 dark:bg-emerald-500/10;
+}
+
 .relation-link-icon {
     fill: none;
     stroke: currentColor;
