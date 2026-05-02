@@ -1,0 +1,290 @@
+<div class="grammar-search relative w-36 sm:w-64" data-search-root>
+    <label class="sr-only" for="site-search">Search grammar content</label>
+    <div class="relative">
+        <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+             xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+            <path d="m21 21-4.34-4.34"></path>
+            <circle cx="11" cy="11" r="8"></circle>
+        </svg>
+        <input
+                id="site-search"
+                type="search"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="Search"
+                class="h-10 w-full rounded-lg border border-background-border bg-white px-9 text-sm text-slate-800 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-primary focus:ring-2 focus:ring-emerald-500/20 dark:border-background-border-dark dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
+                aria-controls="site-search-results"
+                aria-expanded="false"
+                data-search-input
+        />
+        <button
+                type="button"
+                class="absolute right-2 top-1/2 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-md text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:hover:bg-slate-800 dark:hover:text-slate-100"
+                aria-label="Clear search"
+                data-search-clear>
+            <svg class="h-4 w-4"
+                 xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 aria-hidden="true">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div
+            id="site-search-results"
+            class="search-results-panel absolute right-0 top-full z-30 mt-2 hidden overflow-hidden rounded-lg border border-background-border bg-white shadow-xl shadow-slate-950/10 dark:border-background-border-dark dark:bg-slate-900 dark:shadow-black/30"
+            data-search-panel>
+        <p class="px-4 py-3 text-sm text-slate-500 dark:text-slate-400" data-search-status></p>
+        <ol class="max-h-96 overflow-y-auto p-2" data-search-results></ol>
+    </div>
+</div>
+
+<script>
+    type PagefindResultData = {
+        url: string;
+        excerpt: string;
+        meta: {
+            title?: string;
+        };
+        sub_results?: PagefindSubResult[];
+    };
+
+    type PagefindWeightedLocation = {
+        balanced_score?: number;
+    };
+
+    type PagefindSubResult = {
+        title: string;
+        url: string;
+        excerpt: string;
+        anchor?: {
+            id: string;
+        };
+        weighted_locations?: PagefindWeightedLocation[];
+    };
+
+    type PagefindResult = {
+        data: () => Promise<PagefindResultData>;
+    };
+
+    type PagefindModule = {
+        search: (query: string) => Promise<{ results: PagefindResult[] }>;
+    };
+
+    const root = document.querySelector<HTMLElement>('[data-search-root]');
+    const input = root?.querySelector<HTMLInputElement>('[data-search-input]');
+    const clearButton = root?.querySelector<HTMLButtonElement>('[data-search-clear]');
+    const panel = root?.querySelector<HTMLElement>('[data-search-panel]');
+    const status = root?.querySelector<HTMLElement>('[data-search-status]');
+    const resultsList = root?.querySelector<HTMLOListElement>('[data-search-results]');
+
+    if (root && input && clearButton && panel && status && resultsList) {
+        let pagefindPromise: Promise<PagefindModule> | undefined;
+        let searchTimeout: number | undefined;
+        let searchRequest = 0;
+        let selectedIndex = -1;
+
+        const setPanelOpen = (isOpen: boolean) => {
+            panel.classList.toggle('hidden', !isOpen);
+            input.setAttribute('aria-expanded', String(isOpen));
+        };
+
+        const setStatus = (message: string) => {
+            status.textContent = message;
+            status.classList.toggle('hidden', message.length === 0);
+        };
+
+        const updateClearButton = () => {
+            clearButton.classList.toggle('hidden', input.value.length === 0);
+            clearButton.classList.toggle('flex', input.value.length > 0);
+        };
+
+        const searchLinks = () => Array.from(resultsList.querySelectorAll<HTMLAnchorElement>('a'));
+
+        const setSelectedIndex = (index: number) => {
+            const links = searchLinks();
+            selectedIndex = links.length ? (index + links.length) % links.length : -1;
+
+            links.forEach((link, linkIndex) => {
+                link.dataset.selected = String(linkIndex === selectedIndex);
+            });
+
+            links[selectedIndex]?.focus();
+        };
+
+        const loadPagefind = () => {
+            const pagefindPath = '/pagefind/pagefind.js';
+            pagefindPromise ??= import(/* @vite-ignore */ pagefindPath) as Promise<PagefindModule>;
+            return pagefindPromise;
+        };
+
+        const resultTitle = (data: PagefindResultData) => {
+            const fallback = data.url.replace(/^\//, '').replace(/\/$/, '').replace(/-/g, ' ');
+            return (data.meta.title || fallback || 'Untitled').replace(/\s+\|\s+Grammar\.ie$/, '');
+        };
+
+        const resultScore = (result: PagefindSubResult) => {
+            return Math.max(...(result.weighted_locations ?? []).map((location) => location.balanced_score ?? 0), 0);
+        };
+
+        const bestSubResult = (data: PagefindResultData) => {
+            const anchoredResults = (data.sub_results ?? []).filter((result) => result.anchor);
+            return anchoredResults.toSorted((a, b) => resultScore(b) - resultScore(a)).at(0);
+        };
+
+        const resultUrl = (data: PagefindResultData) => {
+            const url = bestSubResult(data)?.url ?? data.url;
+
+            try {
+                const parsedUrl = new URL(url, window.location.href);
+                return `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`;
+            } catch {
+                return url;
+            }
+        };
+
+        const resultLabel = (data: PagefindResultData) => {
+            const pageTitle = resultTitle(data);
+            const sectionTitle = bestSubResult(data)?.title;
+
+            if (!sectionTitle || sectionTitle === pageTitle) return pageTitle;
+
+            return `${pageTitle} / ${sectionTitle}`;
+        };
+
+        const resultExcerpt = (data: PagefindResultData) => {
+            return bestSubResult(data)?.excerpt ?? data.excerpt;
+        };
+
+        const renderResults = async (results: PagefindResult[], requestId: number) => {
+            const resultData = await Promise.all(results.slice(0, 8).map((result) => result.data()));
+            if (requestId !== searchRequest) return;
+
+            resultsList.replaceChildren();
+            selectedIndex = -1;
+
+            resultData.forEach((data) => {
+                const item = document.createElement('li');
+                const link = document.createElement('a');
+                const title = document.createElement('span');
+                const excerpt = document.createElement('span');
+
+                link.href = resultUrl(data);
+                link.className = 'block rounded-md px-3 py-2 no-underline transition-colors hover:bg-emerald-50 focus:bg-emerald-50 focus:outline-none dark:hover:bg-emerald-500/10 dark:focus:bg-emerald-500/10';
+                title.className = 'block text-sm font-semibold text-slate-900 dark:text-slate-100';
+                excerpt.className = 'mt-1 line-clamp-2 block text-xs leading-5 text-slate-600 dark:text-slate-400';
+
+                title.textContent = resultLabel(data);
+                excerpt.innerHTML = resultExcerpt(data);
+
+                link.append(title, excerpt);
+                item.append(link);
+                resultsList.append(item);
+            });
+
+            setStatus(resultData.length ? '' : 'No results found.');
+            setPanelOpen(true);
+        };
+
+        const runSearch = async () => {
+            const query = input.value.trim();
+            const requestId = searchRequest + 1;
+            searchRequest = requestId;
+            updateClearButton();
+
+            if (query.length === 0) {
+                resultsList.replaceChildren();
+                setStatus('');
+                setPanelOpen(false);
+                return;
+            }
+
+            if (query.length < 2) {
+                resultsList.replaceChildren();
+                setStatus('Type at least 2 characters.');
+                setPanelOpen(true);
+                return;
+            }
+
+            setStatus('Searching...');
+            setPanelOpen(true);
+
+            try {
+                const pagefind = await loadPagefind();
+                const search = await pagefind.search(query);
+                await renderResults(search.results, requestId);
+            } catch {
+                if (requestId !== searchRequest) return;
+
+                resultsList.replaceChildren();
+                setStatus('Search is available after the site has been built.');
+                setPanelOpen(true);
+            }
+        };
+
+        const queueSearch = () => {
+            window.clearTimeout(searchTimeout);
+            searchTimeout = window.setTimeout(runSearch, 180);
+        };
+
+        input.addEventListener('input', queueSearch);
+        input.addEventListener('focus', () => {
+            if (input.value.trim().length > 0) {
+                setPanelOpen(true);
+            }
+        });
+
+        clearButton.addEventListener('click', () => {
+            input.value = '';
+            input.focus();
+            runSearch();
+        });
+
+        root.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                setPanelOpen(false);
+                input.focus();
+                return;
+            }
+
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                setSelectedIndex(selectedIndex + 1);
+                return;
+            }
+
+            if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                setSelectedIndex(selectedIndex - 1);
+                return;
+            }
+
+            if (event.key === 'Enter' && document.activeElement === input) {
+                const [firstLink] = searchLinks();
+                if (firstLink) {
+                    firstLink.click();
+                }
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!root.contains(event.target as Node)) {
+                setPanelOpen(false);
+            }
+        });
+    }
+</script>

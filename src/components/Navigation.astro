@@ -1,4 +1,6 @@
 ---
+import SearchBox from './SearchBox.astro';
+
 export type Breadcrumb = {
     title: string;
     url?: string;
@@ -29,7 +31,9 @@ const {breadcrumbs} = Astro.props
             ))}
         </div>
 
-        <div class="flex shrink-0 items-center">
+        <div class="flex shrink-0 items-center gap-3">
+            <SearchBox/>
+
             <div class="theme-mode-control inline-flex rounded-lg border border-background-border bg-slate-100 p-1 dark:border-background-border-dark dark:bg-slate-900"
                  role="group"
                  aria-label="Theme mode">
