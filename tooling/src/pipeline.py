@@ -71,6 +71,26 @@ def force_content_plan():
     return os.getenv("PIPELINE_FORCE_CONTENT_PLAN") == "1"
 
 
+def content_only():
+    return os.getenv("PIPELINE_CONTENT_ONLY") == "1"
+
+
+def direct_enrich():
+    return os.getenv("PIPELINE_DIRECT_ENRICH") == "1"
+
+
+def force_enrich():
+    return os.getenv("PIPELINE_FORCE_ENRICH") == "1"
+
+
+def skip_parse():
+    return content_only() or os.getenv("PIPELINE_SKIP_PARSE") == "1"
+
+
+def skip_translate():
+    return content_only() or os.getenv("PIPELINE_SKIP_TRANSLATE") == "1"
+
+
 def dry_run():
     return os.getenv("PIPELINE_DRY_RUN") == "1"
 
@@ -246,18 +266,25 @@ def split_mdx_pages(content: str, default_slug: str):
 
 
 def discover_targets():
-    return [
-        {
-            "slug": os.path.splitext(file_name)[0],
+    targets_by_slug = {}
+    for file_name in sorted(os.listdir(INPUT_DIR)):
+        stem, extension = os.path.splitext(file_name)
+        if extension.lower() not in {".html", ".htm"}:
+            continue
+        if stem in targets_by_slug and extension.lower() == ".htm":
+            continue
+
+        html_path = os.path.join(INPUT_DIR, file_name)
+        targets_by_slug[stem] = {
+            "slug": stem,
             "html_file": file_name,
-            "html_path": os.path.join(INPUT_DIR, file_name),
-            "step_1_path": os.path.join(STEP_1_DIR, f"{os.path.splitext(file_name)[0]}.md"),
-            "step_3_path": os.path.join(STEP_3_DIR, f"{os.path.splitext(file_name)[0]}.md"),
-            "source_html_hash": hash_file(os.path.join(INPUT_DIR, file_name)),
+            "html_path": html_path,
+            "step_1_path": os.path.join(STEP_1_DIR, f"{stem}.md"),
+            "step_3_path": os.path.join(STEP_3_DIR, f"{stem}.md"),
+            "source_html_hash": hash_file(html_path),
         }
-        for file_name in sorted(os.listdir(INPUT_DIR))
-        if file_name.endswith(".html")
-    ]
+
+    return [targets_by_slug[slug] for slug in sorted(targets_by_slug)]
 
 
 def source_slug_from_href(href: str):
@@ -1115,6 +1142,9 @@ def _normalise_page_slug(page):
 
 
 def normalise_public_route_metadata(content_plan):
+    if content_plan.get("strategy") == "source-preserving":
+        return
+
     for page in content_plan.get("pages", []):
         if not isinstance(page, dict):
             continue
@@ -1352,6 +1382,136 @@ def publish_organized_content():
     print(f"\n📚 Organised {len(copied_paths)} MDX files into {target_dir}")
 
 
+def direct_output_path(target):
+    return os.path.join(STEP_4_DIR, f"{target['slug']}.mdx")
+
+
+def direct_output_relative_path(target):
+    return os.path.relpath(direct_output_path(target), STEP_4_DIR)
+
+
+def direct_enrichment_changed(record, target, stage_config, stage_prompt):
+    stage_record = record.get("direct_enrichment") or {}
+    output_path = direct_output_path(target)
+    step_3_hash = hash_file(target["step_3_path"]) if os.path.isfile(target["step_3_path"]) else None
+    output_hash = hash_file(output_path) if os.path.isfile(output_path) else None
+
+    return any([
+        force_enrich(),
+        not stage_record,
+        not os.path.isfile(output_path),
+        stage_record.get("input_hash") != step_3_hash,
+        stage_record.get("output_hash") != output_hash,
+        stage_config_changed(stage_record, stage_config, stage_prompt),
+    ])
+
+
+def build_direct_enrichment_plan(targets, manifest, stage_config, stage_prompt):
+    pending = []
+    missing_translations = []
+
+    for target in targets:
+        if not os.path.isfile(target["step_3_path"]):
+            missing_translations.append(target["slug"])
+            continue
+
+        record = manifest.get("files", {}).get(target["slug"], {})
+        if direct_enrichment_changed(record, target, stage_config, stage_prompt):
+            pending.append(target)
+
+    return {"enrich": pending, "missing_translations": missing_translations}
+
+
+def update_direct_enrichment_record(manifest, target, stage_config, stage_prompt):
+    output_path = direct_output_path(target)
+    if not os.path.isfile(target["step_3_path"]) or not os.path.isfile(output_path):
+        return
+
+    record = manifest_record(manifest, target["slug"])
+    record["step_4_output_paths"] = [direct_output_relative_path(target)]
+    record["direct_enrichment"] = {
+        "input_hash": hash_file(target["step_3_path"]),
+        "output_path": direct_output_relative_path(target),
+        "output_hash": hash_file(output_path),
+        "prompt_hash": stage_prompt["hash"],
+        "prompt_version": stage_prompt["version"],
+        "model_type": stage_config["model_type"],
+        "model_id": stage_config["model_id"],
+        "temperature": stage_config["temperature"],
+    }
+
+
+def enrich_direct(llm: BaseChatModel, targets, manifest, stage_config, stage_prompt):
+    os.makedirs(STEP_4_DIR, exist_ok=True)
+
+    for target in targets:
+        print(f"📄 Direct enriching: {target['slug']}.md")
+        markdown_content = read_text_file(target["step_3_path"])
+        content = prompt.improve_direct_page(
+            llm,
+            markdown_content,
+            source_slug=target["slug"],
+            cache_dir=llm_cache_dir(),
+            cache_namespace=llm_cache_namespace("direct-enrichment", target["slug"], stage_config, stage_prompt),
+        )
+        generated_pages = split_mdx_pages(content, target["slug"])
+        # actual_slugs = [page_slug for page_slug, _page_content in generated_pages]
+        # if actual_slugs != [target["slug"]]:
+        #     raise ValueError(
+        #         f"Direct enrichment slug for {target['slug']} must stay as the original source slug. "
+        #         f"Expected {[target['slug']]}, got {actual_slugs}."
+        #     )
+
+        output_path = Path(direct_output_path(target))
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(generated_pages[0][1], encoding="utf-8")
+        print(f"Saved to {output_path}")
+        update_direct_enrichment_record(manifest, target, stage_config, stage_prompt)
+        save_manifest(manifest)
+
+
+def publish_direct_content(targets=None):
+    if targets is None:
+        outputs = discover_all_step_4_outputs()
+    else:
+        outputs = [
+            direct_output_relative_path(target)
+            for target in targets
+            if os.path.isfile(direct_output_path(target))
+        ]
+
+    if not outputs:
+        print("\n📚 No step_4 MDX files found to publish.")
+        return
+
+    target_dir = Path(os.getenv("PIPELINE_ASTRO_CONTENT_DIR", str(ASTRO_CONTENT_DIR))).resolve()
+    project_content_dir = (PROJECT_ROOT / "src" / "content").resolve()
+    if project_content_dir not in target_dir.parents:
+        raise ValueError(f"Refusing to write outside src/content: {target_dir}")
+
+    if target_dir.exists():
+        shutil.rmtree(target_dir)
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    copied_paths = []
+    for output_path in sorted(outputs):
+        source_path = Path(STEP_4_DIR) / output_path
+        if Path(output_path).parts and Path(output_path).parts[0] in {"__pycache__"}:
+            continue
+
+        target_relative_path = Path(output_path)
+        target_path = target_dir / target_relative_path
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        content = read_text_file(str(source_path))
+        target_path.write_text(
+            rewrite_component_imports(content, target_relative_path),
+            encoding="utf-8",
+        )
+        copied_paths.append(target_relative_path.as_posix())
+
+    print(f"\n📚 Published {len(copied_paths)} direct MDX files into {target_dir}")
+
+
 def model_config(model_type: str, temperature: float):
     if model_type not in GEMINI_MODELS:
         raise ValueError(f"Invalid model type: {model_type}. Must be one of {list(GEMINI_MODELS.keys())}")
@@ -1393,6 +1553,10 @@ def prompt_metadata():
         "enrichment": {
             "version": PROMPT_VERSIONS["enrichment"],
             "hash": hash_text(prompt.IMPROVE_UX_SYSTEM_PROMPT),
+        },
+        "direct_enrichment": {
+            "version": PROMPT_VERSIONS["enrichment"] + "-direct",
+            "hash": hash_text(prompt.DIRECT_ENRICHMENT_SYSTEM_PROMPT),
         },
     }
 
@@ -1561,12 +1725,17 @@ def build_pipeline_plan(targets, manifest, configs, prompts, force_content_plan_
             source_changed,
             parsed_markdown_is_suspiciously_large(target),
         ])
+        if skip_parse():
+            parse_pending = False
+
         translate_pending = any([
             force_regenerate(),
             parse_pending,
             not step_3_exists,
             translation_changed(record, target, configs["translator"], prompts["translation"]),
         ])
+        if skip_translate():
+            translate_pending = False
 
         if parse_pending:
             plan["parse"].append(target)
@@ -1760,6 +1929,10 @@ def source_page_split_max_chars():
         return SOURCE_PAGE_SPLIT_MAX_CHARS
 
 
+def source_splitting_enabled():
+    return os.getenv("PIPELINE_ENABLE_SOURCE_SPLITS") == "1"
+
+
 def source_page_table_row_split_threshold():
     try:
         return int(os.getenv("PIPELINE_SOURCE_PAGE_TABLE_ROW_SPLIT_THRESHOLD", SOURCE_PAGE_TABLE_ROW_SPLIT_THRESHOLD))
@@ -1847,6 +2020,15 @@ def source_route_metadata(slug: str, title: str):
     override = SOURCE_ROUTE_OVERRIDES.get(slug)
     if override:
         category, section, section_slug, topic, topic_slug = override
+        if topic_slug == "overview":
+            title_slug = english_url_slug(title)
+            section_singular = section_slug[:-1] if section_slug.endswith("s") else section_slug
+            if title_slug in {section_slug, section_singular}:
+                topic = section
+                topic_slug = section_slug
+            else:
+                topic = title
+                topic_slug = title_slug
         return {
             "category": category,
             "section": section,
@@ -1876,6 +2058,8 @@ def source_unit_groups_for_target(target):
     units = source_units_for_target(target)
     if not units:
         return []
+    if not source_splitting_enabled():
+        return [units]
 
     markdown = read_text_file(target["step_3_path"])
     table_stats = markdown_table_stats(markdown)
@@ -1905,9 +2089,9 @@ def source_unit_groups_for_target(target):
     return groups
 
 
-def page_slug_for_source_group(group, index, used_slugs):
+def page_slug_for_source_group(group, index, used_slugs, terminal_slug=None):
     if index == 0:
-        base_slug = "overview"
+        base_slug = terminal_slug or "overview"
     else:
         heading = english_title_text(group[0].get("heading") or f"part {index + 1}")
         base_slug = slugify(heading)
@@ -1927,11 +2111,35 @@ def page_slug_for_source_group(group, index, used_slugs):
     return slug
 
 
+def english_url_slug(value: str):
+    slug = slugify(english_title_text(value))
+    return re.sub(r"^(?:the|a|an)-", "", slug) or slug
+
+
+def source_terminal_slug(metadata, title: str):
+    topic_slug = optional_slug(metadata.get("topicSlug") or metadata.get("topic"))
+    section_slug = optional_slug(metadata.get("sectionSlug") or metadata.get("section"))
+    title_slug = english_url_slug(title)
+    section_singular = section_slug[:-1] if section_slug.endswith("s") else section_slug
+
+    if topic_slug:
+        return topic_slug
+    if title_slug and title_slug in {section_slug, section_singular}:
+        return section_slug
+    return title_slug or "overview"
+
+
 def source_preserving_page_for_group(target, title, metadata, group, group_index, group_count, order, links, route_lookup, used_slugs):
-    page_slug = page_slug_for_source_group(group, group_index, used_slugs)
+    terminal_slug = source_terminal_slug(metadata, title)
+    page_slug = page_slug_for_source_group(
+        group,
+        group_index,
+        used_slugs,
+        terminal_slug=terminal_slug,
+    )
     first_heading = english_title_text(group[0].get("heading") if group else title)
     split_label = "" if group_count == 1 or slugify(first_heading) == slugify(title) else f": {first_heading}"
-    nav_title = "Overview" if page_slug == "overview" else first_heading
+    nav_title = title if group_index == 0 else first_heading
     table_stats = markdown_table_stats("\n\n".join(unit.get("content", "") for unit in group))
 
     if table_stats["rows"] > source_page_table_row_split_threshold() or table_stats["maxColumns"] > 4:
@@ -1977,11 +2185,12 @@ def build_source_preserving_content_plan(targets):
     for target in ordered_targets:
         title = source_title_for_target(target)
         metadata = source_route_metadata(target["slug"], title)
+        terminal_slug = source_terminal_slug(metadata, title)
         route_lookup[target["slug"]] = content_route_path({
             **metadata,
-            "slug": "overview",
+            "slug": terminal_slug,
             "title": title,
-            "navTitle": "Overview",
+            "navTitle": title,
         })
 
     pages = []
@@ -2194,12 +2403,48 @@ if __name__ == "__main__":
     manifest = load_manifest()
     targets = discover_targets()
 
+    if direct_enrich():
+        enricher_config = configs["enricher"]
+        direct_prompt = prompts["direct_enrichment"]
+        direct_plan = build_direct_enrichment_plan(targets, manifest, enricher_config, direct_prompt)
+
+        print("🚀 Planning direct enrichment...")
+        print(f"📊 Model profile: {profile_name}")
+        print("📄 Direct mode enabled. Planner, parser, and translator will be skipped.")
+        if force_enrich():
+            print("♻️  Force direct enrichment enabled.")
+        if direct_plan["missing_translations"]:
+            print(f"⚠️  Missing translated step_3 file(s): {', '.join(direct_plan['missing_translations'])}")
+        print(f"Direct enrich pending: {len(direct_plan['enrich'])} — {format_slugs(direct_plan['enrich'])}")
+
+        if dry_run():
+            print("\n🧪 Dry run enabled. Exiting before paid LLM calls.")
+            raise SystemExit(0)
+
+        if direct_plan["enrich"]:
+            llm_enricher = get_gemini_llm(
+                enricher_config["model_type"],
+                enricher_config["temperature"],
+            )
+            enrich_direct(llm_enricher, direct_plan["enrich"], manifest, enricher_config, direct_prompt)
+
+        if organize_content():
+            publish_direct_content(targets)
+
+        print("\n✅ Direct enrichment finished.")
+        raise SystemExit(0)
+
     print("🚀 Planning pipeline...")
     print(f"📊 Model profile: {profile_name}")
     if force_regenerate():
         print("♻️  Force regenerate enabled.")
     if force_content_plan():
         print("🧭 Force content plan enabled.")
+    if content_only():
+        print("📚 Content-only mode enabled. Parse and translation stages will be skipped.")
+    elif skip_parse() or skip_translate():
+        skipped = ", ".join(stage for stage, enabled in [("parse", skip_parse()), ("translate", skip_translate())] if enabled)
+        print(f"⏭️  Skipping stage(s): {skipped}.")
 
     force_content_plan_pending = force_content_plan()
     plan = build_pipeline_plan(
@@ -2252,21 +2497,21 @@ if __name__ == "__main__":
         save_manifest(manifest)
         print_run_summary("Enrichment plan after translation", plan)
 
-    if plan["content_plan"]:
-        planner_config = configs["planner"]
-        plan_content(None, targets, manifest, planner_config, prompts["content_plan"])
-
-        force_content_plan_pending = False
-        plan = build_pipeline_plan(
-            targets,
-            manifest,
-            configs,
-            prompts,
-            force_content_plan_stage=force_content_plan_pending,
-        )
-        adopt_completed_outputs(targets, manifest, configs, prompts, plan)
-        save_manifest(manifest)
-        print_run_summary("Enrichment plan after content planning", plan)
+    # if plan["content_plan"]:
+    #     planner_config = configs["planner"]
+    #     plan_content(None, targets, manifest, planner_config, prompts["content_plan"])
+    #
+    #     force_content_plan_pending = False
+    #     plan = build_pipeline_plan(
+    #         targets,
+    #         manifest,
+    #         configs,
+    #         prompts,
+    #         force_content_plan_stage=force_content_plan_pending,
+    #     )
+    #     adopt_completed_outputs(targets, manifest, configs, prompts, plan)
+    #     save_manifest(manifest)
+    #     print_run_summary("Enrichment plan after content planning", plan)
 
     if plan["enrich"]:
         content_plan = load_content_plan()

@@ -350,10 +350,78 @@ class PipelineContractTests(unittest.TestCase):
             self.assertEqual(plan["sourceOrder"][:4], ["subst1", "adjekt1", "subst2", "gramadac"])
             self.assertEqual([page["sourceSlug"] for page in plan["pages"][:3]], ["subst1", "adjekt1", "subst2"])
             subst1_page = next(page for page in plan["pages"] if page["sourceSlug"] == "subst1")
-            self.assertIn("nouns/grammar/case-number/overview", subst1_page["relatedTopics"])
+            self.assertIn("nouns/grammar/case-number", subst1_page["relatedTopics"])
             pipeline.validate_content_plan(plan, targets)
 
-    def test_source_preserving_plan_splits_large_pages_within_source_topic(self):
+    def test_source_preserving_plan_matches_original_html_page_count(self):
+        tooling_dir = Path(__file__).resolve().parents[1]
+        input_dir = tooling_dir / "assets" / "test" / "input"
+        step_3_dir = tooling_dir / "assets" / "test" / "output" / "step_3"
+        html_files = sorted(input_dir.glob("*.html"))
+        targets = [
+            {
+                "slug": html_path.stem,
+                "html_path": str(html_path),
+                "step_3_path": str(step_3_dir / f"{html_path.stem}.md"),
+                "source_html_hash": pipeline.hash_file(str(html_path)),
+            }
+            for html_path in html_files
+            if (step_3_dir / f"{html_path.stem}.md").exists()
+        ]
+
+        self.assertEqual(len(html_files), 119)
+        self.assertEqual(len(targets), len(html_files))
+
+        plan = pipeline.build_source_preserving_content_plan(targets)
+
+        self.assertEqual(len(plan["pages"]), len(html_files))
+        pipeline.validate_content_plan(plan, targets)
+
+    def test_discover_targets_accepts_original_htm_extension(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            input_dir = temp_path / "input"
+            step_1_dir = temp_path / "step_1"
+            step_3_dir = temp_path / "step_3"
+            input_dir.mkdir()
+            original_input_dir = pipeline.INPUT_DIR
+            original_step_1_dir = pipeline.STEP_1_DIR
+            original_step_3_dir = pipeline.STEP_3_DIR
+            try:
+                pipeline.INPUT_DIR = str(input_dir)
+                pipeline.STEP_1_DIR = str(step_1_dir)
+                pipeline.STEP_3_DIR = str(step_3_dir)
+                (input_dir / "gramadac.htm").write_text("<h1>Grammar</h1>", encoding="iso-8859-1")
+                (input_dir / "subst1.htm").write_text("<h1>Nouns</h1>", encoding="iso-8859-1")
+
+                targets = pipeline.discover_targets()
+            finally:
+                pipeline.INPUT_DIR = original_input_dir
+                pipeline.STEP_1_DIR = original_step_1_dir
+                pipeline.STEP_3_DIR = original_step_3_dir
+
+            self.assertEqual([target["slug"] for target in targets], ["gramadac", "subst1"])
+            self.assertEqual([target["html_file"] for target in targets], ["gramadac.htm", "subst1.htm"])
+
+    def test_source_preserving_plan_keeps_large_pages_intact_by_default(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            step_3_path = Path(temp_dir) / "verbnom1.md"
+            step_3_path.write_text(
+                "# Verbal noun syntax\n\nIntro."
+                "\n\n## Objects\n\n" + ("Object detail. " * 60)
+                + "\n\n## Purpose\n\n" + ("Purpose detail. " * 60),
+                encoding="utf-8",
+            )
+            html_path = Path(temp_dir) / "verbnom1.html"
+            html_path.write_text("", encoding="iso-8859-1")
+            targets = [{"slug": "verbnom1", "html_path": str(html_path), "step_3_path": str(step_3_path)}]
+
+            plan = pipeline.build_source_preserving_content_plan(targets)
+
+            self.assertEqual(len(plan["pages"]), 1)
+            pipeline.validate_content_plan(plan, targets)
+
+    def test_source_preserving_plan_can_split_large_pages_when_enabled(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             step_3_path = Path(temp_dir) / "verbnom1.md"
             step_3_path.write_text(
@@ -366,14 +434,20 @@ class PipelineContractTests(unittest.TestCase):
             html_path.write_text("", encoding="iso-8859-1")
             targets = [{"slug": "verbnom1", "html_path": str(html_path), "step_3_path": str(step_3_path)}]
             previous = os.environ.get("PIPELINE_SOURCE_PAGE_SPLIT_MAX_CHARS")
+            previous_enabled = os.environ.get("PIPELINE_ENABLE_SOURCE_SPLITS")
             try:
                 os.environ["PIPELINE_SOURCE_PAGE_SPLIT_MAX_CHARS"] = "300"
+                os.environ["PIPELINE_ENABLE_SOURCE_SPLITS"] = "1"
                 plan = pipeline.build_source_preserving_content_plan(targets)
             finally:
                 if previous is None:
                     os.environ.pop("PIPELINE_SOURCE_PAGE_SPLIT_MAX_CHARS", None)
                 else:
                     os.environ["PIPELINE_SOURCE_PAGE_SPLIT_MAX_CHARS"] = previous
+                if previous_enabled is None:
+                    os.environ.pop("PIPELINE_ENABLE_SOURCE_SPLITS", None)
+                else:
+                    os.environ["PIPELINE_ENABLE_SOURCE_SPLITS"] = previous_enabled
 
             self.assertGreater(len(plan["pages"]), 1)
             self.assertEqual({page["sourceSlug"] for page in plan["pages"]}, {"verbnom1"})
@@ -412,7 +486,7 @@ class PipelineContractTests(unittest.TestCase):
 
             self.assertEqual(
                 pipeline.content_route_path(plan["pages"][0]),
-                "verbs/verbal-system/perfect-aspect-tar-eis/overview",
+                "verbs/verbal-system/perfect-aspect-tar-eis",
             )
             pipeline.validate_content_plan(plan, targets)
 
@@ -423,6 +497,58 @@ class PipelineContractTests(unittest.TestCase):
         )
 
         self.assertEqual(rewritten, "import MutationCard from '@components/MutationCard.astro';")
+
+    def test_direct_enrichment_plan_uses_existing_translations_without_planner(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            html_path = temp_path / "0dekl.htm"
+            step_3_path = temp_path / "step_3" / "0dekl.md"
+            step_3_path.parent.mkdir()
+            html_path.write_text("<h1>Irregular declension</h1>", encoding="utf-8")
+            step_3_path.write_text("# Irregular Declension\n\nBody.", encoding="utf-8")
+            targets = [{
+                "slug": "0dekl",
+                "html_path": str(html_path),
+                "step_3_path": str(step_3_path),
+            }]
+            manifest = {"files": {}}
+            stage_config = {"model_type": "ideator", "model_id": "model", "temperature": 0.25}
+            stage_prompt = {"hash": "direct", "version": "direct-v1"}
+
+            plan = pipeline.build_direct_enrichment_plan(targets, manifest, stage_config, stage_prompt)
+
+            self.assertEqual([target["slug"] for target in plan["enrich"]], ["0dekl"])
+            self.assertEqual(plan["missing_translations"], [])
+
+    def test_publish_direct_content_preserves_original_file_names(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            original_step_4_dir = pipeline.STEP_4_DIR
+            previous_content_dir = os.environ.get("PIPELINE_ASTRO_CONTENT_DIR")
+            target_dir = pipeline.PROJECT_ROOT / "src" / "content" / "__test_direct_publish"
+            published_path = target_dir / "0dekl.mdx"
+            published = False
+            try:
+                pipeline.STEP_4_DIR = str(temp_path / "step_4")
+                os.environ["PIPELINE_ASTRO_CONTENT_DIR"] = str(target_dir)
+                Path(pipeline.STEP_4_DIR).mkdir(parents=True)
+                Path(pipeline.STEP_4_DIR, "0dekl.mdx").write_text(
+                    "---\ntitle: \"Irregular Declension\"\nslug: \"0dekl\"\n---\n\nBody.",
+                    encoding="utf-8",
+                )
+
+                pipeline.publish_direct_content()
+                published = published_path.exists()
+            finally:
+                pipeline.STEP_4_DIR = original_step_4_dir
+                if previous_content_dir is None:
+                    os.environ.pop("PIPELINE_ASTRO_CONTENT_DIR", None)
+                else:
+                    os.environ["PIPELINE_ASTRO_CONTENT_DIR"] = previous_content_dir
+                if target_dir.exists():
+                    pipeline.shutil.rmtree(target_dir)
+
+            self.assertTrue(published)
 
     def test_mixed_italic_code_is_rejected(self):
         content = """---
@@ -573,6 +699,72 @@ Body.
                     os.environ.pop("PIPELINE_FORCE_CONTENT_PLAN", None)
                 else:
                     os.environ["PIPELINE_FORCE_CONTENT_PLAN"] = previous
+
+            self.assertEqual(plan["parse"], [])
+            self.assertEqual(plan["translate"], [])
+            self.assertTrue(plan["content_plan"])
+
+    def test_content_only_skips_stale_translation_and_allows_content_plan(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            html_path = temp_path / "ar.html"
+            step_1_path = temp_path / "step_1" / "ar.md"
+            step_3_path = temp_path / "step_3" / "ar.md"
+            html_path.write_text("<h1>Ar</h1>", encoding="utf-8")
+            step_1_path.parent.mkdir()
+            step_3_path.parent.mkdir()
+            step_1_path.write_text("# Ar", encoding="utf-8")
+            step_3_path.write_text("# Ar", encoding="utf-8")
+
+            targets = [{
+                "slug": "ar",
+                "html_path": str(html_path),
+                "step_1_path": str(step_1_path),
+                "step_3_path": str(step_3_path),
+                "source_html_hash": pipeline.hash_file(str(html_path)),
+            }]
+            configs = {
+                "translator": {"model_type": "general", "model_id": "new-model", "temperature": 0.1},
+                "planner": {"model_type": "ideator", "model_id": "model", "temperature": 0.2},
+                "enricher": {"model_type": "ideator", "model_id": "model", "temperature": 0.25},
+            }
+            prompts = {
+                "translation": {"hash": "new-translation", "version": "translation-v2"},
+                "content_plan": {"hash": "content-plan", "version": "content-plan-v1"},
+                "enrichment": {"hash": "enrichment", "version": "enrichment-v4"},
+            }
+            manifest = {
+                "files": {
+                    "ar": {
+                        "source_html_hash": pipeline.hash_file(str(html_path)),
+                        "translation": {
+                            "input_hash": pipeline.hash_file(str(step_1_path)),
+                            "output_hash": pipeline.hash_file(str(step_3_path)),
+                            "prompt_hash": "old-translation",
+                            "prompt_version": "translation-v1",
+                            "model_type": "general",
+                            "model_id": "old-model",
+                            "temperature": 0.1,
+                        },
+                    },
+                },
+            }
+
+            previous_content_only = os.environ.get("PIPELINE_CONTENT_ONLY")
+            previous_force_content_plan = os.environ.get("PIPELINE_FORCE_CONTENT_PLAN")
+            try:
+                os.environ["PIPELINE_CONTENT_ONLY"] = "1"
+                os.environ["PIPELINE_FORCE_CONTENT_PLAN"] = "1"
+                plan = pipeline.build_pipeline_plan(targets, manifest, configs, prompts)
+            finally:
+                if previous_content_only is None:
+                    os.environ.pop("PIPELINE_CONTENT_ONLY", None)
+                else:
+                    os.environ["PIPELINE_CONTENT_ONLY"] = previous_content_only
+                if previous_force_content_plan is None:
+                    os.environ.pop("PIPELINE_FORCE_CONTENT_PLAN", None)
+                else:
+                    os.environ["PIPELINE_FORCE_CONTENT_PLAN"] = previous_force_content_plan
 
             self.assertEqual(plan["parse"], [])
             self.assertEqual(plan["translate"], [])

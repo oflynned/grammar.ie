@@ -1,0 +1,158 @@
+---
+order: 3
+enTitle: "Eclipsis"
+gaTitle: "An tUrú"
+description: "A guide to eclipsis (urú), the initial consonant mutation that voices or nasalises the beginning of a word in specific grammatical contexts."
+tags: ["mutations", "eclipsis", "urú", "grammar"]
+---
+import Note from '@components/Note.astro';
+import Dialect from '@components/Dialect.astro';
+import Details from '@components/Details.astro';
+import MutationCard from '@components/MutationCard.astro';
+
+Eclipsis, known in Irish as *urú*, is one of the two most common initial consonant mutations. It changes the sound at the beginning of a word, typically by "voicing" a voiceless consonant (like `p` becoming `b`) or "nasalising" a voiced one (like `b` becoming `m`). This change is triggered by certain preceding words, such as prepositions, numbers, and possessive pronouns.
+
+## The Eclipsis Changes
+
+Eclipsis affects seven consonants. In writing, the new sound is represented by adding a letter before the original initial consonant. The original letter is not pronounced.
+
+<MutationCard title="b becomes mb" before="bád" after="ár mbád" rule="b → mb" />
+<MutationCard title="c becomes gc" before="cat" after="ár gcat" rule="c → gc" />
+<MutationCard title="d becomes nd" before="doras" after="ár ndoras" rule="d → nd" />
+<MutationCard title="f becomes bhf" before="fuinneog" after="ár bhfuinneog" rule="f → bhf" />
+<MutationCard title="g becomes ng" before="gairdín" after="ár ngairdín" rule="g → ng" />
+<MutationCard title="p becomes bp" before="peann" after="ár bpeann" rule="p → bp" />
+<MutationCard title="t becomes dt" before="teach" after="ár dteach" rule="t → dt" />
+
+The table below summarises these changes and their approximate pronunciation for both broad and slender consonants.
+
+| Initial Sound | Eclipsed Form | Pronunciation (Broad) | Pronunciation (Slender) |
+| :--- | :--- | :--- | :--- |
+| `b` | `mb` | [m] | [mʲ] |
+| `c` | `gc` | [g] | [gʲ] |
+| `d` | `nd` | [n] | [nʲ] |
+| `f` | `bhf` | [v] or [w] | [vʲ] |
+| `g` | `ng` | [ŋ] (as in "si**ng**") | [ŋʲ] |
+| `p` | `bp` | [b] | [bʲ] |
+| `t` | `dt` | [d] | [dʲ] |
+
+<Note>
+The consonants `l`, `m`, `n`, `r`, and `s` are not affected by eclipsis. The same is true for `h` and letters borrowed for foreign words like `j`, `v`, `w`, and `z`.
+</Note>
+
+Before a vowel, some of the same grammatical triggers cause an `n-` to be prefixed to the word. This is known as n-prefixing.
+
+## How Eclipsis is Written
+
+In written Irish, the eclipsing letter is added before the original letter, which is then silenced in pronunciation.
+
+*   *ár dteach* (our house) is pronounced as if it were written *ár dteach*.
+
+When a word that is eclipsed needs to be capitalised, such as at the start of a sentence or in a title, the eclipsing letter remains lowercase while the original initial letter is capitalised.
+
+*   *i **gC**onnachta* - in Connacht
+*   *i **nG**aeilge* - in Irish
+*   *i **mB**éarla* - in English
+
+## When to Use Eclipsis
+
+Eclipsis is triggered by specific grammatical contexts.
+
+### After Certain Prepositions with the Article
+
+Eclipsis occurs after the prepositions `ar`, `as`, `faoi`, `le`, `ó`, `roimh`, `thar`, `trí`, and `um` when they are followed by the singular definite article `an`.
+
+*   *ar an **mb**ord* - on the table
+*   *leis an **gc**ailín* - with the girl (`le` + `an` = `leis`)
+*   *tríd an **bhf**uinneog* - through the window (`trí` + `an` = `tríd`)
+
+<Dialect region="Standard">
+This rule is consistently applied in Munster and is the basis for the written standard.
+</Dialect>
+
+<Dialect region="Connacht">
+In Connacht, words beginning with `d` and `t` are not eclipsed in this context. Feminine nouns beginning with `s` receive a `t-` prefix instead.
+</Dialect>
+
+<Dialect region="Ulster">
+In Ulster, lenition is generally used instead of eclipsis in this context (e.g., *ar an **bh**ord*).
+</Dialect>
+
+### After the Preposition `sa`
+
+The form `sa` (a contraction of `i` + `an`, meaning "in the") causes eclipsis on the following noun.
+
+*   *sa **bhf**arraige* - in the sea
+
+<Dialect region="Standard">
+In the standard language and in Ulster, `sa` causes lenition instead of eclipsis (e.g., *san **fh**arraige*). The form `san` is used before vowels and `f`.
+</Dialect>
+
+<Dialect region="Munster">
+In Munster, this rule generally only applies to words beginning with `f`.
+</Dialect>
+
+### After the Preposition `i`
+
+The preposition `i` (in) causes eclipsis when it is **not** followed by the definite article.
+
+*   *i **dt**each* - in a house
+*   *i **bp**áirc* - in a park
+
+### After the Genitive Plural Article `na`
+
+Eclipsis is used on nouns following `na` when it is the article for the genitive plural (meaning "of the").
+
+*   *hataí na **bhf**ear* - the hats of the men
+*   *dath na **gc**arranna* - the colour of the cars
+
+### After Plural Possessive Adjectives
+
+The plural possessive adjectives `ár` (our), `bhur` (your, plural), and `a` (their) all trigger eclipsis.
+
+*   *ár **dt**ír* - our country
+*   *bhur **mb**ord* - your table
+*   *a **gc**arr* - their car
+
+### After Numbers 7-10
+
+The cardinal numbers from seven to ten cause eclipsis on the following noun. This also applies to compound numbers ending in 7-10, like 17 or 27.
+
+*   *seacht **gc**at* - seven cats
+*   *ocht **bp**eann* - eight pens
+*   *naoi **dt**iachóg* - nine kites
+*   *deich **mb**ád* - ten boats
+
+### After Certain Verbal Particles and Conjunctions
+
+Eclipsis is used on a verb following these common particles and conjunctions: `an` (question particle), `go` (that), `nach` (that...not), `mura` (if...not), `dá` (if), and `sula` (before).
+
+*   *An **bhf**uil tú ann?* - Are you there?
+*   *Dúirt sé go **dt**iocfadh sé.* - He said that he would come.
+*   *Mura **gc**reideann tú mé...* - If you don't believe me...
+
+### After Other Particles
+
+Eclipsis also occurs in a few other specific situations:
+
+*   **After the interrogative `cá` (where):** *Cá **bhf**uil sé?* - Where is he?
+*   **After the indirect relative particle `a`:** *an fear a **bhf**uil a mhac tinn* - the man whose son is sick
+*   **After the generalising relative pronoun `a` (all that):** *sin a **bhf**uil uaim* - that is all that I want
+
+### After the Prefix `éa-`
+
+The prefix `éa-`, meaning "un-", causes eclipsis. In modern spelling, the original eclipsed letter is usually omitted entirely.
+
+*   `éa-` + `cóir` (just) → `éagóir` (injustice)
+*   `éa-` + `trom` (heavy) → `éadrom` (light, not heavy)
+
+## Archaic and Fossilised Forms
+
+You may encounter eclipsis in older texts or fixed phrases where the rules were applied differently.
+
+*   **In place names:** Some place names preserve an older eclipsis that followed a neuter noun, e.g., *Loch **nE**achach* (Lough Neagh).
+*   **On adjectives:** It was once common to eclipse an adjective that followed an eclipsed noun in the genitive plural, e.g., *scéal na mban **mb**ocht* (the story of the poor women). This is rare in modern Irish.
+
+<Details summary="Historical note on older spellings">
+In older texts, you might see a different way of writing eclipsis where the eclipsed letter was doubled. For example, `cc` was used instead of `gc` for [g], and `tt` instead of `dt` for [d]. So, `go bhfuil` might have been written as `go ffuil`, and `nach dtuigim` as `nach ttuigim`. This convention is no longer used.
+</Details>

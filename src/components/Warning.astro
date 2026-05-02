@@ -1,0 +1,24 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = 'Watch out' } = Astro.props;
+---
+
+<aside
+  role="alert"
+  aria-label={title}
+  class="my-5 grid gap-1.5 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3.5 text-[0.9375rem] leading-relaxed text-slate-700 dark:border-amber-500/25 dark:bg-amber-500/10 dark:text-slate-300"
+>
+  <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-amber-700 dark:text-amber-400">
+    <svg class="size-4 shrink-0" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M8 2L14.5 13.5H1.5L8 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M8 6.5v3M8 11v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    {title}
+  </div>
+  <div class="[&_p]:m-0 [&_p+p]:mt-2 [&_table]:mt-2.5 [&_table]:w-full [&_table]:border-collapse [&_table]:text-sm [&_th]:border [&_th]:border-amber-200 [&_th]:bg-amber-100 [&_th]:px-2.5 [&_th]:py-1.5 [&_th]:text-left [&_th]:font-semibold [&_td]:border [&_td]:border-amber-200 [&_td]:px-2.5 [&_td]:py-1.5 dark:[&_th]:border-amber-500/25 dark:[&_th]:bg-amber-500/20 dark:[&_td]:border-amber-500/25">
+    <slot />
+  </div>
+</aside>

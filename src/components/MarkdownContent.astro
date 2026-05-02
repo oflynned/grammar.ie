@@ -14,41 +14,15 @@ interface Props {
 const {entry} = Astro.props;
 const {Content, headings} = await entry.render();
 const hasTableOfContents = headings && Array.isArray(headings) && headings.length > 1;
-const pageTitle = entry.data.title ?? entryPath(entry)
-    .split('/')
-    .at(-1)
-    ?.replace(/-/g, ' ')
-    .replace(/\b\w/g, (letter) => letter.toUpperCase()) ?? 'Grammar';
+const pageTitle = entry.data.enTitle
 const tags = entry.data.tags ?? [];
-const prerequisiteTopics = entry.data.prerequisiteTopics ?? [];
-const relatedTopics = entry.data.relatedTopics ?? [];
-const entries = await getCollection('grammar');
-
-const relationForTopic = (topic: string) => {
-    const topicEntry = entries.find((candidate) => entryPath(candidate) === topic);
-    const fallbackTitle = topic
-        .split('/')
-        .filter(Boolean)
-        .slice(-2)
-        .map(formatSegment)
-        .join(' / ');
-
-    return {
-        href: `/${topic}`,
-        title: topicEntry?.data.navTitle ?? topicEntry?.data.title ?? titleForPath(entries, topic) ?? fallbackTitle,
-        path: topic,
-    };
-}
-
-const prerequisiteLinks = prerequisiteTopics.map(relationForTopic);
-const relatedLinks = relatedTopics.map(relationForTopic);
 ---
 
 <PageContent title={pageTitle}>
     <section class="flex mx-auto w-full max-w-6xl gap-12">
         <article class="flex-1 min-w-0 prose dark:prose-invert">
             <header class="mb-8">
-                <h1 class="text-5xl font-bold mb-4 tracking-tight">
+                <h1 class="text-4xl font-extrabold mb-4 tracking-tight">
                     {pageTitle}
                 </h1>
 

@@ -1,0 +1,210 @@
+---
+order: 5
+enTitle: "Traditional Verb Conjugation"
+gaTitle: "Réimniú Traidisiúnta na mBriathra"
+description: "A detailed reference on the historical and dialectal forms of Irish verb conjugation, contrasting them with the modern standard."
+tags: ["verbs", "conjugation", "dialects", "grammar", "reference"]
+---
+import Dialect from '@components/Dialect.astro';
+import Note from '@components/Note.astro';
+import Details from '@components/Details.astro';
+
+This page provides a reference for the traditional system of Irish verb conjugation. Many of these forms are now considered archaic in the Official Standard but are essential for understanding dialectal variations, especially in Munster, and for reading older texts. They form the historical basis from which modern analytic ("separate") forms developed.
+
+## The Traditional System
+
+The tables of traditional verb forms show a more "synthetic" system, where the verb ending itself indicates the person (e.g., `buailim`, "I strike"). Modern Irish, particularly in Connacht and Ulster, increasingly prefers "analytic" forms, where a standard verb form is followed by a separate pronoun (e.g., `buaileann mé`, "I strike").
+
+These traditional forms are presented here in modern orthography, but they are the direct ancestors of forms you might see in older literature with different spellings.
+
+<Note>
+In past tenses, the historical particle `do` is included for completeness. This particle caused the lenition that remains on verbs in these tenses today. In modern Irish, `do` is usually omitted, except sometimes in Munster, but it still appears as `d'` before a vowel.
+</Note>
+
+Parentheses in endings like `-f(a)idh` indicate that the vowel depends on the verb stem's quality. A broad stem takes `a` (`dúnfaidh`), while a slender stem takes `e` (written as `i` in `-fidh`, e.g., `buailfidh`).
+
+## Dialectal Differences
+
+The traditional conjugation system has evolved differently across the main dialect areas. The Official Standard (`An Caighdeán Oifigiúil`) often prescribes forms that are a compromise or are based on older literary norms, which may not perfectly match any single spoken dialect.
+
+### Endings with `-t-` or `-th-`
+
+Historically, the choice between `-t-` and `-th-` in endings like the autonomous imperfect (`-t(a)í` / `-th(a)í`) was governed by the preceding sound.
+*   `-t-` was used after `d, l, n, s, t, th`.
+*   `-th-` was used in all other cases.
+
+When `-th-` followed voiced consonants like `b` or `g`, it devoiced them to `[p]` and `[k]`.
+*   *scuabthaí* `[scuapiː]` - one swept
+*   *scuabthar* `[scuapər]` - one sweeps
+
+The modern standard simplifies this by using `-t-` in almost all cases (e.g., `scuabtar`). However, the older `-th-` forms are still found in many dialects. The verbal adjective also retains `-th-` after certain consonants (e.g., `scuabtha`, "swept").
+
+<Dialect region="Munster">
+In Munster, `-th-` can even appear after `-l`, preserving the older system more consistently.
+</Dialect>
+
+### Differences Between 1st and 2nd Conjugation
+
+The primary difference between the two regular verb conjugations is the future tense marker: `-f-` for the 1st conjugation and `-ó-` (or `-eó-`) for the 2nd. This distinction is maintained in all dialects.
+
+<Dialect region="Ulster">
+In Ulster, the future and conditional of 2nd conjugation verbs often retain a `[x]` or `[h]` sound from the older spelling `-óch-`.
+*   Future: `-óchaidh` [axi, ahi]
+*   Conditional: `-óchadh` [axu, ahu]
+*   *Sáróchaidh sé* - He will surpass.
+
+In other dialects, this was shortened to `-óidh` (future) and `-ódh` (conditional).
+</Dialect>
+
+<Dialect region="Connacht">
+In Connacht, the future ending `-óidh` is often pronounced as a simple long vowel `[oː]`, which can lead to the spelling `-ó`.
+*   *Sáró sé* - He will surpass.
+</Dialect>
+
+In northern Donegal, the `-igh` stem ending of 2nd conjugation verbs is often dropped before another ending is added, making them look like 1st conjugation verbs in some tenses.
+*   *ceannann sé* - he buys (Standard and other dialects: `ceannaíonn sé`)
+
+Conversely, for some monosyllabic 1st conjugation verbs ending in `-igh`, this ending is sometimes preserved in dialects when it is dropped in the standard.
+
+<Dialect region="Munster">
+In Muskerry, `-igh` can remain as a depalatalised `[x]` sound.
+*   *feochann sí* - she withers (Standard: `feonn sí`)
+</Dialect>
+
+<Dialect region="Ulster">
+In northern Donegal, `-igh` can remain as a `[j]` sound.
+*   *léigheann sé* - he reads (Standard: `léann sé`)
+</Dialect>
+
+<Note>
+For 2nd conjugation verbs with stems ending in `-il`, `-ir`, or `-in`, an older future form existed where `-ó-` replaced the vowel of the final syllable. These forms survive as alternatives in some Donegal dialects.
+*   *oscólaidh* (older) vs. *osclóidh* (newer) - will open
+*   *imeoraidh* (older) vs. *imreoidh* (newer) - will play
+</Note>
+
+### Present Tense
+
+#### Analytic Forms
+The common present tense ending `-(e)ann` was originally only used in dependent positions (e.g., after `ní`). The independent form used `-(a)idh`.
+
+<Dialect region="Ulster">
+The older `-(a)idh` ending is still found, particularly as a "historical present" in storytelling or in short positive answers. Some irregular verbs also retain older endingless forms: *tig sé* (he comes), *tchí tú* (you see).
+</Dialect>
+
+The relative form `-(e)as` (e.g., *an fear a bhuaileas an liathróid*, "the man who hits the ball") is optional in the Standard but common in Ulster and Connacht, often as `-(e)anns`. It is not used in Munster.
+
+<Dialect region="Munster">
+In Munster, `-(e)ann` is sometimes added to verbs that are endingless elsewhere, especially in the 2nd person: *tánn tú* (you are).
+
+Additionally, an ending `-(e)as` appears in questions before `tú`, but it is not related to the relative form.
+*   *An dtuigeas tú?* - Do you understand?
+</Dialect>
+
+#### Synthetic Forms
+*   **1st Person Singular `-(a)im`**: Used and generally required in all dialects. *Buailim* is standard; *buaileann mé* is rare.
+*   **1st Person Plural `-(a)imid`**: Required in the Standard and in Munster (often pronounced `-[iːdʲ]`). In Connacht and Ulster, the analytic form `... muid` is far more common: *buaileann muid*.
+*   **2nd Person Singular `-(a)ir`**: Rare now, largely replaced by analytic forms. It survives in a few phrases, especially in Munster: *Cad deirir?* (What do you say?).
+*   **3rd Person Plural `-(a)id`**: Common in Munster (usually with `siad`) and Connemara. It can be used synthetically or analytically: *buailid* or *buailid siad* (they strike).
+
+<Dialect region="Connacht">
+In echo questions, `-(a)inns` is used for the 2nd person singular instead of `-(a)ir`: *An mbuailinns?* (Do you strike?). In Connemara, the preterite ending `-adar` is sometimes used for the 3rd person plural present: *tádar* (they are).
+</Dialect>
+
+### Preterite Tense
+
+#### Analytic Forms
+The analytic preterite is always endingless (e.g., *bhris sé*, "he broke"). The `-igh` of 2nd conjugation verbs is pronounced `[ig′]` in Munster.
+
+<Dialect region="Munster">
+In West Cork, some 2nd conjugation verbs whose verbal noun ends in `-(e)amh` take a preterite ending `-imh` `[iv′]`.
+*   *do sheasaimh sé* - he stood (Standard: `sheas sé`)
+</Dialect>
+
+#### Synthetic Forms
+*   **1st Plural `-(e)amair`** and **3rd Plural `-(e)adar`**: Used in Connacht and Munster.
+*   **2nd Plural `-(e)abhair`**: Used only in Munster.
+
+These synthetic forms are obligatory in West Munster. The 1st and 2nd person singular forms (`-as`, `-is`) are used regularly in Munster but typically only as echo forms elsewhere.
+
+<Dialect region="Munster">
+The plural endings for the 1st and 2nd person use a slender `r` (`-amair`, `-abhair`), while the 3rd person uses a broad `r` (`-adar`). Some irregular verbs also have endingless 1st person singular forms: *chonac* (I saw), *chuala* (I heard).
+</Dialect>
+
+### Imperfect Tense
+
+The imperfect forms are largely consistent with the Standard across dialects.
+*   The 1st person plural `-(a)imis` has variants like `-(e)amais` or with a long `í` in Munster.
+*   In Connacht, the analytic form `... muid` is common for the 1st person plural: *bhuaileadh muid* (we used to strike).
+
+<Dialect region="Ulster">
+In Ulster and parts of Munster, an extra `-t` is sometimes added to the 1st and 3rd person plural endings: `-(a)imist`, `-(a)idist`.
+</Dialect>
+
+<Dialect region="Munster">
+In West Cork, the pronouns `sé` and `sí` are pronounced with a broad `s` after the analytic ending `-(e)adh`.
+</Dialect>
+
+### Future Tense
+
+Synthetic future forms are now mainly used in Munster. Elsewhere, they survive mostly in echo forms or for the 1st person plural.
+*   The 1st person plural `-(f)imid` has variants like `-(f)eamuid` or `-(f)eam`.
+*   The relative form `-(f)eas` is common in Connacht (`-ós`) and Ulster (`-óchas` for 2nd conj.) but absent in Munster.
+*   The autonomous form was originally `-f(a)idhear`, and dialectal pronunciations often reflect this with a long `[iːr]` sound.
+
+<Dialect region="Connacht">
+The echo form for the 2nd person singular is sometimes `-f(a)is` instead of `-f(a)ir`: *buailfis* (you will strike).
+</Dialect>
+
+### Conditional Mood
+
+The synthetic conditional forms are preserved in the Standard (except for the obsolete 2nd person plural).
+*   Variants of `-(a)imis` exist, similar to the imperfect.
+
+<Dialect region="Ulster">
+The form `-fas muid` / `-feas muid` is sometimes used for the 1st person plural. For the 2nd conjugation, the older `-ch-` sound is retained instead of being replaced by `-f-`: `-óchá` instead of `-ófá`.
+</Dialect>
+
+<Dialect region="Munster">
+In West Cork, the pronouns `sé` and `sí` are pronounced with a broad `s` after the analytic ending `-f(e)adh`.
+</Dialect>
+
+### Imperative Mood
+
+The standard 2nd person plural is now `-igí`. The older form `-(a)idh` survived longest in Munster (pronounced `[ig′]` or `[iːg′]`). The 1st person plural has several variants: `-(a)imis` (Standard), `-(e)am`, or `-(a)imid`.
+
+### Present Subjunctive
+
+#### Analytic Forms
+The standard ending is now written `-a` or `-e` (e.g., *go raibh maith agat*). This reflects the pronunciation and the older dependent form.
+
+<Dialect region="Ulster">
+In Ulster and West Muskerry (Munster), the older ending `-(a)idh` is still pronounced as `[iː]` or `[ig′]`, respectively, except before pronouns.
+*   *Go dtagaidh do ríocht* - Thy kingdom come.
+</Dialect>
+
+#### Synthetic Forms
+Only the 1st person plural (`-aimid`) is required in the Standard. Other forms (`-ad`, `-air`, `-aid`) are optional in Munster.
+
+### Past Subjunctive
+
+The main distinction from the conditional is seen with the verb `bí`. The past subjunctive is `dá mbeadh`, never `*dá mbíodh`. Note also the use of `-t-` instead of `-f-` in the 2nd person forms: `dá mbeitheá` (you would be), `dá mbeití` (one would be).
+
+<Details summary="Linguistic analysis of ending patterns">
+The conjugation endings can be grouped into three historical "series" based on their form and function across different tenses.
+
+### First Series
+This series is used in the **Present Indicative, Future Indicative, and Present Subjunctive**. The core endings are: `-im/-ad`, `-ir`, `-idh/-ann`, `-imid`, `-tidh`, `-id`, `-tar`.
+
+*   **`-im` (1st sg.)**: Related to the Latin subjunctive ending `-em`.
+*   **`-ir` (2nd sg.)**: A later development. The Classical Irish form was a vowel ending (`-a`, `-e`).
+*   **`-idh` (3rd sg.)**: Related to the `-t` ending in Latin (`amat`) and Germanic languages. It has been replaced by `-ann` in the present indicative but survives in the future (`-fidh`) and subjunctive (`-a/-e`).
+*   **`-imid` (1st pl.)**: Contains the Indo-European `-m-` element seen in Latin `amamus`. The `-d` is a fossilised pronoun.
+*   **`-id` (3rd pl.)**: Related to Latin `-ant` (`amant`).
+*   **`-tar` (autonomous)**: Has passive origins, related to Latin `-tur` (`amatur`).
+
+### Second Series
+This series is used in the **Imperfect Indicative, Past Subjunctive, and Conditional**. The core endings are: `-inn`, `-tá`, `-adh`, `-imis`, `-ídís`, `-tí`. The future marker `-f-` is added before these endings for the conditional. Their etymological origin is more complex.
+
+### Third Series
+This series is unique to the **Preterite Indicative**. The core endings are: `-as`, `-is`, `-`, `-amar`, `-abhar`, `-adar`, `-adh`. These endings are a historical mix. The singular forms come from the Old Irish "s-preterite", while the plural forms with `-r-` come from the old deponent (middle-passive) conjugation.
+</Details>

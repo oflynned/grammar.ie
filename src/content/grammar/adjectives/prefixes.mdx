@@ -1,0 +1,192 @@
+---
+order: 5
+enTitle: "Prefixes"
+gaTitle: "Na Réimíreanna"
+description: "A guide to common Irish prefixes, how they modify nouns and adjectives, and the mutation rules they follow."
+tags: ["prefixes", "adjectives", "word formation", "mutations"]
+---
+
+import Note from '@components/Note.astro';
+import Warning from '@components/Warning.astro';
+import Dialect from '@components/Dialect.astro';
+import MutationCard from '@components/MutationCard.astro';
+
+In Irish, some adjectives and other modifying words can be attached to the beginning of a noun or another adjective as a prefix (`réimír`). This changes the meaning of the word and often triggers a sound change called a mutation. Understanding these prefixes is key to building vocabulary and understanding compound words.
+
+While most descriptive adjectives come *after* the noun they modify, a few types always come before it:
+- Pronominal adjectives like `gach` (every): *gach teach* (every house)
+- Possessive pronouns like `mo` (my): *mo theach* (my house)
+- Numbers like `trí` (three): *trí theach* (three houses)
+
+Other descriptive adjectives can only be placed before a noun by turning them into a prefix.
+
+## How Prefixes Work
+
+The way an adjective is used as a prefix depends on the word itself.
+
+### Prefix-only Adjectives
+
+Some adjectives, like `dea-` (good) and `droch-` (bad), appear almost exclusively as prefixes.
+
+- *dea-bhád* - a good boat
+- *drochbhád* - a bad boat
+
+### Preferred Prefixes
+
+For some adjectives, the prefix form is strongly preferred. A common example is `sean-` (old).
+
+- *seanfhear* - an old man
+
+<Note>
+While you might occasionally see *fear sean*, it is much less common. However, if `sean` is modified by an adverb like `an-` (very) or `ró-` (too), it must come after the noun.
+- *fear an-sean* - a very old man
+- *fear róshean* - a man who is too old
+</Note>
+
+### Prefixes for Fixed Terms
+
+Most adjectives are rarely used as prefixes. When they are, it is usually to form a specific, well-known compound noun or concept. In general use, they follow the noun.
+
+- *ardrí* - High King
+- *sliabh ard* - a high mountain
+
+### Intensifying Prefixes
+
+Some prefixes act like adverbs, intensifying the meaning of the adjective or noun they are attached to. Common examples include `an-` (very), `fíor-` (truly), and `ró-` (too).
+
+- *an-mhaith* - very good
+- *fíormhaith* - really good
+- *rómhaith* - too good
+
+These can also modify nouns directly to create a new meaning.
+
+- *an-charr* - a great car (literally "very-car")
+
+## Mutation and Spelling Rules
+
+Prefixes follow consistent rules for mutations and how they are written.
+
+### Mutations
+
+Nearly all prefixes cause **lenition** on the following word.
+
+- `sean` + `bean` → `seanbhean` (old woman)
+- `droch` + `bád` → `drochbhád` (bad boat)
+
+The main exception is the older prefix `éa-` (un-), which causes **eclipsis**.
+
+<MutationCard
+  title="Eclipsis after éa-"
+  before="éa- + cóir"
+  after="éagóir"
+  rule="The prefix éa- (un-) causes eclipsis on the following word. In modern spelling, the eclipsed consonant is often omitted."
+/>
+
+<Note>
+In older orthography, the eclipsed consonant was written, so you may still encounter spellings like `éagcóir` for `éagóir` (injustice).
+</Note>
+
+### Hyphenation
+
+Prefixes and the words they modify are usually written as a single word.
+
+- `sean` + `fear` → `seanfhear` (old man)
+
+There are three main exceptions where a hyphen is required:
+
+1.  The prefixes `an-` (very) and `dea-` (good) are always followed by a hyphen.
+    - *an-bhean* - a very good woman
+    - *dea-cheol* - good music
+
+2.  A hyphen is used when two prefixes are joined together.
+    - *droch-sheanbhád* - a bad old boat
+
+3.  A hyphen is used to separate two identical vowels or consonants.
+    - *ró-óg* - too young
+    - *sean-nós* - old style (a traditional style of singing)
+
+<Warning>
+Be careful not to confuse the intensifying prefix `an-` (very) with the negative prefix `an-` (un-).
+
+| Prefix | Meaning | Hyphen? | Example |
+|---|---|---|---|
+| `an-` | very | Yes | *an-mhaith* (very good) |
+| `an-` / `ain-` | un- | No | *anabaí* (unripe) |
+
+The negative prefix `an-` changes to `ain-` before a slender vowel, following the *caol le caol* rule. The intensifier `an-` never changes.
+</Warning>
+
+<Dialect region="Munster">
+In Munster Irish, an epenthetic vowel (`-a-`) is often inserted after prefixes ending in `l`, `n`, or `r` when they are followed by a consonant.
+- *ana-mhaith* (instead of *an-mhaith*) - very good
+- *seanabhean* (instead of *seanbhean*) - an old woman
+</Dialect>
+
+## Common Prefixes
+
+This list includes some of the most frequently encountered prefixes.
+
+| Prefix | Meaning | Example | Translation |
+| --- | --- | --- | --- |
+| `ais` | back | *aisbhreathnaigh* | to look back |
+| `an-` | very | *an-mhaith*, *an-charr* | very good, a great car |
+| `ard` | high, arch- | *ardeaspag* | archbishop |
+| `ath` | re-, again | *Athbhliain*, *athbheoigh* | New Year, to revive |
+| `corr` | occasional, odd | *corruimhir*, *corrdhuine* | odd number, the odd one out |
+| `barr` | excellent, exceedingly | *barrthuirseach* | terribly tired |
+| `dea-` | good | *dea-cheol* | good music |
+| `dearg` | red, intense | *deargamadán* | complete idiot |
+| `dian` | intense, strict | *dianchosc* | strict prohibition |
+| `droch` | bad | *drochbhád* | a bad boat |
+| `fíor` | truly | *fíormhaith* | truly good |
+| `il` | many, poly- | *ilteangach* | multilingual |
+| `leath` | half, one of two | *leathchéad*, *leathshúil* | fifty (half a hundred), one eye |
+| `oll` | huge, super- | *ollmhargadh*, *ollscoil* | supermarket, university |
+| `príomh` | main, primary | *príomhtheanga* | main language |
+| `rí` | royal, very | *ríshean* | very old |
+| `ró` | too, excessively | *róshean* | too old |
+| `sár` | extremely, super- | *sárálainn* | extremely beautiful |
+| `sean` | old | *seanbhean* | an old woman |
+| `síor` | eternal, continuous | *síordheifir*, *síorghrá* | constant hurry, eternal love |
+
+## Negative Prefixes
+
+These prefixes add a negative meaning like "un-", "dis-", or "non-".
+
+| Prefix | Meaning | Example | Translation |
+| --- | --- | --- | --- |
+| `amh` / `aimh` | un- | *aimhleas* | harm, damage |
+| `an` / `ain` | un- | *anabaí*, *aineolaí* | unripe, ignorant person |
+| `dí` | un-, dis- | *dímheas* | disrespect |
+| `éa` / `éi` | un-, non- | *éadrom* | light (not heavy) |
+| `eas` / `eis` | un- | *easonóir* | dishonour, shame |
+| `mí` | un-, mis- | *míshásta* | unhappy, dissatisfied |
+| `neamh` | un-, non- | *neamhbhall*, *neamhbheo* | non-member, lifeless |
+
+## Prefixes with Verbal Adjectives
+
+The prefixes `so-`, `do-`, and `in-` are now almost exclusively used with verbal adjectives (participles) to indicate possibility.
+
+| Prefix | Meaning | Example | Translation |
+| --- | --- | --- | --- |
+| `so` | easily | *sobhriste* | easily broken, fragile |
+| `do` | difficult, impossible | *dodhéanta* | impossible to do |
+| `in` | -able, possible | *inite* | edible |
+
+## Numbers as Prefixes
+
+Numbers can also function as prefixes, often corresponding to English prefixes like "mono-", "bi-", and "tri-".
+
+| Prefix | Meaning | Example | Translation |
+| --- | --- | --- | --- |
+| `aon` | one-, mono- | *aondiachas* | monotheism |
+| `dá` | two-, bi- | *dátheangach* | bilingual |
+| `dé` | two-, bi- | *décheannach* | two-headed |
+| `trí` | three-, tri- | *trídhathach* | three-coloured |
+| `ceathair` | four- | *ceathairchosach* | four-legged |
+| `cúig` | five- | *cúigshiollach* | five-syllable |
+| `sé` | six- | *séchosach* | six-legged |
+| `seacht` | seven- | *seachtsiollach* | seven-syllable |
+| `ocht` | eight- | *ochtfhillte* | eight-fold |
+| `naoi` | nine- | *naoicheannach* | nine-headed |
+| `deich` | ten- | *deich-cheannach* | ten-headed |

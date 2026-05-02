@@ -1,0 +1,364 @@
+---
+order: 2
+enTitle: "Structure"
+gaTitle: "Struchtúr na hAbairte"
+description: "An overview of Irish sentence structure, including word order, negation, questions, and answers."
+tags: ["sentence", "grammar", "word order", "vso"]
+---
+
+import Note from '@components/Note.astro';
+import Warning from '@components/Warning.astro';
+import Dialect from '@components/Dialect.astro';
+import Details from '@components/Details.astro';
+
+Irish sentences follow a different word order from English, which can be challenging for new learners. This guide covers the fundamental rules for building positive and negative sentences, asking questions, and giving correct answers.
+
+## Word Order
+
+The basic word order in a standard Irish sentence is **Predicate-Subject-Object (PSO)**. In most cases, the predicate is a verb, so this is more commonly described as **Verb-Subject-Object (VSO)**.
+
+This means the verb always comes first in the sentence.
+
+### The Predicate
+
+The predicate is the core statement of the sentence, usually describing an action.
+
+*   **Predicative Verb**: When the predicate is an action, it is expressed by a verb. This is the most common sentence type.
+    *   *Ólann an cat bainne.* - The cat drinks milk.
+*   **Predicative Noun**: When the sentence classifies or identifies something, a noun is the predicate. These sentences use the copula (`is`). The word order is Copula-Predicate-Subject.
+    *   *Is múinteoir é Pól.* - Paul is a teacher.
+*   **Predicative Adjective**: When the sentence describes a quality, an adjective is the predicate. This is usually done with the verb `bí` (to be), which forms a frame around the subject.
+    *   *Tá Pól óg.* - Paul is young.
+
+### The Subject
+
+The subject is the "doer" of the action in an active sentence. It is usually a noun or pronoun in the nominative case.
+
+With synthetic verb forms, the subject is contained within the verb ending, and a separate subject pronoun is not used.
+*   *Bhíomar* - We were.
+*   *Táim* - I am.
+
+<Warning>
+You must not add a subject pronoun after a synthetic verb form. For example, `táim mé` is incorrect.
+</Warning>
+
+However, you can add another subject joined by `agus` (and). The verb only agrees with the first subject (the one contained in the verb).
+*   *Táimse agus cara liom i nGaillimh.* - Myself and a friend of mine are in Galway.
+*   *Dá mbeitheá féin agus Rachel ag gabháil i gcleamhnas…* - If you and Rachel were to get married…
+
+In passive sentences, the subject is the "receiver" of the action, not the agent.
+
+#### Grammatical and Logical Subjects
+
+In many Irish idioms, the entity that would be the subject in English appears as a prepositional phrase. This is called the **logical subject**, while the **grammatical subject** is a different noun in the sentence.
+
+For example, to express hunger, Irish uses the verb `bí` with the noun `ocras` (hunger) as the grammatical subject. The person who is hungry is the logical subject, expressed with the preposition `ar` (on).
+
+*   *Tá **ocras** orm.* - I am hungry. (lit. "Is **hunger** on-me")
+
+Here, `ocras` is the grammatical subject, and `orm` (on me) is the logical subject.
+
+#### Grammatical Subjectlessness
+
+Some verbs and constructions can appear without any grammatical subject. Often, a logical subject appears with a preposition instead.
+
+##### Dative Subjects with `do`
+
+The preposition `do` (to) can introduce a logical subject, sometimes called a "dative of agent".
+
+The copula can sometimes appear without a grammatical subject. The logical subject is then introduced by `do`.
+*   *Is cuma dom.* - It's all the same to me. / I don't care.
+
+This construction was also formerly common with verbal nouns, and it still appears in expressions of time.
+*   *Tar éis dom imeacht* - After I left (lit. "after to-me leaving")
+
+It is also used with the defective verb `dóbair` (almost).
+*   *Ba dhóbair dom titim.* - I almost fell.
+
+<Details summary="Linguistic note on `dóbair`">
+  The defective verb `dóbair` ("almost happened") always appears with the preposition `do` to denote the affected party when a verbal noun construction follows. The reason is likely complex: `do` can mark the agent of the verbal noun, but `dóbair` is also often treated as an adverb ("almost") in a copula construction (`ba dhóbair`), where `do` marks the logical subject. It can also be seen as a subjectless, unaccusative verb. The phrase with `do` can always be replaced by a `go`-clause: *Dóbair dom titim* is equivalent to *Dóbair go dtitfinn* (I almost fell).
+</Details>
+
+##### Unaccusative Verbs without a Subject
+
+Unaccusative verbs (or ergative verbs) are intransitive verbs describing actions that happen without an agent. While most have a grammatical subject in Irish, some do not. Instead, the person or thing affected by the action appears as a prepositional phrase, often with `ar`. The verb is in the 3rd person singular analytical form.
+
+These verbs often describe changes, increases, decreases, success, or failure.
+*   *Theip orm.* - I failed. (lit. "Failed on-me")
+*   *D'éirigh liom.* - I succeeded. (lit. "Rose with-me")
+*   *Neartaigh ar a ghlór.* - His voice grew stronger. (lit. "Strengthened on his voice")
+
+With some of these verbs, a standard nominative subject is also possible.
+*   *Neartaigh a ghlór.* - His voice grew stronger.
+
+<Dialect region="Munster">
+The use of prepositional phrases instead of nominative subjects with these verbs is more common in Munster than in northern dialects.
+</Dialect>
+
+Some phrasal verbs can be followed by a verbal noun construction that functions as the subject. In these cases, the verb is followed directly by a prepositional phrase, and the verbal noun subject comes after.
+*   *Theip orm teacht.* - I failed to come.
+*   *Teastaíonn uaim litir a scríobh.* - I want to write a letter.
+
+Unaccusative verbs can also be used in compound tenses, such as the perfect (with the verbal adjective) and the progressive (with the verbal noun), without a grammatical subject for the auxiliary verb `bí`.
+*   *Tá teipthe orm.* - I have failed.
+*   *Tá ag éirí liom.* - I am succeeding.
+
+<Details summary="Linguistic note on subjectlessness">
+  The cause of subjectlessness may lie in the historical nature of the 3rd person singular verb form. Originally, it could be used both analytically (requiring a subject) and synthetically (with an implied "he/she/it" subject). Today, it is almost exclusively analytical, but subjectless constructions with unaccusative verbs and in the answer ellipsis could be remnants of its older synthetic use. For example, *Bhris ar an bhfoighne agam* ("My patience ran out") could be interpreted as "It broke on the patience at me," with "it" as an inherent subject.
+</Details>
+
+##### Perfect-Passive without a Subject
+
+In perfect or passive sentences formed with a verbal adjective, a grammatical subject can be absent. This occurs with verbs that take a prepositional object in the active voice.
+*   *Tá beirthe ar an ngadaí.* - The thief has been caught. (from `beir ar` - to catch)
+*   *Tá an litir scríofa agam.* - I have written the letter. (lit. "Is the letter written at-me")
+
+With transitive verbs that can also be used intransitively, the perfect can be formed with `ag` + agent, with no grammatical subject.
+*   *Tá ite agus ólta agam.* - I have eaten and drunk.
+
+#### The Answer Ellipsis
+
+When a verb is repeated, such as in an answer to a question, everything after the finite verb form (including the subject) can be omitted because it is understood from context. This is known as the answer ellipsis or short clause ellipsis.
+*   *An ólann tú tae? - Ólann.* - Do you drink tea? - Yes. (lit. "Drink.")
+
+If the same action and subject are repeated within a sentence, the subject can also be omitted after the second verb.
+*   *An té a bhí ann, tá, agus beidh go deo.* - He who was there, is, and will be forever.
+
+If synthetic forms are required in a full sentence, they are also used in the answer ellipsis. However, analytical forms are often used alongside them, especially in Connacht and Ulster, where they are known as "echo forms".
+
+#### Chaining of Actions
+
+When listing a series of actions performed by the same subject, the subject is only stated after the first verb. The conjunction `agus` (and) introduces only the last verb in the chain.
+*   *D'éirigh sé, d'ith sé a bhricfeasta agus d'fhág sé an teach.* - He got up, ate his breakfast and left the house.
+
+This is not possible with synthetic verb forms; the synthetic ending must be repeated on each verb.
+
+If the actions are contrasted with `ach` (but), the subject can also be omitted if it is the same.
+*   *Rith sé ach níor rug sé ar an mbus.* - He ran but he didn't catch the bus.
+
+#### Other Subjectless Forms
+
+*   **Autonomous Form (`Saorbhriathar`)**: This form, often translated with "one" or "they", has no explicit subject. Grammatically, it is a synthetic form, so the subject is considered to be contained within it.
+    *   *Buaileadh an clog.* - The bell was rung. / Someone rang the bell.
+*   **Set Phrases**: Some fixed phrases omit the subject.
+    *   *Go raibh maith agat.* - Thank you. (lit. "May there be good at you.")
+
+<Details summary="Linguistic note on 'pro-drop'">
+  Irish is not a "pro-drop" language in the way Spanish or Italian are. In a pro-drop language, a subject pronoun can be omitted but also re-inserted for clarity or emphasis. In Irish, a subject pronoun can *never* be used with a synthetic verb form because the subject is considered to be fused with the verb ending. The verb ending *is* the pronoun. Analytical verb forms, on the other hand, almost always require an explicit subject (noun or pronoun).
+</Details>
+
+### The Object
+
+*   **Direct Object**: This is the receiver of the action. It is usually a noun or pronoun. Irish does not allow two direct objects; one must be expressed with a preposition.
+    *   *Mhúin sí Gaeilge **dom**.* - She taught me Irish. (lit. "Taught she Irish **to-me**")
+*   **Indirect Object**: This always appears with a preposition in Irish.
+*   **Genitive Object**: The verbal noun can take a direct object in the genitive case.
+
+## The Simple Positive Sentence
+
+The standard word order is **Verb + Subject + Object (VSO)**. Other sentence complements follow in a general order.
+
+**Verb + Subject + Direct Object + Indirect Object + Locative + Modal + Temporal**
+
+*   *Thug Pól an leabhar dom sa seomra inné.* - Paul gave the book to me in the room yesterday.
+
+**Placement Rules:**
+
+*   **Directional Complements**: These usually come before locational complements. If they are the only complement, they can move before the object.
+    *   *Thug sé abhaile an capall.* - He brought the horse home.
+*   **Temporal Adverbs**: Some adverbs like `riamh` (ever), `i gcónaí` (always), `go minic` (often), and `fós` (still/yet) can stand before the object.
+*   **Direct Pronominal Objects**: Simple personal pronouns used as direct objects usually move to the very end of the sentence.
+    *   *Thug Pól an leabhar dom **é**.* - Paul gave the book to me. (Incorrect: *Thug Pól é dom an leabhar*)
+    *   *Scríobh sé don chailín **é**.* - He wrote it to the girl.
+*   **Indirect Objects with Phrasal Verbs**: With phrasal verbs (verb + preposition combinations like `tabhair do` or `cuir ar`), the indirect object is often placed between the subject and the direct object.
+    *   *Thug sé dom an litir.* - He gave me the letter.
+    *   *Chuir sí uirthi a cóta.* - She put on her coat.
+*   **Imperative Sentences**: The indirect object always comes before the direct object.
+    *   *Scríobh dom litir!* - Write me a letter!
+*   **Complex Subjects**: With verbs of movement, appearance, or existence, a long or complex subject can be moved to the end of the sentence.
+    *   *Tháinig isteach sa teach an fear a bhí ina chónaí i Spidéal.* - The man who lived in Spiddal came into the pub.
+
+## The Negative Sentence
+
+To make a sentence negative, you add a negative particle to the beginning. The word order does not change.
+
+| Tense/Mood | Structure | Example |
+| :--- | :--- | :--- |
+| Present, Future, etc. | `Ní` + Verb + Subject + Object | *Ní fheiceann tú an fear.* - You do not see the man. |
+| Past (Preterite) | `Níor` + Verb + Subject + Object | *Níor ól mé fuisce.* - I did not drink whiskey. |
+| Imperative | `Ná` + Verb + Subject + Object | *Ná hól fuisce!* - Do not drink whiskey! |
+
+`Ní` and `níor` cause lenition and require the dependent form of the verb. `Ná` causes an h-prefix before a vowel but does not cause lenition.
+
+<Dialect region="Ulster">
+In Donegal, `cha` and `char` are often used instead of `ní` and `níor`.
+</Dialect>
+
+### Multiple Negation
+
+Irish does not have double negation in the same way as some other languages. A sentence has only one negative particle (`ní`). However, certain words like `aon` (any), `aon duine` (anyone), `rud ar bith` (anything), and `tada` (nothing) are used in negative sentences to express concepts like "no", "nobody", or "nothing". These are called "negative polarity items".
+
+*   *Ní fhaca mé **aon duine**.* - I didn't see **anyone**. / I saw **nobody**.
+
+True double negation can occur across clauses (`ní ... nach ...`), creating an emphatic positive statement.
+*   *Níl aon duine ann nach bhfuil sásta.* - There is nobody there who is not happy. (i.e., Everyone is happy.)
+
+A double negation with `gan` (without) also creates emphasis.
+*   *Ní féidir liom gan é a dhéanamh.* - I can't not do it. (i.e., I must do it.)
+
+### Negation of the Verbal Noun
+
+The verbal noun is negated with `gan` (without).
+*   *D'imigh sé gan focal a rá.* - He left without saying a word.
+
+### Demonic Negation
+
+A very common and emphatic way to negate a statement is to use the words `diabhal` (devil) or `dheamhan` (demon). This is a strong "not at all" or "no way" but is not considered swearing in this context.
+
+#### `Diabhal/Dheamhan` + Negated Term
+
+To negate a noun, place `diabhal` or `dheamhan` before it at the start of the sentence, followed by a direct relative clause. This construction means "no" or "not a single".
+*   *Diabhal Gaeilge atá aige.* - He has no Irish. (lit. "Devil Irish that is at him.")
+*   *Dheamhan focal a dúirt sé.* - He didn't say a word.
+
+If a form of `bí` is the verb in the relative clause, it is often omitted, leaving a small clause.
+*   *Diabhal pingin agam.* - I don't have a penny. (from *Diabhal pingin atá agam.*)
+
+#### `Diabhal/Dheamhan` + Indirect Relative Clause
+
+Without a following noun, `diabhal` or `dheamhan` can be followed by an indirect relative clause to mean "not".
+*   *Dheamhan ar chuimhnigh mé air.* - I didn't think of it.
+
+#### `Diabhal/Dheamhan` + Generalising Relative Pronoun
+
+Combined with the generalising relative pronoun `a`, this construction means "nothing".
+*   *Diabhal a bhfuil agam.* - I have nothing.
+*   *Dheamhan a thuigim de.* - I understand nothing of it.
+
+#### Variants and Other Uses
+
+*   **Variants**: `Diabhal` is considered stronger than `dheamhan`. Euphemisms like `d—l` are sometimes written. Older forms include `don diabhal` or `an diabhal`.
+*   **Swearing**: `Diabhal` can be used as a swear word, similar to "what the devil" or "damn".
+    *   *Cad sa diabhal é sin?* - What the devil is that?
+*   **Positive Reinforcement**: Followed by `go/nach`, it can have a positive, reinforcing meaning.
+    *   *Dheamhan gur breá an smaoineamh é.* - That's a really excellent idea.
+
+## The Semi-Negative Sentence ("Only")
+
+To express "only", Irish frequently uses a "semi-negative" construction. The sentence is negated with `ní`, but then the word `ach` (but) introduces the part of the sentence that is the exception. The structure is **`ní ... ach ...`**.
+
+*   *Níl agam ach deich euro.* - I only have ten euro. (lit. "Is-not at-me but ten euro.")
+*   *Ní fhaca mé ach Pól.* - I only saw Paul.
+
+In temporal contexts, this can mean "hardly" or "just".
+*   *Ní raibh mé ann ach nóiméad nuair a thosaigh sé ag cur báistí.* - I was hardly there a minute when it started to rain.
+
+To say "only if", you use `ach má`.
+*   *Ní rachaidh mé ann ach má thagann tú liom.* - I will only go if you come with me.
+
+To limit the action itself, you can use `déan` (to do).
+*   *Ní dhearna sé ach gáire.* - He did nothing but laugh. / He only laughed.
+
+<Note>
+The word `amháin` also means "only", but it is used more in the sense of "solely" or "alone" and often acts as an adjective. The `ní ... ach` construction is preferred for expressing "nothing but" or a limited quantity.
+</Note>
+
+## Polar Questions (Yes/No Questions)
+
+Polar questions are those that can be answered with "yes" or "no". In Irish, you do not change the word order. Instead, you add an interrogative particle to the beginning of the sentence.
+
+| Tense | Type | Structure | Example |
+| :--- | :--- | :--- | :--- |
+| Present, etc. | Positive | `An` + Verb + Subject + Object | *An ólann tú fuisce?* - Do you drink whiskey? |
+| | Negative | `Nach` + Verb + Subject + Object | *Nach n-ólann tú fuisce?* - Don't you drink whiskey? |
+| Past (Preterite) | Positive | `Ar` + Verb + Subject + Object | *Ar ól tú fuisce?* - Did you drink whiskey? |
+| | Negative | `Nár` + Verb + Subject + Object | *Nár ól tú fuisce?* - Didn't you drink whiskey? |
+
+*   `An` and `nach` cause eclipsis.
+*   `Ar` and `nár` cause lenition.
+*   All require the dependent form of the verb.
+
+<Dialect region="Munster">
+In Munster, `ná` is used instead of `nach`. It causes an h-prefix before vowels and does not cause mutation.
+</Dialect>
+
+Questions with `an` are neutral. Questions with `nach` often expect a positive answer and can be rhetorical.
+
+### Question Tags
+
+Like in English, you can add a "question tag" to a declarative sentence. This consists of the interrogative particle (`an` or `nach`) and the verb from the main clause.
+*   *Tá sé fuar, nach bhfuil?* - It's cold, isn't it?
+*   *Níor tháinig sé, ar tháinig?* - He didn't come, did he?
+
+## Information Questions (Wh-Questions)
+
+Information questions use an interrogative word like `cé` (who), `cad` (what), `cá` (where), or `conas` (how).
+
+Because the verb must come first, Irish uses a **cleft sentence** structure for these questions. The interrogative word (which contains an implied copula) comes first, followed by a relative clause.
+
+*   **Declarative**: *Rinne Pól é.* (Paul did it.)
+*   **Question**: *Cé a rinne é?* (Who did it?)
+    *   Literal structure: "Who is [it] that did it?"
+
+*   **Declarative**: *Cheannaigh sí carr.* (She bought a car.)
+*   **Question**: *Cad a cheannaigh sí?* (What did she buy?)
+    *   Literal structure: "What is [it] that she bought?"
+
+The type of relative clause depends on the interrogative word:
+*   **Direct Relative Clause**: Used after `cé`, `cad`, `cén`, `conas`.
+    *   *Cén leabhar a léigh tú?* - Which book did you read?
+*   **Indirect Relative Clause**: Used after interrogative words with prepositions (`cé leis`, `cad air`) and interrogative adverbs (`cén fáth`, `cén áit`).
+    *   *Cén fáth a bhfuil tú anseo?* - Why are you here?
+    *   *Cé leis ar labhair tú?* - Who did you speak with?
+
+## Disjunctive Questions (Choice Questions)
+
+These questions offer a choice between two or more options, usually connected by `nó` (or). They are often formed with `cé acu` (which of them) or the interrogative particle `an`.
+
+*   *Cé acu is fearr leat, tae nó caife?* - Which do you prefer, tea or coffee?
+*   *An ólann tú tae nó caife?* - Do you drink tea or coffee?
+*   *Cé acu a rinne tú, an obair bhaile nó an tionscadal?* - Which did you do, the homework or the project?
+
+## The Answer
+
+### Answering Information Questions
+
+You answer an information question with the requested information. A full-sentence answer often repeats the cleft structure of the question, replacing the interrogative word with the answer.
+*   *Cé a rinne sin? - Pól a rinne sin.* - Who did that? - Paul did that.
+*   *Cé a bhí ann? - Mise.* - Who was there? - Me.
+
+### Answering Polar Questions (Yes/No)
+
+Irish has **no words for "yes" and "no"**. To answer a polar question, you repeat the verb from the question in either its positive or negative form. This is the "answer ellipsis".
+
+*   *An ólann tú tae?* - Do you drink tea?
+    *   **Positive Answer**: *Ólann.* (lit. "Drink.")
+    *   **Negative Answer**: *Ní ólann.* (lit. "Don't drink.")
+
+*   *Ar ith tú do dhinnéar?* - Did you eat your dinner?
+    *   **Positive Answer**: *D'ith.* (lit. "Ate.")
+    *   **Negative Answer**: *Níor ith.* (lit. "Didn't eat.")
+
+<Warning>
+Using `sea` and `ní hea` as general "yes/no" answers is a very common mistake for learners. They can only be used to answer a copula question with an indefinite predicate. For all other questions, you must repeat the verb.
+</Warning>
+
+*   *An múinteoir é?* - Is he a teacher?
+    *   **Correct Answer**: *Is ea.* (or *Sea.*)
+    *   **Correct Answer**: *Ní hea.*
+
+#### Using `déan` in Answers
+
+As a general-purpose answer, especially in Munster, you can use the appropriate form of `déan` (to do) as an auxiliary verb.
+*   *Ar labhair tú leis? - Rinne.* - Did you speak to him? - Yes, I did.
+
+### Additions to Answers
+
+You can add more information to a short answer using conjunctions:
+
+*   **`agus` (and)**: Adds confirming information to a positive answer.
+    *   *An bhfuil tú fuar? - Tá, agus tusa?* - Are you cold? - Yes, and you?
+*   **`ná` (nor)**: Adds confirming information to a negative answer.
+    *   *An raibh Pól ann? - Ní raibh, ná Seán.* - Was Paul there? - No, nor was John.
+*   **`ach` (but)**: Provides a correction to a negative answer.
+    *   *An dochtúir é? - Ní hea, ach múinteoir.* - Is he a doctor? - No, but a teacher.

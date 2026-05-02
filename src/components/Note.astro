@@ -1,0 +1,25 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = 'Note' } = Astro.props;
+---
+
+<aside
+  role="note"
+  aria-label={title}
+  class="my-5 grid gap-1.5 rounded-lg border border-violet-200 bg-violet-50 px-4 py-3.5 text-[0.9375rem] leading-relaxed text-slate-700 dark:border-violet-500/25 dark:bg-violet-500/10 dark:text-slate-300"
+>
+  <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">
+    <svg class="size-4 shrink-0" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 3h10v8.5L10.5 14H3V3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M10.5 11.5V14l2.5-2.5h-2.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M5.5 6.5h5M5.5 9h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    {title}
+  </div>
+  <div class="[&_p]:m-0 [&_p+p]:mt-2">
+    <slot />
+  </div>
+</aside>

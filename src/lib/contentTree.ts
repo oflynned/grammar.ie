@@ -12,37 +12,28 @@ export type TreeChild = {
     order?: number;
 }
 
-export function entryPath(entry: {id: string}) {
+export function entryPath(entry: { id: string }) {
     return entry.id.replace(/\.(md|mdx)$/, '');
 }
 
-export const moduleMetadata: Record<string, {ga: string; order: number}> = {
-    nouns: {ga: 'AN tAINMFHOCAL', order: 10},
-    articles: {ga: 'AN CÓNASC', order: 20},
-    adjectives: {ga: 'AN AIDIACHT', order: 30},
-    verbs: {ga: 'AN BRIATHAR', order: 40},
-    adverbs: {ga: 'AN DOBRIATHAR', order: 50},
-    prepositions: {ga: 'AN RÉAMHFHOCAL', order: 60},
-    pronouns: {ga: 'AN FORAINM PEARSANTA', order: 70},
-    syntax: {ga: 'AN CHÓMHRÉIR', order: 80},
-    'initial-mutations': {ga: 'NA hATHRUITHE TOSAIGH', order: 90},
-    numbers: {ga: 'NA hUIMHREACHA', order: 100},
-    pronunciation: {ga: 'FUAIMEANNA AGUS LITRIÚ', order: 110},
-    other: {ga: 'EILE', order: 999},
-}
-
-const labelOverrides: Record<string, string> = {
-    bi: 'Bí',
-    conjugated: 'Conjugated Prepositions',
-    dean: 'Déan',
-    i: 'i',
-    o: 'Ó',
-    tri: 'Trí',
+export const moduleMetadata: Record<string, { en: string, ga: string; order: number }> = {
+    nouns: {en: 'Nouns', ga: 'AN tAINMFHOCAL', order: 10},
+    articles: {en: 'Articles', ga: 'AN CÓNASC', order: 20},
+    adjectives: {en: 'Adjectives', ga: 'AN AIDIACHT', order: 30},
+    verbs: {en: 'Verbs', ga: 'AN BRIATHAR', order: 40},
+    copula: {en: 'Copula', ga: 'AN CHOPAIL', order: 40},
+    conjunctions: {en: 'Conjunctions', ga: 'AN CÓNASC', order: 40},
+    adverbs: {en: 'Adverbs', ga: 'AN DOBRIATHAR', order: 50},
+    prepositions: {en: 'Prepositions', ga: 'AN RÉAMHFHOCAL', order: 60},
+    pronouns: {en: 'Pronouns', ga: 'AN FORAINM PEARSANTA', order: 70},
+    syntax: {en: 'Syntax', ga: 'AN CHÓMHRÉIR', order: 80},
+    mutations: {en: 'Mutations', ga: 'NA hATHRUITHE TOSAIGH', order: 90},
+    numbers: {en: 'Numbers', ga: 'NA hUIMHREACHA', order: 100},
+    pronunciation: {en: 'Pronunciation', ga: 'FUAIMEANNA AGUS LITRIÚ', order: 110},
+    other: {en: 'Miscellaneous', ga: 'EILE', order: 999},
 }
 
 export function formatSegment(name: string) {
-    if (labelOverrides[name]) return labelOverrides[name];
-
     return name
         .replace(/-/g, ' ')
         .replace(/\b\w/g, (letter) => letter.toUpperCase());
@@ -71,7 +62,10 @@ function mostCommon(values: Array<string | undefined>) {
 
 export function titleForPath(entries: GrammarEntry[], path: string) {
     const segment = path.split('/').at(-1) ?? path;
-    if (!path.includes('/') && moduleMetadata[path]) return formatSegment(path);
+
+    if (!path.includes('/') && moduleMetadata[path]) {
+        return formatSegment(path);
+    }
 
     const descendants = descendantsForPath(entries, path);
     const metadataTitle = mostCommon(descendants.flatMap((entry) => [
@@ -117,8 +111,8 @@ export function directChildrenForPath(entries: GrammarEntry[], path: string): Tr
     });
 
     const pageChildren = pages.map<TreeChild>((entry) => ({
+        title: entry.data.enTitle,
         slug: entryPath(entry),
-        title: entry.data.navTitle ?? entry.data.title ?? formatSegment(entryPath(entry).split('/').at(-1) ?? entryPath(entry)),
         href: `/${entryPath(entry)}`,
         kind: 'page',
         description: entry.data.description,

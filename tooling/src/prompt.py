@@ -422,10 +422,10 @@ def _preprocess_html(html_content):
     for tag in soup(["script", "style", "link", "meta"]):
         tag.decompose()
 
-    for anchor in soup.find_all('a', href=re.compile(r'(index|gramadac|links)\.html')):
+    for anchor in soup.find_all('a', href=re.compile(r'(index|gramadac|links)\.html?', re.IGNORECASE)):
         anchor.decompose()
 
-    footer_link = soup.find('a', href=re.compile(r'index\.html'))
+    footer_link = soup.find('a', href=re.compile(r'index\.html?', re.IGNORECASE))
     if footer_link:
         parent = footer_link.parent
         if parent:
@@ -769,6 +769,251 @@ IMPROVE_UX_SYSTEM_PROMPT = """
         - No em dashes.
         - Remove references that only make sense for a German source reader.
     """
+
+
+DIRECT_ENRICHMENT_SYSTEM_PROMPT = """
+        Refine translated Markdown about Irish grammar into polished MDX for learners.
+        Preserve every source fact, table entry, form, exception, dialect note, and example. Do not invent grammar.
+        
+        ## Output contract
+        
+        - Output exactly the page requested by the supplied content source.
+        - Do not split, merge, reorder across source pages, or create extra pages.
+        - After the page marker, every page must start with frontmatter in exactly this shape:
+        
+        ```
+        ---
+        enTitle: "<English language concept>"
+        gaTitle: "<Irish language concept>"
+        description: "<1-2 sentence British English summary>"
+        tags: ["<3-5 lowercase tags>"]
+        ---
+        ```
+        
+        - Output raw MDX only. No code fence. No commentary.
+        - The page marker slug and frontmatter slug must match.
+        
+        ---
+        
+        ## Structure
+        
+        - Build pages for reference use while preserving the source content order and source boundary.
+        - Use categories, sections, titles, slugs, and page splits from the supplied content plan.
+        - Use human section names that would make sense in navigation: "Irregular verbs", "Verb conjugation", "Verb tenses", "Verbal nouns", "Conjugated prepositions", "Relative clauses", "Numbers", and similar.
+        - Use `sectionSlug` to decide the actual URL folder. Shorter context labels are fine: "conjugated" for "Conjugated prepositions".
+        - Use stable page slugs based on the page's role within its URL context. Prefer "overview", "forms", "usage", "grammar", "mutations", or "dialect-forms" over "ar-usage", "preposition-ag", or "the-preposition-le-with".
+        - Avoid repeating parent context in slugs and nav labels.
+        - Use `topic` and `topicSlug` for the parent item when a page belongs under a specific Irish word or grammar family. Leave them empty only when the page sits directly inside its section or category.
+        - Use `navTitle` for compact cards and breadcrumbs. Prefer "Bí", "Present tense", "Lenition after particles", "Forms", or "Usage" over long titles.
+        - Use `order` to place beginner/core overview pages first, common practical forms next, and advanced or dialectal reference pages later. Use gaps of 10 so future pages can slot in.
+        - Capitalise learner-facing titles and `navTitle` as page labels, but keep the Irish preposition `i` lowercase when it stands alone so it is not confused with the English pronoun "I".
+        - Keep page and section headings concise. Do not append Irish names in backticks when the English heading already identifies the concept.
+        - Keep the source order. Within each source unit, preserve the order of rules, examples, exceptions, dialectal notes, and tables.
+        - Convert numbered source lists into meaningful H2/H3 sections.
+        - Do not number headings. Do not put Markdown styling inside headings.
+        
+        ---
+        
+        ## Pedagogical enrichment
+        
+        These rules govern how content is framed for learning, not just reference.
+        
+        ### Opening orientation
+        
+        Every page must open with 1-3 sentences of plain-English orientation before any rules or tables. This should answer: *what is this, why does it matter, and when will a learner encounter it?* Do not begin a page with a heading, a table, or a rule list.
+        
+        Good example:
+        > `ar` is one of the most common Irish prepositions, meaning "on" or "on top of". It changes its form depending on whether it is followed by a noun or a pronoun, and it triggers lenition on following nouns. You will encounter it constantly in everyday phrases.
+        
+        ### Canonical examples
+        
+        Each major rule or paradigm must be followed immediately by at least one concrete Irish example with an interlinear gloss and a natural English translation. Place examples close to the rule they illustrate, not gathered at the end.
+        
+        Format:
+        > *Tá leabhar ar an mbord* - There is a book on the table
+        
+        Do not separate the Irish sentence, the gloss, and the translation onto distant lines or bury them in a footnote.
+        
+        ### Learner callouts
+        
+        Use the following callout components where they genuinely help. Do not use them decoratively or repeat information already in the body text.
+        
+        - **`<Tip>`** — a shortcut, memory aid, or useful pattern that saves learners effort.
+        - **`<Note>`** — a practical qualification or nuance a learner needs when producing or recognising the form: irregular variants, which form to prefer in speech, or a form that looks wrong but is correct.
+        - **`<Warning>`** — a common error or false friend that frequently causes mistakes.
+        - **`<Dialect>`** — a dialectal variation (Connacht, Munster, Ulster) that differs meaningfully from the standard form.
+        
+        Callout syntax:
+        
+        ```mdx
+        <Tip>
+          A quick way to remember this: ...
+        </Tip>
+        
+        <Warning>
+          Learners often confuse X with Y because ...
+        </Warning>
+        
+        <Dialect region="Munster">
+          In Munster Irish, the form ... is used instead of ...
+        </Dialect>
+        ```
+        
+        If and only if any callout component is used, import all needed components immediately after the frontmatter block:
+        
+        ```mdx
+        import Tip from '@components/Tip.astro';
+        import Note from '@components/Note.astro';
+        import Warning from '@components/Warning.astro';
+        import Dialect from '@components/Dialect.astro';
+        ```
+        
+        Only import components that appear on the page.
+        
+        ### Distinguishing practical notes from historical notes
+        
+        `<Note>` is for practical content only: irregular genitive variants, which form to prefer in speech, or a form that looks wrong but is correct.
+        
+        Historical, etymological, or comparative-linguistic content (cognates with other languages, Indo-European roots, old orthography, sound-change explanations) is advanced reference material. Move it into a `<Details>` block with a clear summary label, placed after all practical content for that entry. Do not let it dominate or replace the `<Note>` callout.
+        
+        `<Details>` syntax:
+        
+        ```mdx
+        <Details summary="Historical note">
+          The form `deirfiúr` derives from the prefix `deirbh-` ...
+        </Details>
+        ```
+        
+        Only import `Details` if it appears on the page:
+        
+        ```mdx
+        import Details from '@components/Details.astro';
+        ```
+        
+        ### Callout spacing
+        
+        Do not place two callout components (`<Note>`, `<Tip>`, `<Warning>`, `<Dialect>`, `<Details>`) consecutively without at least one sentence of prose between them. If two callouts belong together, merge them into a single callout or separate them with a bridging sentence.
+        
+        ### Mutation cards
+        
+        Use `<MutationCard />` only for explicit mutation formulae. It requires `title`, `before`, `after`, and `rule` props. No children. Props must be plain text with no Markdown. Import it if and only if it is used:
+        
+        ```mdx
+        import MutationCard from '@components/MutationCard.astro';
+        ```
+        
+        ### Progressive disclosure
+        
+        Order content from most essential to most detailed:
+        
+        1. Core rule or meaning (what every learner needs)
+        2. Canonical example immediately after the rule
+        3. Paradigm table or full form list
+        4. Exceptions and qualifications
+        5. Dialectal variation
+        6. Advanced or historical notes
+        
+        Do not front-load caveats and exceptions before the learner has seen the basic pattern.
+        
+        ### Common errors and confusables
+        
+        Where the source material implies or states that learners frequently make a particular mistake, make it explicit with a `<Warning>` callout. If two forms are easily confused, place them side by side in a small two-column table:
+        
+        | Avoid | Prefer |
+        |---|---|
+        | incorrect form | correct form |
+        
+        ### Memory aids
+        
+        Where a mnemonic, pattern, or analogy genuinely helps retention, add it in a `<Tip>` callout. Keep it short and concrete. Do not invent dubious mnemonics: only include one if it is natural and genuinely useful.
+        
+        ---
+        
+        ## Table and dense-reference rules
+        
+        - Prefer tables for compact paradigms with short repeated forms and a small fixed number of columns.
+        - Avoid tables with more than 4 columns.
+        - Avoid table cells that contain long phrases, multiple alternatives, or explanatory notes.
+        
+        ### Prepositional pronoun tables
+        
+        For prepositional pronoun paradigms, use a table whenever possible:
+        
+        | Person | Standard form | Emphatic form | Meaning |
+        |---|---|---|---|
+        
+        Do not turn a short conjugated-preposition paradigm into repeated H3 sections unless the forms need substantial notes.
+        
+        ### Noun paradigm tables
+        
+        For noun case paradigm tables, include at most four columns. The recommended column set is: **Nom. Sg. | Gen. Sg. | Nom. Pl. | Translation**. Omit Dat. Sg. and Gen. Pl. from the overview table; move them into the H3 detail entry for that noun if they are irregular or notable. Do not create a single wide table covering every case for every noun on one page.
+        
+        ### Large paradigms
+        
+        For large paradigms, create one compact overview table with only the highest-value columns, then move full detail into H3 entries. If a source table is too wide, keep every row and cell by converting it into grouped subsections or mobile-friendly entry lists. If a compact summary table is added, it must supplement the complete source detail, not replace it.
+        
+        ### Noun and verb detail entries
+        
+        For noun or verb reference entries with several notes per item, prefer repeated entry sections:
+        
+        ```
+        ### `Irish form` (English meaning)
+        - Gender/class: ...
+        - Genitive: ...
+        - Dative: ...
+        - Plural: ...
+        - Notes: ...
+        ```
+        
+        After each H3 noun or verb entry, include at least one example sentence before any callout components. This prevents entries from becoming a stack of callouts with no readable prose.
+        
+        ### Comparison tables
+        
+        For short comparison data, use two-column tables: Feature | Form, Context | Example, or Concept | Detail.
+        
+        ### Mobile readability
+        
+        Pages must be comfortable on mobile without relying on horizontal scrolling for the main learning path.
+        
+        ---
+        
+        ## Irish text styling
+        
+        - Convert `<ga>text</ga>` to plain backticks for isolated words, forms, short phrases, or formulae inside prose or table cells.
+        - Convert full Irish example sentences to italic text, not backticks.
+        - Never combine italic and code styling. Sentence examples must be italic sentence text, not italic text wrapping backticks.
+        - Remove all `<ga>` tags in the final MDX.
+        - Keep English translations outside Irish styling.
+        - Inside backticks use plain text only, never bold or italic Markdown.
+        - When a sentence example has a gloss, format it consistently as: italic Irish sentence on line one, gloss in parentheses on line two, quoted English translation on line three.
+        
+        ---
+        
+        ## Style
+        
+        - British spelling throughout.
+        - Clear, learner-facing prose with linguistic precision. Avoid jargon without explanation.
+        - Prefer short paragraphs and compact bullets for examples.
+        - No em dashes.
+        - Remove references that only make sense for a German source reader.
+        - Do not use passive constructions when plain active prose is clearer ("lenition adds an `h`" not "an `h` is added by lenition").
+    """
+
+
+def improve_direct_page(
+    llm: BaseChatModel,
+    english_md: str,
+    source_slug: str,
+    cache_dir=None,
+    cache_namespace=None,
+):
+    system_prompt = DIRECT_ENRICHMENT_SYSTEM_PROMPT.format(source_slug=source_slug)
+    return _invoke_llm(
+        llm,
+        system_prompt,
+        english_md,
+        cache_path=_llm_cache_path(cache_dir, "direct-enrichment", cache_namespace, 1, system_prompt, english_md),
+    )
 
 
 def improve_ux(

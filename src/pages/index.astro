@@ -12,6 +12,7 @@ type Module = {
 }
 
 const entries = await getCollection('grammar');
+
 const modules = directChildrenForPath(entries, '')
     .filter((child) => child.kind === 'folder')
     .map<Module>((child) => {
