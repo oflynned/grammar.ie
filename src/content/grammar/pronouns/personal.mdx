@@ -1,115 +1,245 @@
 ---
-title: "Personal Pronouns"
-slug: "personal"
-navTitle: "Personal"
-description: "A detailed guide to Irish personal pronouns, covering subject, object, and copula forms, emphatic suffixes, and special pronouns like 'ea'."
-category: "Pronouns"
-section: ""
-sectionSlug: ""
-topic: ""
-topicSlug: ""
-difficulty: "reference"
-order: 10
-tags: ["pronouns", "personal-pronouns", "subject", "object", "emphatic"]
-prerequisiteTopics: []
-relatedTopics: ["prepositions/grammar/overview", "other/pronouns/possessive-pronouns"]
-canonicalExamples: ["Chonaic sé mé. (He saw me.)", "Is mise an múinteoir. (I am the teacher.)"]
-expectedLayout: "compact paradigm table"
-pagePurpose: "To provide a comprehensive reference for all forms of personal pronouns and their specific grammatical roles."
+enTitle: "Personal Pronouns"
+gaTitle: "Forainmneacha Pearsanta"
+description: "A guide to Irish personal pronouns, including subject, object, and emphatic forms, and how they are used in sentences."
+tags: ["pronouns", "grammar", "core concepts", "forms"]
 ---
 
-Irish personal pronouns change form depending on their grammatical role, such as whether they are the subject or object of a verb. They also have distinct emphatic forms used for contrast or emphasis.
+import Note from '@components/Note.astro';
+import Dialect from '@components/Dialect.astro';
+import Warning from '@components/Warning.astro';
+import Details from '@components/Details.astro';
 
-## Forms of Personal Pronouns
+Irish personal pronouns, like "I", "you", "he", and "she", work differently from their English counterparts. They have distinct forms depending on their role in a sentence and whether they follow a verb directly. This guide covers the standard, emphatic, and special-use forms you will encounter.
 
-This table shows the main forms of personal pronouns. The distinction between subject, object, and copula forms is most important in the 3rd person.
+Unlike English, Irish does not have separate possessive pronouns like "mine" or dative forms like "to me". These concepts are expressed using possessive adjectives and conjugated prepositions instead.
 
-| Person | Subject Form | Object / Copula Form | Emphatic Subject | Emphatic Object / Copula |
-| :--- | :--- | :--- | :--- | :--- |
-| 1st sg (I) | `mé` | `mé` | `mise` | `mise` |
-| 2nd sg (you) | `tú` | `thú` | `tusa` | `thusa` |
-| 3rd sg (he) | `sé` | `é` | `seisean` | `eisean` |
-| 3rd sg (she) | `sí` | `í` | `sise` | `ise` |
-| 3rd sg (it) | — | `ea` | — | (`eadhon`) |
-| 1st pl (we) | `sinn` / `muid` | `sinn` / `muid` | `sinne` / `muidne` | `sinne` / `muidne` |
-| 2nd pl (you) | `sibh` | `sibh` | `sibhse` | `sibhse` |
-| 3rd pl (they) | `siad` | `iad` | `siadsan` | `iadsan` |
+## Forms
 
-**Dialectal variants for `muidne`:**
-*   Ulster: `muidinne`, `muid inne`
-*   Connacht: `muide`
+Irish personal pronouns are divided into standard and emphatic forms. Emphatic forms add stress or contrast, similar to saying "*I* did it" or "he *himself*" in English.
 
-### Conjunct and Disjunct Forms
+### Standard Forms
 
-While often called subject and object forms, a more precise linguistic distinction is between **conjunct** and **disjunct** forms.
-*   **Conjunct forms** (`sé`, `sí`, `siad`) are used when the pronoun is the subject and immediately follows a finite verb.
-*   **Disjunct forms** (`é`, `í`, `iad`) are used in all other positions, including as an object, with the copula, or as a subject that does not immediately follow the verb.
+These are the everyday, unstressed forms of the pronouns.
 
-### Genitive and Dative Cases
+| Person | Subject (Conjunct) | Object (Disjunct) | Copula (Disjunct) |
+| :--- | :--- | :--- | :--- |
+| 1st sg (I) | `mé` | `mé` | `mé` |
+| 2nd sg (you) | `tú` | `thú` | `tú` |
+| 3rd sg (he) | `sé` | `é` | `é` |
+| 3rd sg (she) | `sí` | `í` | `í` |
+| 3rd sg (it) | — | — | `ea` |
+| 1st pl (we) | `muid` / `sinn` | `muid` / `sinn` | `muid` / `sinn` |
+| 2nd pl (you) | `sibh` | `sibh` | `sibh` |
+| 3rd pl (they) | `siad` | `iad` | `iad` |
 
-Irish personal pronouns do not have distinct genitive (possessive) or dative forms.
-*   To show possession, **possessive pronouns** are used (e.g., `mo`, `do`, `a`).
-*   To express the dative case, **prepositional pronouns** are used, which are combinations of a preposition and a pronoun (e.g., `dom` for `do + mé`, meaning "to me").
+### Emphatic Forms
 
-## Grammatical Roles and Usage
+These forms are used to emphasise or contrast the person.
 
-### The Subject Form (Conjunct)
+| Person | Subject (Conjunct) | Object (Disjunct) | Copula (Disjunct) |
+| :--- | :--- | :--- | :--- |
+| 1st sg (I) | `mise` | `mise` | `mise` |
+| 2nd sg (you) | `tusa` | `thusa` | `tusa` |
+| 3rd sg (he) | `seisean` | `eisean` | `eisean` |
+| 3rd sg (she) | `sise` | `ise` | `ise` |
+| 3rd sg (it) | — | — | `eadhon` |
+| 1st pl (we) | `muidne` / `sinne` | `muidne` / `sinne` | `muidne` / `sinne` |
+| 2nd pl (you) | `sibhse` | `sibhse` | `sibhse` |
+| 3rd pl (they) | `siadsan` | `iadsan` | `iadsan` |
 
-The subject forms (`sé`, `sí`, `siad`, and `tú`) are used when the pronoun is the subject of the sentence and comes **immediately after the verb**.
+<Dialect region="Ulster">
+Instead of the standard emphatic form `muidne`, you may also encounter `muidinne` or `muid inne`.
+</Dialect>
 
-*   *Ólann sé bainne.* - He drinks milk.
+<Dialect region="Connacht">
+The form `muide` is sometimes used instead of `muidne`.
+</Dialect>
 
-This form is **not** used:
-*   With synthetic verb forms, where the subject is part of the verb ending (e.g., *ólaim* - I drink). An exception is the 3rd person plural, where the pronoun can be added for clarity: *tuigid siad* or *tuigeann siad* (they understand).
-*   When the pronoun subject does not directly follow the verb: *Ólann seisean agus ise.* (He and she drink).
+<Note>
+In Irish grammar, pronouns that immediately follow a verb as its subject are called **conjunct forms** (e.g., `sé`, `sí`). All other forms, used as objects or with the copula, are called **disjunct forms** (e.g., `é`, `í`). While terms like "subject form" and "object form" are common, they can be misleading as disjunct forms are sometimes used as subjects in certain constructions.
+</Note>
 
-### The Object and Copula Form (Disjunct)
+## Pronunciation
 
-The object forms (`é`, `í`, `iad`, and `thú`) are used in all other contexts. This includes when the pronoun is:
-*   The **direct object** of a verb: *Chonaic mé é.* (I saw him.)
-*   The **subject in an infinitive construction**: *Ba mhaith liom é a fheiceáil.* (I would like to see him.)
-*   The **subject or predicate in a copula sentence**: *Is é mo mhúinteoir é.* (He is my teacher.)
-*   Used with the **autonomous verb form**: *Glantar é.* (It is cleaned.)
-*   Used after **non-conjugable prepositions**: *gan é* (without him), *idir mé agus tú* (between me and you).
+The simple pronouns `mé`, `tú`, `sé`, `sí`, and `siad` have both a stressed and an unstressed pronunciation, while `sinn`, `muid`, and `sibh` do not.
 
-Note that with the copula `is`, the forms `é`, `í`, and `iad` are often pronounced as if they start with 's': `is é` sounds like `sé`. This is sometimes reflected in non-standard spellings like `'sé`.
+-   **Stressed pronunciation**: The vowel is long, matching the spelling (e.g., `mé` [mʲeː], `tú` [tuː], `sé` [ʃeː]). This is used for emphasis, after conjunctions like `agus`, and in copular sentences.
+-   **Unstressed pronunciation**: The vowel is shortened, sometimes to a schwa [ə]. This is the most common pronunciation in everyday speech, as pronouns are often unstressed. For example, unstressed `mé` can sound like [mʲe] or [mʲə].
 
-## Pronunciation and Stress
+Even when pronounced with a short vowel, the fada is always retained in standard spelling (e.g., `mé`, `tú`).
 
-### Stressed and Unstressed Forms
+### Double Stress
 
-The simple pronouns `mé`, `tú`, `sé`, `sí`, and `siad` have both stressed and unstressed pronunciations.
-*   **Stressed:** The vowel is long, as the spelling suggests: `mé` [m′eː], `tú` [tuː], `sé` [s′eː]. This is used after conjunctions like `agus` or `ach`, in infinitive constructions, and in copula sentences.
-*   **Unstressed:** The vowel is shortened, sometimes to a schwa [ə]. This is the more common pronunciation in everyday speech when the pronoun is not the focus.
+In sentences with a finite verb, stressing the simple personal pronoun does not emphasise the person, but rather the action or the truthfulness of the statement. This creates a "double stress" pattern where both the verb and the pronoun receive equal stress.
 
-Despite the change in pronunciation, the standard spelling with the fada (`mé`, `tú`) is always retained.
+*An raibh sé anseo? - Bhí.* - Was he here? - Yes. (Standard answer)
+*An raibh sé anseo? - Bhí sé.* [ˈvʲiː ˈʃeː] - Was he here? - Yes, he *certainly* was. (Emphasises the truth of the statement)
 
-### Double Stress (`an béimniú dúbáilte`)
+This allows for fine distinctions in meaning:
 
-In some cases, a simple personal pronoun subject is stressed to emphasise the **action or the truth of the statement**, not the person performing it. This creates a "double stress" pattern where both the verb and the pronoun receive equal emphasis.
+-   *Rinne sé sin.* [sə] - He did that. (Neutral statement, unstressed pronoun)
+-   *Rinne sé sin.* [ˈʃeː] - He *did* do that. (Emphasis on the action, stressed pronoun)
+-   *Rinne seisean sin.* - *He* did that. (Emphasis on the person, emphatic pronoun)
 
-*   *Bhí sé.* [ˈv′iː ˈs′eː] - He **was** (indeed). (In response to "An raibh sé anseo?")
-*   *Rachaidh sí.* [ˈraxə ˈs′iː] - She **will** go.
+## Subject Form (Conjunct)
 
-To emphasise the **person**, the emphatic forms (`seisean`, `sise`, etc.) are used instead.
-*   *Rinne sé sin.* (unstressed `sé`) - He did that. (Neutral statement)
-*   *Rinne sé sin.* (stressed `sé`) - He **did** do that. (Emphasis on the action)
-*   *Rinne seisean sin.* - **He** did that. (Emphasis on the person: he, and no one else)
+The subject form (e.g., `sé`, `sí`, `siad`) is used only when the pronoun is the subject of the sentence and *immediately* follows the verb.
 
-## Emphatic Forms and Suffixes
+*Ólann sé bainne.* - He drinks milk.
 
-### Using Emphatic Pronouns
+It is **not** used:
+-   With synthetic verb forms, where the subject is already part of the verb ending (e.g., `ólaim` - I drink).
+-   When the pronoun subject does not come directly after the verb.
 
-Emphatic forms like `mise`, `tusa`, and `seisean` are used to contrast or highlight a person. They are required in certain structures:
-*   In lists of people: *mise agus tusa* (me and you).
-*   As the predicate in identification sentences with the copula: *Is mise Pól.* (I am Paul.)
-*   When calling out to someone: *Haigh, tusa!* (Hey, you!)
+*Ólann seisean agus ise.* - He and she drink. (Here, the disjunct emphatic forms are used).
 
-These forms are generally used for people, not for inanimate objects. For objects, alternatives like `é féin` (itself) or `é sin` (that one) are used.
+## Object Form (Disjunct)
 
-### Emphatic Suffixes (`na hiarmhíreanna tréise`)
+The object form (e.g., `é`, `í`, `iad`, `thú`) is used whenever the pronoun does not immediately follow the verb as its subject.
 
-The emphatic pronouns are formed by adding suffixes to the simple pronouns. These suffixes can also attach to other words to add emphasis to the person associated with them.
+This includes:
+-   **As the object of a verb:**
+    *Chonaic mé é.* - I saw him.
+-   **As the subject in infinitive constructions:**
+    *Ba mhaith liom thú a fheiceáil.* - I would like to see you.
+-   **With the autonomous verb form:**
+    *Glanfar é.* - It will be cleaned.
+-   **After non-conjugable prepositions:**
+    *gan é* - without him
+    *gan tú* - without you
+-   **To express reflexivity, with `féin` (self):**
+    *Ghortaigh sé é féin.* - He hurt himself.
+
+<Warning>
+The object form is **not** used after prepositions that conjugate with pronouns (e.g., `ag`, `le`, `do`). Instead, a special combined form, the prepositional pronoun, is used. For example, "at him" is `aige`, not `*ag é`.
+</Warning>
+
+## Copula Form (Disjunct)
+
+The copula form is used when a pronoun is the subject or predicate in a sentence with the copula (`is`). It is identical to the object form, except that `tú` is not lenited if it comes directly after the copula.
+
+*Is é mo mhúinteoir é.* - He is my teacher.
+*Is tusa a rinne é.* - It was you who did it.
+
+<Note>
+In speech, the copula `is` often merges with a following `é`, `í`, or `iad`, making them sound like the subject forms: `is é` sounds like `sé` [ʃeː]. This is sometimes reflected in non-standard spellings like `'sé` or `'sí`.
+</Note>
+
+## Polite Form
+
+Irish does not generally have a formal "you" for showing respect. Strangers, elders, and superiors are all addressed with `tú` (singular you).
+
+*Conas atá tú, a Uachtaráin?* - How are you, Mr. President?
+
+The only common exception is when addressing a member of the clergy, where `sibh` (plural you) can be used as a mark of respect (the *plural of honour* or `iolra an ómóis`).
+
+*Conas atá sibh, a Athair?* - How are you, Father?
+
+## Emphatic Forms
+
+Emphatic forms are used to highlight or contrast a person. They are required in certain situations:
+
+-   **In lists of people:**
+    *mise agus tusa* - you and I
+-   **As the predicate in identification sentences with the copula:**
+    *Is mise Pól.* - I am Paul.
+-   **In calls or commands:**
+    *Haigh, tusa!* - Hey, you!
+
+For inanimate objects, emphasis is shown using `féin` (self) or a demonstrative like `sin` (that), not the personal emphatic suffixes.
+
+## The Impersonal Pronoun `ea`
+
+The pronoun `ea` (older spelling `eadh`) is a remnant of the neuter gender, which no longer exists in modern Irish. It translates as "it" but has a very specific and limited use. It can only be used as a predicate with the copula.
+
+Its main uses include:
+
+-   **In classification sentences with an indefinite predicate:**
+    *Múinteoir is ea í.* - She is a teacher. (Literally: "A teacher, it is she.")
+-   **In answers to classification questions:**
+    *An dochtúir thú? - Ní hea, ach múinteoir.* - Are you a doctor? - No, a teacher.
+-   **In short questions and answers:**
+    *Seán a rinne é, an ea? - Is ea.* - Seán did it, is that so? - Yes.
+-   **To connect an adverbial phrase to a main clause:**
+    *Thall ansiúd is ea atá sí ina cónaí.* - Over there is where she lives.
+-   **In the phrase `más ea` (if so):**
+    *Ach más ea, déanfaidh mé é!* - But if so, I will do it!
+
+In all other contexts where English uses an impersonal "it", Irish uses the masculine pronoun `sé` or `é`. This is common in expressions about weather, time, and distance.
+
+*Tá sé te.* - It is hot.
+*Tá sé a naoi a chlog.* - It is nine o'clock.
+
+### `eadhon`
+
+The form `eadhon` is the emphatic version of `ea`. Today, it is used only in writing to mean "that is" or "namely", often abbreviated as `.i.` (from the Latin *id est*).
+
+### `amhlaidh`
+
+The word `amhlaidh` (so, thus) is a fossilised prepositional pronoun from `amhail` (like) + `eadh` (it), literally meaning "like it is".
+
+*Tá sin amhlaidh!* - That's how it is!
+*Is amhlaidh a bhuail tú an fear.* - What you did was hit the man. (Used for emphasis).
+
+## `muid` vs `sinn`
+
+Both `muid` and `sinn` mean "we". `Sinn` is the older, original form, while `muid` developed from the verb ending `-imid`.
+
+-   `Sinn` is more traditional and is strongly associated with Munster Irish.
+-   `Muid` originated in Ulster and has now become the more common form in most of the country, including in the official standard.
+
+While some recommend using `muid` as a subject form (`Tuigeann muid`) and `sinn` as an object form (`Tuigeann tú sinn`), this is not a strict rule, and `muid` is frequently used in all positions.
+
+<Details summary="Historical note on 'muid'">
+Older grammar books, such as *Graiméar na Gaedhilge leis na Bráithreachaibh Críostamhla* (1906), strongly condemned the use of `muid`, calling it a "corruption" that "on no account should be imitated by the student." Despite this, its use spread and it is now fully accepted in Standard Irish.
+</Details>
+
+## `tú` vs `thú`
+
+In Connacht and Ulster Irish, `tú` is generally the subject form and `thú` is the object form. The rules are slightly more complex in the standard language.
+
+**Use unlenited `tú` / `tusa`:**
+-   As the subject of a verb: *Rinne tú é.* - You did it.
+-   Immediately after the copula: *Is tusa mo ghrá.* - You are my love.
+-   After the conjunction `agus`: *mise agus tusa* - you and I.
+-   After non-conjugated prepositions: *gan tusa* - without you.
+
+**Use lenited `thú` / `thusa`:**
+-   As the object of a verb: *Feicim thú.* - I see you.
+-   As the subject in a copula sentence when it does not immediately follow the copula: *Is dochtúir thú.* - You are a doctor.
+-   To add emphasis to a command: *Léigh thusa é!* - *You* read it!
+
+## Order of Persons
+
+When listing people, Irish places the 1st person (`mé`, `mise`) first, followed by the 2nd person (`tú`, `tusa`), and finally the 3rd person (`é`, `í`, nouns). This is the opposite of the polite convention in English.
+
+*Bhí mise agus tusa agus eisean ann.* - He, you, and I were there.
+*Bhí mise agus mo chairde in Éirinn.* - My friends and I were in Ireland.
+
+## Agreement in Gender and Number
+
+Pronouns in the 3rd person (`sé`, `sí`) must agree with the grammatical gender and number of the noun they refer to, but there are several important exceptions.
+
+### Gender Agreement
+
+-   **People**: For nouns referring to people, the pronoun matches the person's natural gender, not the noun's grammatical gender.
+    *an cailín* (the girl) is a masculine noun, but the pronoun is `sí` (she).
+-   **Animals**: For animals, the pronoun usually matches the noun's grammatical gender, regardless of the animal's actual sex.
+    *stail* (stallion) is a feminine noun, so the pronoun is `sí` (she).
+-   **Ships**: All ships, boats, and vessels take the feminine pronoun `í`, regardless of the grammatical gender of the noun used (`bád` is masculine, `long` is feminine).
+    *Is bád deas í.* - It is a nice boat.
+-   **General Reference**: When referring to something of unknown gender or to a general statement, the masculine pronoun `é` is used.
+    *Is é mo bharúil go...* - It is my opinion that...
+
+### Number Agreement
+
+-   **Collective Nouns**: Nouns that are singular in form but refer to a group (e.g., `muintir` - people, `beirt` - two people, `foireann` - team) can take a plural pronoun when the focus is on the individual members.
+    *Is iad an bheirt is fearr iad.* - They are the two best. (`an bheirt` is singular, `iad` is plural).
+
+## Emphatic Suffixes
+
+A common way to add emphasis is by attaching a suffix to a pronoun, noun, or verb. These suffixes serve to contrast or highlight the person involved.
 
 | Person | Suffix (after broad vowel) | Suffix (after slender vowel) |
 | :--- | :--- | :--- |
@@ -121,83 +251,24 @@ The emphatic pronouns are formed by adding suffixes to the simple pronouns. Thes
 | 2nd pl (you) | `-sa` | `-se` |
 | 3rd pl (they) | `-san` | `-sean` |
 
-The suffix is chosen based on the quality (broad or slender) of the final vowel of the word it attaches to.
-*   Broad ending: `a bhean**sa**` (his wife)
-*   Slender ending: `táim**se**` (I am)
-
-### Attaching Emphatic Suffixes
+The suffix is chosen based on the final vowel of the word it attaches to.
 
 These suffixes can be attached to:
-*   **Personal pronouns:** `sé` + `-sean` → `seisean`
-*   **Possessive pronouns (via the noun):** `a theach**san**` (his house)
-*   **Prepositional pronouns:** `aige` + `-sean` → `aigesean` (with him)
-*   **Synthetic verb forms:** `tuigim` + `-se` → `tuigimse` (I understand)
+-   **Personal pronouns**: `mise`, `tusa`, `seisean`
+-   **Possessive pronouns (after the noun)**: `mo theachsa` (my house), `a theachsan` (his house)
+-   **Prepositional pronouns**: `agamsa` (at me), `aigesean` (at him)
+-   **Synthetic verb forms**: `táimse` (I am), `tuigimse` (I understand)
 
-If a person is mentioned multiple times in a clause, the suffix is only used on the first mention: *Nímse mé féin.* (I wash myself.)
+*An bhfuil tusa ag labhairt liomsa?* - Are *you* talking to *me*?
 
-## Special Pronouns and Cases
+<Details summary="Etymology of emphatic suffixes">
+These suffixes evolved from older forms. `-sa`/`-se` likely comes from a doubling of the pronoun `sí` (`sise` < `si-si`), which was then applied to other persons. `-ne` comes from a doubling of `sinn` (`sinne` < `sni-sni`). The `-san`/`-sean` suffix derives from an older form `-som`, related to the English word "same".
+</Details>
 
-### The Impersonal Pronoun `ea`
+### Alternatives to Emphatic Suffixes
 
-`ea` is a remnant of the neuter gender and translates as "it". It refers to indefinite nouns, phrases, or entire statements, but its use is restricted to predicative positions with the copula.
+Instead of suffixes, emphasis can also be added using:
+-   The reflexive pronoun `féin` (self): `mé féin` (myself), `é féin` (himself).
+-   Demonstrative pronouns (3rd person only): `é sin` (that one), `iad seo` (these ones).
 
-*   **In classification sentences:** *Múinteoir is ea í.* (She is a teacher. Lit: "A teacher, is it she.")
-*   **In answers:** *An dochtúir thú? - Ní hea.* (Are you a doctor? - No.)
-*   **In questions:** *Seán a rinne é, an ea? - Is ea.* (Seán did it, is that so? - Yes.)
-*   **To connect adverbials:** *Thall ansiúd is ea atá sí.* (Over there is where she is.)
-*   **In phrases:** `más ea` (if so), `ní hea` (no, not so).
-
-For the general, expletive "it" with other verbs (e.g., weather, time), `sé` is used: *Tá sé fuar.* (It is cold.)
-
-### The Polite Form (`foirm an ómóis`)
-
-Irish does not have a formal "you" like French *vous* or German *Sie*. The 2nd person singular `tú` is used for everyone, including strangers and superiors.
-*   *Conas atá tú, a Uachtaráin?* - How are you, Mr. President?
-
-The only exception is when addressing clergy, where the 2nd person plural `sibh` can be used as a sign of respect (the *plural of honour*).
-*   *Conas atá sibh, a Athair?* - How are you, Father?
-
-### `muid` vs. `sinn`
-
-Both `muid` and `sinn` mean "we".
-*   `sinn` is the older, traditional form, strongly associated with Munster.
-*   `muid` originated from a verb ending (`-imid`) in Ulster and is now more common in many regions.
-
-In the Official Standard, `muid` is fully accepted. Some speakers differentiate, using `muid` as a subject form after a verb (*Tuigeann muid*) and `sinn` as an object form (*Tuigeann tú sinn*), but this is not a universal rule.
-
-### `tú` vs. `thú`
-
-The lenited form `thú` is primarily the object form of "you" (sg.).
-*   **Use `tú` (unlenited):**
-    *   As the subject of a verb: *Rinne tú go maith.* (You did well.)
-    *   Immediately after the copula: *Is tusa mo ghrá.* (You are my love.)
-    *   After `agus` and non-conjugated prepositions: *idir mise agus tusa* (between me and you).
-*   **Use `thú` (lenited):**
-    *   As the object of a verb: *Chonaic mé thú.* (I saw you.)
-    *   In copula sentences where it does not immediately follow the copula: *Is dochtúir thú.* (You are a doctor.)
-
-## Syntax and Agreement
-
-### Order of Persons (`ord na bpearsan`)
-
-When listing people, Irish follows a strict order: 1st person, then 2nd person, then 3rd person. This is the opposite of the polite convention in English.
-*   *Bhí mise, tusa agus eisean ann.* - I, you, and he were there.
-*   *Bhí mise agus mo chairde in Éirinn.* - My friends and I were in Ireland.
-
-### Agreement in Gender and Number
-
-Pronouns must agree with the noun they refer to.
-*   **Gender:** For people, the pronoun matches their natural gender, regardless of the noun's grammatical gender (*an cailín* is masculine, but the pronoun is `sí`). For animals and objects, the pronoun usually matches the grammatical gender of the noun (*stail*, "stallion", is feminine, so the pronoun is `sí`).
-*   **Number:** Collective nouns like `muintir` (people) or `beirt` (two people) are grammatically singular but can be referred to by a plural pronoun (`iad`, `leo`) when the individual members of the group are being considered.
-
-## Pronouns in Other Constructions
-
-### With Demonstratives and `féin`
-
-Personal pronouns combine with other words to create more specific meanings.
-*   **With demonstratives:** `é` + `seo` → `é seo` (this one, masc.); `í` + `sin` → `í sin` (that one, fem.).
-*   **With the reflexive pronoun `féin`:** `mé` + `féin` → `mé féin` (myself); `é` + `féin` → `é féin` (himself).
-
-### The Determinative Pronoun `an té`
-
-The pronoun `an té` means "the one who" or "he who". It functions like a substantivised pronoun but is gender-neutral and can refer to men or women.
+Unlike the suffixes, these alternatives can be used for inanimate objects and animals as well as people.

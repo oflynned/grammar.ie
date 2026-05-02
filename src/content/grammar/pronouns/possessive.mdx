@@ -1,181 +1,276 @@
 ---
-title: "Possessive Pronouns"
-slug: "possessive"
-navTitle: "Possessive"
-description: "A guide to Irish possessive pronouns (or 'possessive adjectives'), explaining how they trigger initial mutations and their interaction with prepositions and the noun 'cuid'."
-category: "Pronouns"
-section: ""
-sectionSlug: ""
-topic: ""
-topicSlug: ""
-difficulty: "reference"
-order: 20
-tags: ["pronouns", "possessive-pronouns", "possessive-adjectives", "mutations", "cuid"]
-prerequisiteTopics: ["other/pronouns/personal-pronouns", "mutations/core/overview"]
-relatedTopics: ["prepositions/grammar/overview"]
-canonicalExamples: ["mo chara (my friend)", "a hainm (her name)", "ár dteach (our house)"]
-expectedLayout: "compact paradigm table"
-pagePurpose: "To provide a comprehensive reference for the forms and mutation rules of possessive pronouns."
+enTitle: "Possessive Pronouns"
+gaTitle: "Aidiachtaí Sealbhacha"
+description: "Learn how to express possession in Irish using possessive pronouns like 'mo', 'do', and 'a', and understand their impact on the following noun."
+tags: ["pronouns", "possession", "grammar", "mutations"]
 ---
-import MutationCard from '@components/MutationCard.astro';
+import Dialect from '@components/Dialect.astro';
+import Note from '@components/Note.astro';
+import Warning from '@components/Warning.astro';
+import Details from '@components/Details.astro';
 
-In Irish, possessive pronouns are typically referred to as `aidiachtaí sealbhacha` (possessive adjectives). This is because they always appear with a noun and cannot stand alone, unlike English "mine" or "yours".
+In Irish, the words for "my", "your", "his", and so on are technically considered possessive adjectives (`aidiachtaí sealbhacha`) rather than pronouns. This is because they must always be used with a noun and cannot stand alone. To express concepts like "mine" or "yours" independently, helper words are required.
 
-## Forms and Initial Mutations
+## Forms of Possessive Pronouns
 
-Possessive pronouns in Irish cause initial mutations on the noun that follows them. The specific mutation depends on the pronoun.
+Possessive pronouns come before the noun they modify and often cause a sound change, known as a mutation, at the beginning of that noun. The specific pronoun and the mutation it causes are essential for distinguishing meaning, especially between "his", "her", and "their".
 
-| Person | Pronoun | Mutation | Example (consonant) | Example (vowel) |
+| Person | Pronoun | Mutation | Before a Vowel | Emphatic Suffix |
 | :--- | :--- | :--- | :--- | :--- |
-| 1st sg | `mo` | Lenition | *mo chara* (my friend) | *m'athair* (my father) |
-| 2nd sg | `do` | Lenition | *do chara* (your friend) | *d'athair* (your father) |
-| 3rd sg (m) | `a` | Lenition | *a chara* (his friend) | *a athair* (his father) |
-| 3rd sg (f) | `a` | h-prefix | *a cara* (her friend) | *a hathair* (her father) |
-| 1st pl | `ár` | Eclipsis | *ár gcara* (our friend) | *ár n-athair* (our father) |
-| 2nd pl | `bhur` | Eclipsis | *bhur gcara* (your friend) | *bhur n-athair* (your father) |
-| 3rd pl | `a` | Eclipsis | *a gcara* (their friend) | *a n-athair* (their father) |
+| 1st Sg. (my) | `mo` | Lenition | `m'` | `-sa`/`-se` |
+| 2nd Sg. (your) | `do` | Lenition | `d'` | `-sa`/`-se` |
+| 3rd Sg. (his) | `a` | Lenition | `a` | `-san`/`-sean` |
+| 3rd Sg. (her) | `a` | None | `a h-` | `-sa`/`-se` |
+| 1st Pl. (our) | `ár` | Eclipsis | `ár n-` | `-na`/`-ne` |
+| 2nd Pl. (your) | `bhur` | Eclipsis | `bhur n-` | `-sa`/`-se` |
+| 3rd Pl. (their) | `a` | Eclipsis | `a n-` | `-san`/`-sean` |
 
-### Mutation Rules
+The forms `m'` (for `mo`) and `d'` (for `do`) are used before nouns starting with a vowel or `fh-`.
+* *m'athair* - my father
+* *d'uncail* - your uncle
+* *m'fhocal* - my word
 
-<MutationCard
-  title="mo (my), do (your), a (his)"
-  before="c, p, t, f, b, d, g, m, s"
-  after="ch, ph, th, fh, bh, dh, gh, mh, sh"
-  rule="These pronouns cause lenition."
-/>
-
-<MutationCard
-  title="a (her)"
-  before="a, e, i, o, u"
-  after="ha, he, hi, ho, hu"
-  rule="This pronoun prefixes 'h' to a following vowel. It does not change consonants."
-/>
-
-<MutationCard
-  title="ár (our), bhur (your), a (their)"
-  before="c, p, t, f, b, d, g"
-  after="gc, bp, dt, bhf, mb, nd, ng"
-  rule="These pronouns cause eclipsis. They prefix 'n-' to a following vowel."
-/>
-
-Note that `mo` and `do` are shortened to `m'` and `d'` before a vowel or `fh-` (e.g., *m'fhocal*, my word).
+However, the full forms `mo` and `do` are typically used before `fhl-` or `fhr-`.
+* *do fhreagra* - your answer
 
 ### Emphatic Forms
 
 To add emphasis, a suffix is attached to the noun (or a following adjective), not the pronoun itself.
+* *mo charrsa* - **my** car
+* *mo charr mórsa* - **my** big car
 
-- **-sa/-se**: Used for 1st/2nd person singular and 2nd person plural.
-- **-san/-sean**: Used for 3rd person singular masculine and 3rd person plural.
-- **-na/-ne**: Used for 1st person plural.
+## Examples
 
-Examples:
-- *mo charrsa* (MY car)
-- *a charrsan* (HIS car)
-- *ár gcarrna* (OUR car)
-- *mo charr mórsa* (MY big car)
+Here are examples showing how the pronouns and their mutations work in practice.
 
-## Using `cuid`
+### Before a Consonant
 
-The noun `cuid` (share, part) is frequently used with possessive pronouns, especially in certain contexts.
+| Person | Irish Example | Emphatic Example | Translation |
+| :--- | :--- | :--- | :--- |
+| 1st Sg. | *mo charr* | *mo charrsa* | my car |
+| 2nd Sg. | *do charr* | *do charrsa* | your car |
+| 3rd Sg. (masc) | *a charr* | *a charrsan* | his car |
+| 3rd Sg. (fem) | *a carr* | *a carrsa* | her car |
+| 1st Pl. | *ár gcarr* | *ár gcarrna* | our car |
+| 2nd Pl. | *bhur gcarr* | *bhur gcarrsa* | your car |
+| 3rd Pl. | *a gcarr* | *a gcarrsan* | their car |
+
+### Before a Vowel
+
+| Person | Irish Example | Emphatic Example | Translation |
+| :--- | :--- | :--- | :--- |
+| 1st Sg. | *m'athair* | *m'athairse* | my father |
+| 2nd Sg. | *d'athair* | *d'athairse* | your father |
+| 3rd Sg. (masc) | *a athair* | *a athairsean* | his father |
+| 3rd Sg. (fem) | *a hathair* | *a hathairse* | her father |
+| 1st Pl. | *ár n-athair* | *ár n-athairne* | our father |
+| 2nd Pl. | *bhur n-athair* | *bhur n-athairse* | your father |
+| 3rd Pl. | *a n-athair* | *a n-athairsean* | their father |
+
+## Dialectal Differences
+
+<Dialect region="Connacht/Munster">
+In many dialects outside Ulster, `t'` is used instead of `d'` for "your" before a vowel or `fh-`.
+* *t'uncail* - your uncle
+* *t'fhocal* - your word
+</Dialect>
+
+<Dialect region="Connacht">
+In Connacht, `ár` (our) and `bhur` (your, pl.) are often pronounced the same as `a` [ə]. Because of this, stronger emphatic forms are needed to avoid ambiguity. Instead of the simple suffixes, the full emphatic pronouns are often placed after the noun.
+* *a charr seisean* - his car (instead of `a charrsan`)
+* *a carr sise* - her car (instead of `a carrsa`)
+* *ár gcarr muide* - our car (instead of `ár gcarrna`)
+* *bhur gcarr sibhse* - your car (instead of `bhur gcarrsa`)
+* *a gcarr siadsan* - their car (instead of `a gcarrsan`)
+</Dialect>
+
+<Dialect region="Ulster">
+In Ulster, a similar pattern occurs in the 3rd person when lenition or eclipsis isn't enough to distinguish meaning.
+* *a lámh eisean* - his hand
+* *a lámh ise* - her hand
+* *a lámh iadsan* - their hand
+
+Also in Ulster, `mur` is used for `bhur` (your, pl.).
+</Dialect>
+
+<Dialect region="Munster">
+In Munster, `úr` is used for `bhur` (your, pl.).
+</Dialect>
+
+<Note>
+You may occasionally see `mh'` instead of `m'` for "my", for example, *mh'athair*.
+</Note>
+
+## Using `cuid` with Possessive Pronouns
+
+The word `cuid` (meaning "share" or "part") is frequently used with possessive pronouns, especially for plural or uncountable nouns. Its use is more common in northern dialects.
+
+### Grammatical Form
+
+When `cuid` is used, the noun that follows it is put into the genitive case.
+* *mo chuid oibre* - my work (literally "my share of work")
+
+Alternatively, the preposition `de` ("of") can be used.
+* *mo chuid den obair* - my share of the work
+
+<Note>
+Although `cuid` is a feminine noun, it does not cause lenition on the following noun because the noun is in the partitive genitive, which is not lenited.
+* *a cuid gruaige* - her hair
+</Note>
+
+When adding emphasis, the suffix is usually attached to the noun following `cuid`, not to `cuid` itself.
+* *Seo mo chuid bainnese!* - This is **my** milk!
+* *mo chuid airgidse* - **my** money
+
+However, it is also possible to attach it to `cuid`.
+* *mo chuidse airgid* - **my** money
 
 ### When to Use `cuid`
 
-The use of `cuid` is mandatory or very common in the following cases:
+The use of `cuid` is mandatory in all dialects for certain categories:
+*   **Food**: *mo chuid ime* - my butter
+*   **Property**: *mo chuid talaimh* - my land
+*   **Language skills**: *mo chuid Gaeilge* - my Irish
+*   **Activities**: *mo chuid oibre* - my work
 
-- **Plural nouns**: *mo chuid leabhar* (my books). An exception is for inalienable possessions like body parts, e.g., *mo chosa* (my feet).
-- **Uncountable nouns**: *do chuid Gaeilge* (your Irish), *ár gcuid airgid* (our money).
-- **Specific categories**: It is standard for food (*mo chuid bainne*, my milk), property (*mo chuid talaimh*, my land), and abstract concepts like work or knowledge (*mo chuid oibre*, my work).
+In other cases, `cuid` is used for:
+1.  **Plural nouns**: *mo chuid leabhar* - my books.
+2.  **Uncountable nouns**: *ár gcuid airgid* - our money.
 
-Usage can vary by dialect, with `cuid` being more frequent in northern dialects.
+<Warning>
+`Cuid` is generally not used for inalienable possessions like body parts, except in Ulster.
+*   Standard: *mo chosa* - my feet
+*   Ulster: *mo chuid cos* - my feet
+</Warning>
 
-### Grammar of `cuid`
+For some nouns, usage varies. Both `m'eolas` and `mo chuid eolais` are correct for "my knowledge".
 
-- The noun following `cuid` is in the genitive case.
-- Despite `cuid` being a feminine noun, it does not cause lenition on the following genitive noun.
-- *a cuid gruaige* (her hair, lit. "her share of hair")
+## Expressing 'Mine', 'Yours', 'Hers'
 
-When using an emphatic suffix with `cuid`, it can be attached to `cuid` itself or to the following noun:
-- *mo chuidse airgid* (MY money)
-- *mo chuid airgidse* (my MONEY)
+Irish has no single words for "mine", "yours", etc. Instead, it uses a possessive pronoun with a helper noun like `ceann` (one/head), `cuid` (share), or `muintir` (people).
 
-## Expressing "mine", "yours" (Substantival Forms)
+*   `ceann` is used for singular, countable items.
+*   `cuid` is used for plural items or uncountable singular items.
+*   `muintir` is used for people.
 
-Irish does not have single words for "mine", "yours", "his", etc. Instead, it uses a possessive pronoun with a helper noun like `ceann` (one, head), `cuid` (share), or `muintir` (people).
+| Meaning | Singular (Countable) | Plural / Uncountable | For People |
+| :--- | :--- | :--- | :--- |
+| mine | `mo cheannsa` | `mo chuidse` | `mo mhuintirse` |
+| yours (sg) | `do cheannsa` | `do chuidse` | `do mhuintirse` |
+| his | `a cheannsan` | `a chuidsean` | `a mhuintirsean` |
+| hers | `a ceannsa` | `a cuidse` | `a muintirse` |
+| ours | `ár gceannna` | `ár gcuidne` | `ár muintirne` |
+| yours (pl) | `bhur gceannsa` | `bhur gcuidse` | `bhur muintirse` |
+| theirs | `a gceannsan` | `a gcuidsean` | `a muintirsan` |
 
-| Meaning | For Countable Singular Nouns | For Plural or Uncountable Nouns |
-| :--- | :--- | :--- |
-| mine | `mo cheannsa` | `mo chuidse` |
-| yours (sg) | `do cheannsa` | `do chuidse` |
-| his | `a cheannsan` | `a chuidsean` |
-| hers | `a ceannsa` | `a cuidse` |
-| ours | `ár gceann-na` | `ár gcuidne` |
-| yours (pl) | `bhur gceannsa` | `bhur gcuidse` |
-| theirs | `a gceannsan` | `a gcuidsean` |
+* *Sin é mo cheannsa* - That is mine. (referring to a single item)
+* *Sin é mo chuidse* - Those are mine. (referring to multiple items or an amount)
 
-- Use `ceann` for countable singular items: *Sin é mo cheannsa.* (That is mine.)
-- Use `cuid` for plural or uncountable items: *Sin é mo chuidse.* (Those are mine / That is mine.)
-- Use `muintir` for people: *mo mhuintirse* (my people/family).
+To contrast two items, you can simply repeat the noun.
+* *mo leabharsa agus do leabharsa* - my book and yours
+* *mo chuid leabharsa agus do chuidse* - my books and yours
 
-### Expressing "Belongs to"
+<Warning>
+To state that something **belongs** to someone, use the preposition `le` (with), not a possessive pronoun. This is a very common point of confusion.
+* *Is liomsa an leabhar.* - The book is mine. (literally "Is with-me the book.")
+* *An leatsa an carr?* - Is the car yours?
+* *Is linne na bróga.* - The shoes are ours.
+</Warning>
 
-To state that something belongs to someone, use the copula with the preposition `le` (with), not a possessive pronoun.
+## Combinations with Prepositions
 
-- *Is liomsa an leabhar.* (The book is mine / The book belongs to me.)
-- *Is leatsa an carr.* (The car is yours.)
-- *Is linne na bróga.* (The shoes are ours.)
-
-## Possessive Pronouns with Prepositions
-
-Prepositions that end in a vowel often merge with a following possessive pronoun.
+Several prepositions that end in a vowel merge with a following possessive pronoun.
 
 | | `de` (of) | `do` (to) | `faoi` (under) | `i` (in) | `le` (with) | `ó` (from) | `trí` (through) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **+ mo** | `de mo` | `do mo` | `faoi mo` | `i mo` | `le mo` | `ó mo` | `trí mo` |
-| **+ do** | `de do` | `do do` | `faoi do` | `i do` | `le do` | `ó do` | `trí do` |
-| **+ a** (his/her) | **`dá`** | **`dá`, `á`** | **`faoina`** | **`ina`** | **`lena`** | **`óna`** | **`trína`** |
-| **+ ár** | **`dár`** | **`dár`** | **`faoinár`** | **`inár`** | **`lenár`** | **`ónár`** | **`trínár`** |
-| **+ bhur** | `de bhur` | `do bhur` | `faoi bhur` | **`in bhur`** | `le bhur` | `ó bhur` | `trí bhur` |
-| **+ a** (their) | **`dá`** | **`dá`, `á`** | **`faoina`** | **`ina`** | **`lena`** | **`óna`** | **`trína`** |
+| **`mo`** (my) | `de mo` | `do mo` | `faoi mo` | `i mo` | `le mo` | `ó mo` | `trí mo` |
+| **`do`** (your) | `de do` | `do do` | `faoi do` | `i do` | `le do` | `ó do` | `trí do` |
+| **`a`** (his/her) | **`dá`** | **`dá`, `á`** | **`faoina`** | **`ina`** | **`lena`** | **`óna`** | **`trína`** |
+| **`ár`** (our) | **`dár`** | **`dár`** | **`faoinár`** | **`inár`** | **`lenár`** | **`ónár`** | **`trínár`** |
+| **`bhur`** (your) | `de bhur` | `do bhur` | `faoi bhur` | **`in bhur`** | `le bhur` | `ó bhur` | `trí bhur` |
+| **`a`** (their) | **`dá`** | **`dá`, `á`** | **`faoina`** | **`ina`** | **`lena`** | **`óna`** | **`trína`** |
 
-### Notes on Prepositions
+<Dialect region="Munster">
+In Munster, combined forms are common in the 1st and 2nd person singular.
+*   `im leabhar` (instead of `i mo leabhar`) - in my book
+*   `lem` (for `le mo`), `led` (for `le do`)
+*   `óm` (for `ó mo`), `ód` (for `ó do`)
+</Dialect>
 
-- **`do` (to)**: The form `á` is used instead of `dá` when it is the object of a verbal noun. *Tá mé á mholadh.* (I am praising him.)
-- **`ar` (on)**: The form `arna` is used before verbal nouns to mean "after". *arna chur in eagar ag...* (edited by...). Otherwise, `ar a` is used.
-- **Dialectal Forms**: In Munster, merged forms are common in the 1st and 2nd person singular: `im` for `i mo`, `lem` for `le mo`, `dom` for `do mo`, etc.
+<Dialect region="Connacht/Ulster">
+In Connacht and Ulster, you may see `in mo` and `in do` instead of `i mo` and `i do`.
+</Dialect>
 
-## Usage and Syntax
+<Note>
+The forms `ina` and `inár` are often shortened in speech and writing to `'na` and `'nár`.
+* *Tá sé ’na chónaí i gCorcaigh.* - He lives in Cork.
+</Note>
 
-### Genitive of Personal Pronouns
-Possessive pronouns often function as the genitive of personal pronouns.
-- **Object of a verbal noun**: *Tá tú do mo bhualadh.* (You are hitting me.)
-- **Passive meaning**: *Tá an teach á thógáil.* (The house is being built. lit: 'is the house to-its building'.)
-- **Reflexive meaning**: *Tá tú do do bhualadh féin.* (You are hitting yourself.)
-- **With compound prepositions**: *os mo chionn* (above me, lit: 'above my head').
+### Special Cases for Prepositions
 
-### Other Common Uses
-- **With verbs of state**: *Tá sé ina chónaí i gCorcaigh.* (He lives in Cork. lit: 'He is in his living in Cork'.)
-- **Classification**: *Tá mé i mo dhochtúir.* (I am a doctor.)
-- **Proleptic `a` (his)**: The pronoun `a` can anticipate a following noun or clause.
-  - To mean "how": *a fheabhas atá sí* (how good she is).
-  - With pronominal nouns: *a lán* (a lot), *a oiread* (as much).
-  - To introduce a clause: *Tá a fhios agam go bhfuil tú anseo.* (I know that you are here.)
+**The Preposition `do` (to)**
+When used with a verbal noun to show the object of an action, `do + a` becomes `á`.
+* *Tá mé á mholadh.* - I am praising him. (literally "Am I to-his praising.")
+
+In other contexts, the standard form `dá` is used.
+* *Thug mé dá chara é.* - I gave it to his friend.
+
+**The Preposition `ar` (on)**
+The combined form `arna` is only used before verbal nouns to mean "after". In all other cases, `ar a` is used.
+* *arna chur in eagar ag...* - edited by... (literally "after its putting in order by...")
+
+<Details summary="Historical note on the linking -n-">
+The linking consonant `-n-` in forms like `ina`, `lena`, and `óna` originally came from prepositions that caused eclipsis, such as `i` (`i n-a` > `ina`). Its use spread by analogy to other vowel-ending prepositions like `le` and `ó`. In some older or fixed phrases, especially with `a chéile` (each other), this `-n-` is absent: *le chéile* (together) and *ó chéile* (from each other).
+</Details>
+
+## Grammatical Roles of Possessive Pronouns
+
+Possessive pronouns have several important grammatical functions beyond simple ownership.
+
+*   **As the genitive of a personal pronoun**:
+    *   Object of a verbal noun: *Tá tú do mo bhualadh.* - You are hitting me.
+    *   Passive meaning: *Tá an teach á thógáil.* - The house is being built. (literally "Is the house to-its building.")
+    *   Reflexive meaning (with `féin`): *Tá tú do do bhualadh féin.* - You are hitting yourself.
+    *   With two-part prepositions: *os mo chionn* - above me (literally "above my head.")
+
+*   **With verbs of state**: With verbs like `bí` (to be), `suí` (sit), `codladh` (sleep), the structure `i + possessive pronoun` is used.
+    *   *Tá sé ina shuí.* - He is sitting. (literally "He is in his sitting.")
+    *   *Tá sé ina chónaí i mBaile Átha Cliath.* - He lives in Dublin.
+
+*   **For classification**: To state a person's profession or role (a temporary state), this structure is also used.
+    *   *Tá mé i mo dhochtúir.* - I am a doctor.
+
+*   **To anticipate a clause**: The pronoun `a` (his) can be used to refer to a following clause, especially with verbs of knowing or seeing.
+    *   *Tá a fhios agam go bhfuil tú anseo.* - I know that you are here. (literally "Is its knowledge at-me that...")
+    *   *Ba mhaith liom a fheiceáil go bhfuil tú sásta.* - I would like to see that you are happy.
 
 ### When Not to Use Possessive Pronouns
-In some cases, a different structure is required.
-- **"One of my friends"**: Use a prepositional pronoun. *cara liom* (a friend of mine), *cara dá chuid* (a friend of his).
-- **Direct Address (Vocative)**: Use the vocative particle `a`, not a possessive pronoun. *A chara!* (My friend!).
-- **With Ordinals/Comparatives**: Use a construction with `ag`. *an mac is sine agam* (my eldest son), *an chéad mhac aige* (his first son).
 
-## Alternative Possessive Construction
+There are specific situations where a possessive pronoun is not used, even though it might seem logical.
 
-An alternative way to express possession uses the definite article, the noun, a demonstrative pronoun (usually `seo`), and a form of the preposition `ag`.
+*   **"One of my friends"**: Use a prepositional pronoun of `do` or `le`, or the phrase `de chuid`.
+    *   *cara liom* - a friend of mine
+    *   *cara dá chuid* - a friend of his
 
-**Formula**: `an` + noun + `seo` + prepositional pronoun of `ag`
+*   **In direct address (vocative)**: Use the vocative particle `a`, which causes lenition.
+    *   *A chara!* - My friend!
 
-- *an teach seo agamsa* (this house of mine / my house)
-- *an carr seo aige* (this car of his / his car)
+*   **With demonstratives, comparatives, or ordinals**: A construction with the preposition `ag` is used instead.
+    *   *an teach seo agamsa* - this house of mine
+    *   *an mac is sine agam* - my eldest son
+    *   *an chéad mhac aige* - his first son
 
-This construction is often preferred for nouns like `tír` (country), `baile` (home/town), and `teach` (house).
-- *an tír seo againne* (our country)
+## Alternative Construction for Possession
 
-In Ulster, `seo` is often shortened to `s'`: *an teach s'agamsa*.
+Instead of a simple possessive pronoun, you can use a structure with the definite article `an`, the noun, a demonstrative (`seo`, `sin`, or `úd`), and a form of the preposition `ag`. This is often used for emphasis or with certain nouns.
+
+| Structure | Example | Translation |
+| :--- | :--- | :--- |
+| `an` + noun + `seo` + `agamsa` | *an teach seo agamsa* | this house of mine |
+| `an` + noun + `seo` + `agam féin` | *an teach seo agam féin* | my own house |
+
+This construction is particularly common with nouns like `tír` (country), `baile` (town/home), and `teach` (house).
+* *an tír seo againne* - our country
+
+It is also used with personal names to show a relationship.
+* *Seán seo againne* - our Seán
