@@ -60,6 +60,21 @@
         meta: {
             title?: string;
         };
+        sub_results?: PagefindSubResult[];
+    };
+
+    type PagefindWeightedLocation = {
+        balanced_score?: number;
+    };
+
+    type PagefindSubResult = {
+        title: string;
+        url: string;
+        excerpt: string;
+        anchor?: {
+            id: string;
+        };
+        weighted_locations?: PagefindWeightedLocation[];
     };
 
     type PagefindResult = {
@@ -122,6 +137,39 @@
             return (data.meta.title || fallback || 'Untitled').replace(/\s+\|\s+Grammar\.ie$/, '');
         };
 
+        const resultScore = (result: PagefindSubResult) => {
+            return Math.max(...(result.weighted_locations ?? []).map((location) => location.balanced_score ?? 0), 0);
+        };
+
+        const bestSubResult = (data: PagefindResultData) => {
+            const anchoredResults = (data.sub_results ?? []).filter((result) => result.anchor);
+            return anchoredResults.toSorted((a, b) => resultScore(b) - resultScore(a)).at(0);
+        };
+
+        const resultUrl = (data: PagefindResultData) => {
+            const url = bestSubResult(data)?.url ?? data.url;
+
+            try {
+                const parsedUrl = new URL(url, window.location.href);
+                return `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`;
+            } catch {
+                return url;
+            }
+        };
+
+        const resultLabel = (data: PagefindResultData) => {
+            const pageTitle = resultTitle(data);
+            const sectionTitle = bestSubResult(data)?.title;
+
+            if (!sectionTitle || sectionTitle === pageTitle) return pageTitle;
+
+            return `${pageTitle} / ${sectionTitle}`;
+        };
+
+        const resultExcerpt = (data: PagefindResultData) => {
+            return bestSubResult(data)?.excerpt ?? data.excerpt;
+        };
+
         const renderResults = async (results: PagefindResult[], requestId: number) => {
             const resultData = await Promise.all(results.slice(0, 8).map((result) => result.data()));
             if (requestId !== searchRequest) return;
@@ -135,13 +183,13 @@
                 const title = document.createElement('span');
                 const excerpt = document.createElement('span');
 
-                link.href = data.url;
+                link.href = resultUrl(data);
                 link.className = 'block rounded-md px-3 py-2 no-underline transition-colors hover:bg-emerald-50 focus:bg-emerald-50 focus:outline-none dark:hover:bg-emerald-500/10 dark:focus:bg-emerald-500/10';
                 title.className = 'block text-sm font-semibold text-slate-900 dark:text-slate-100';
                 excerpt.className = 'mt-1 line-clamp-2 block text-xs leading-5 text-slate-600 dark:text-slate-400';
 
-                title.textContent = resultTitle(data);
-                excerpt.innerHTML = data.excerpt;
+                title.textContent = resultLabel(data);
+                excerpt.innerHTML = resultExcerpt(data);
 
                 link.append(title, excerpt);
                 item.append(link);
