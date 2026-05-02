@@ -144,7 +144,7 @@ def _llm_cache_path(cache_dir, stage_name: str, cache_namespace: str, index: int
 
 def _read_cached_llm_output(cache_path):
     if cache_path and cache_path.is_file():
-        print(f"💾 Reusing cached LLM output: {cache_path}")
+        print(f"💾 Reusing cached LLM output_copy: {cache_path}")
         return cache_path.read_text(encoding="utf-8")
 
     return None
@@ -158,7 +158,7 @@ def _read_valid_cached_llm_output(cache_path, output_validator=None):
     if not output_validator or output_validator(cached_output):
         return cached_output
 
-    print(f"⚠️  Cached LLM output is incomplete or invalid. Discarding: {cache_path}")
+    print(f"⚠️  Cached LLM output_copy is incomplete or invalid. Discarding: {cache_path}")
     cache_path.unlink(missing_ok=True)
     return None
 
@@ -387,8 +387,8 @@ def _invoke_llm(llm: BaseChatModel, system_prompt: str, content: str, cache_path
             if attempt == max_attempts - 1:
                 break
 
-            wait_seconds = _retry_delay_seconds(Exception("invalid LLM output"), attempt)
-            print(f"⏳ LLM returned incomplete or invalid output. Retrying in {wait_seconds:.1f}s ({attempt + 2}/{max_attempts}).")
+            wait_seconds = _retry_delay_seconds(Exception("invalid LLM output_copy"), attempt)
+            print(f"⏳ LLM returned incomplete or invalid output_copy. Retrying in {wait_seconds:.1f}s ({attempt + 2}/{max_attempts}).")
             time.sleep(wait_seconds)
         except Exception as error:
             globals()["_last_llm_call_at"] = time.monotonic()
@@ -408,7 +408,7 @@ def _invoke_llm(llm: BaseChatModel, system_prompt: str, content: str, cache_path
         return output
 
     if cache_path:
-        print(f"⚠️  LLM output for {cache_path.parent.name} was incomplete or invalid, so it was not cached.")
+        print(f"⚠️  LLM output_copy for {cache_path.parent.name} was incomplete or invalid, so it was not cached.")
     return output
 
 
@@ -683,7 +683,7 @@ IMPROVE_UX_SYSTEM_PROMPT = """
         Output contract:
         - Output exactly the page requested by the supplied source-preserving content plan.
         - Do not split, merge, reorder across source pages, or create extra pages.
-        - Every page, including a single-page output, must start with an HTML comment marker:
+        - Every page, including a single-page output_copy, must start with an HTML comment marker:
           <!-- page: concise-kebab-case-slug -->
         - After the page marker, every page must start with frontmatter exactly in this shape:
           ---
@@ -1072,7 +1072,7 @@ Content plan contract:
 Chunking context:
 - This is chunk {index} of {len(chunks)} from one large source page.
 - Build a coherent learner-facing MDX page for this chunk only.
-- Start the output with a page marker based on this chunk's learner-facing topic, not the source filename:
+- Start the output_copy with a page marker based on this chunk's learner-facing topic, not the source filename:
   <!-- page: concise-kebab-case-topic-slug -->
 - The page marker slug and frontmatter slug must match.
 - Do not add summaries of missing chunks.
