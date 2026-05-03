@@ -68,7 +68,7 @@ export function titleForPath(entries: GrammarEntry[], path: string) {
     }
 
     const descendants = descendantsForPath(entries, path);
-    const metadataTitle = mostCommon(descendants.flatMap((entry) => [
+    const metadataTitle = mostCommon(descendants.flatMap<string[]>((entry) => [
         entry.data.topicSlug === segment ? entry.data.topic : undefined,
         entry.data.sectionSlug === segment ? entry.data.section : undefined,
     ]));
