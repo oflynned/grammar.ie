@@ -1,35 +1,25 @@
-<div class="grammar-search relative w-36 sm:w-64" data-search-root>
-    <label class="sr-only" for="site-search">Search grammar content</label>
-    <div class="relative">
-        <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+<div class="grammar-search relative" data-search-root>
+    <button
+            type="button"
+            class="inline-flex h-8 w-8 items-center justify-center rounded-md text-slate-500 transition-colors duration-200 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-slate-400 dark:hover:text-white md:hidden"
+            aria-label="Search grammar content"
+            aria-haspopup="dialog"
+            aria-expanded="false"
+            title="Search"
+            data-search-open>
+        <svg class="theme-mode-icon"
              xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             stroke-width="2"
-             stroke-linecap="round"
-             stroke-linejoin="round"
              aria-hidden="true">
             <path d="m21 21-4.34-4.34"></path>
             <circle cx="11" cy="11" r="8"></circle>
         </svg>
-        <input
-                id="site-search"
-                type="search"
-                autocomplete="off"
-                spellcheck="false"
-                placeholder="Search"
-                class="h-10 w-full rounded-lg border border-background-border bg-white px-9 text-sm text-slate-800 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-primary focus:ring-2 focus:ring-emerald-500/20 dark:border-background-border-dark dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
-                aria-controls="site-search-results"
-                aria-expanded="false"
-                data-search-input
-        />
-        <button
-                type="button"
-                class="absolute right-2 top-1/2 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-md text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:hover:bg-slate-800 dark:hover:text-slate-100"
-                aria-label="Clear search"
-                data-search-clear>
-            <svg class="h-4 w-4"
+    </button>
+
+    <div class="relative hidden w-64 md:block" data-search-context="desktop">
+        <label class="sr-only" for="site-search-desktop">Search grammar content</label>
+        <div class="relative">
+            <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
                  xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 24 24"
                  fill="none"
@@ -38,18 +28,103 @@
                  stroke-linecap="round"
                  stroke-linejoin="round"
                  aria-hidden="true">
-                <path d="M18 6 6 18"></path>
-                <path d="m6 6 12 12"></path>
+                <path d="m21 21-4.34-4.34"></path>
+                <circle cx="11" cy="11" r="8"></circle>
             </svg>
-        </button>
+            <input
+                    id="site-search-desktop"
+                    type="text"
+                    role="searchbox"
+                    autocomplete="off"
+                    enterkeyhint="search"
+                    spellcheck="false"
+                    placeholder="Search"
+                    class="h-10 w-full rounded-lg border border-background-border bg-white pl-9 pr-3 text-sm text-slate-800 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-primary focus:ring-2 focus:ring-emerald-500/20 dark:border-background-border-dark dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
+                    aria-controls="site-search-results-desktop"
+                    aria-expanded="false"
+                    data-search-input
+            />
+        </div>
+
+        <div
+                id="site-search-results-desktop"
+                class="search-results-panel absolute right-0 top-full z-30 mt-2 hidden overflow-hidden rounded-lg border border-background-border bg-white shadow-xl shadow-slate-950/10 dark:border-background-border-dark dark:bg-slate-900 dark:shadow-black/30"
+                data-search-panel>
+            <p class="px-4 py-3 text-sm text-slate-500 dark:text-slate-400" data-search-status></p>
+            <ol class="max-h-96 overflow-y-auto p-2" data-search-results></ol>
+        </div>
     </div>
 
     <div
-            id="site-search-results"
-            class="search-results-panel absolute right-0 top-full z-30 mt-2 hidden overflow-hidden rounded-lg border border-background-border bg-white shadow-xl shadow-slate-950/10 dark:border-background-border-dark dark:bg-slate-900 dark:shadow-black/30"
-            data-search-panel>
-        <p class="px-4 py-3 text-sm text-slate-500 dark:text-slate-400" data-search-status></p>
-        <ol class="max-h-96 overflow-y-auto p-2" data-search-results></ol>
+            class="fixed inset-0 z-50 hidden md:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="site-search-mobile-title"
+            data-search-modal>
+        <div
+                class="absolute inset-0 bg-slate-950/40 backdrop-blur-sm dark:bg-black/60"
+                data-search-backdrop>
+        </div>
+
+        <section class="relative mx-auto mt-3 flex max-h-[calc(100dvh-1.5rem)] w-[calc(100vw-1.5rem)] max-w-lg flex-col overflow-hidden rounded-lg border border-background-border bg-white shadow-2xl shadow-slate-950/20 dark:border-background-border-dark dark:bg-slate-900 dark:shadow-black/40"
+                 data-search-context="mobile">
+            <header class="flex items-center justify-between gap-3 border-b border-background-border px-4 py-3 dark:border-background-border-dark">
+                <h2 id="site-search-mobile-title" class="text-base font-semibold text-slate-900 dark:text-slate-100">
+                    Search
+                </h2>
+                <button
+                        type="button"
+                        class="theme-mode-button"
+                        aria-label="Close search"
+                        data-search-close>
+                    <svg class="theme-mode-icon"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         aria-hidden="true">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                </button>
+            </header>
+
+            <div class="border-b border-background-border p-4 dark:border-background-border-dark">
+                <label class="sr-only" for="site-search-mobile">Search grammar content</label>
+                <div class="relative">
+                    <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                         xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         aria-hidden="true">
+                        <path d="m21 21-4.34-4.34"></path>
+                        <circle cx="11" cy="11" r="8"></circle>
+                    </svg>
+                    <input
+                            id="site-search-mobile"
+                            type="text"
+                            role="searchbox"
+                            autocomplete="off"
+                            enterkeyhint="search"
+                            spellcheck="false"
+                            placeholder="Search grammar"
+                            class="h-11 w-full rounded-lg border border-background-border bg-white pl-9 pr-3 text-base text-slate-800 outline-none transition-colors placeholder:text-slate-400 focus:border-brand-primary focus:ring-2 focus:ring-emerald-500/20 dark:border-background-border-dark dark:bg-slate-950 dark:text-slate-100 dark:placeholder:text-slate-500"
+                            aria-controls="site-search-results-mobile"
+                            aria-expanded="false"
+                            data-search-input
+                    />
+                </div>
+            </div>
+
+            <div id="site-search-results-mobile"
+                 class="hidden min-h-0 flex-1 overflow-y-auto"
+                 data-search-panel>
+                <p class="px-4 py-3 text-sm text-slate-500 dark:text-slate-400" data-search-status></p>
+                <ol class="p-2" data-search-results></ol>
+            </div>
+        </section>
     </div>
 </div>
 
@@ -85,35 +160,63 @@
         search: (query: string) => Promise<{ results: PagefindResult[] }>;
     };
 
-    const root = document.querySelector<HTMLElement>('[data-search-root]');
-    const input = root?.querySelector<HTMLInputElement>('[data-search-input]');
-    const clearButton = root?.querySelector<HTMLButtonElement>('[data-search-clear]');
-    const panel = root?.querySelector<HTMLElement>('[data-search-panel]');
-    const status = root?.querySelector<HTMLElement>('[data-search-status]');
-    const resultsList = root?.querySelector<HTMLOListElement>('[data-search-results]');
+    type SearchContext = {
+        root: HTMLElement;
+        input: HTMLInputElement;
+        panel: HTMLElement;
+        status: HTMLElement;
+        resultsList: HTMLOListElement;
+        mode: 'desktop' | 'mobile';
+    };
 
-    if (root && input && clearButton && panel && status && resultsList) {
+    const root = document.querySelector<HTMLElement>('[data-search-root]');
+    const openButton = root?.querySelector<HTMLButtonElement>('[data-search-open]');
+    const modal = root?.querySelector<HTMLElement>('[data-search-modal]');
+    const backdrop = root?.querySelector<HTMLElement>('[data-search-backdrop]');
+    const closeButtons = Array.from(root?.querySelectorAll<HTMLButtonElement>('[data-search-close]') ?? []);
+    const contexts = Array.from(root?.querySelectorAll<HTMLElement>('[data-search-context]') ?? [])
+        .map<SearchContext | undefined>((contextRoot) => {
+            const input = contextRoot.querySelector<HTMLInputElement>('[data-search-input]');
+            const panel = contextRoot.querySelector<HTMLElement>('[data-search-panel]');
+            const status = contextRoot.querySelector<HTMLElement>('[data-search-status]');
+            const resultsList = contextRoot.querySelector<HTMLOListElement>('[data-search-results]');
+            const mode = contextRoot.dataset.searchContext === 'mobile' ? 'mobile' : 'desktop';
+
+            if (!input || !panel || !status || !resultsList) return undefined;
+
+            return {
+                root: contextRoot,
+                input,
+                panel,
+                status,
+                resultsList,
+                mode,
+            };
+        })
+        .filter((context): context is SearchContext => Boolean(context));
+
+    if (root && openButton && modal && contexts.length > 0) {
         let pagefindPromise: Promise<PagefindModule> | undefined;
         let searchTimeout: number | undefined;
         let searchRequest = 0;
         let selectedIndex = -1;
+        let activeContext: SearchContext = contexts[0];
 
-        const setPanelOpen = (isOpen: boolean) => {
-            panel.classList.toggle('hidden', !isOpen);
-            input.setAttribute('aria-expanded', String(isOpen));
+        const mobileContext = contexts.find((context) => context.mode === 'mobile');
+
+        document.body.append(modal);
+
+        const setPanelOpen = (context: SearchContext, isOpen: boolean) => {
+            context.panel.classList.toggle('hidden', !isOpen);
+            context.input.setAttribute('aria-expanded', String(isOpen));
         };
 
-        const setStatus = (message: string) => {
-            status.textContent = message;
-            status.classList.toggle('hidden', message.length === 0);
+        const setStatus = (context: SearchContext, message: string) => {
+            context.status.textContent = message;
+            context.status.classList.toggle('hidden', message.length === 0);
         };
 
-        const updateClearButton = () => {
-            clearButton.classList.toggle('hidden', input.value.length === 0);
-            clearButton.classList.toggle('flex', input.value.length > 0);
-        };
-
-        const searchLinks = () => Array.from(resultsList.querySelectorAll<HTMLAnchorElement>('a'));
+        const searchLinks = (context = activeContext) => Array.from(context.resultsList.querySelectorAll<HTMLAnchorElement>('a'));
 
         const setSelectedIndex = (index: number) => {
             const links = searchLinks();
@@ -124,6 +227,33 @@
             });
 
             links[selectedIndex]?.focus();
+        };
+
+        const setBodyScrollLocked = (isLocked: boolean) => {
+            document.documentElement.classList.toggle('overflow-hidden', isLocked);
+            document.body.classList.toggle('overflow-hidden', isLocked);
+        };
+
+        const openModal = () => {
+            if (!mobileContext) return;
+
+            activeContext = mobileContext;
+            modal.classList.remove('hidden');
+            openButton.setAttribute('aria-expanded', 'true');
+            setBodyScrollLocked(true);
+            window.setTimeout(() => mobileContext.input.focus(), 0);
+
+            if (mobileContext.input.value.trim().length > 0) {
+                runSearch(mobileContext);
+            }
+        };
+
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            openButton.setAttribute('aria-expanded', 'false');
+            setBodyScrollLocked(false);
+            setPanelOpen(mobileContext ?? activeContext, false);
+            openButton.focus();
         };
 
         const loadPagefind = () => {
@@ -170,94 +300,130 @@
             return bestSubResult(data)?.excerpt ?? data.excerpt;
         };
 
-        const renderResults = async (results: PagefindResult[], requestId: number) => {
-            const resultData = await Promise.all(results.slice(0, 8).map((result) => result.data()));
-            if (requestId !== searchRequest) return;
+        const formatSegment = (segment: string) => {
+            return segment
+                .replace(/-/g, ' ')
+                .replace(/\b\w/g, (letter) => letter.toUpperCase());
+        };
 
-            resultsList.replaceChildren();
+        const resultPathLabel = (data: PagefindResultData) => {
+            try {
+                const url = new URL(resultUrl(data), window.location.href);
+                const segments = url.pathname.split('/').filter(Boolean);
+
+                return segments.slice(0, 2).map(formatSegment).join(' / ');
+            } catch {
+                return '';
+            }
+        };
+
+        const renderResults = async (results: PagefindResult[], requestId: number, context: SearchContext) => {
+            const resultData = await Promise.all(results.slice(0, 8).map((result) => result.data()));
+            if (requestId !== searchRequest || context !== activeContext) return;
+
+            context.resultsList.replaceChildren();
             selectedIndex = -1;
 
             resultData.forEach((data) => {
                 const item = document.createElement('li');
                 const link = document.createElement('a');
+                const path = document.createElement('span');
                 const title = document.createElement('span');
                 const excerpt = document.createElement('span');
 
                 link.href = resultUrl(data);
                 link.className = 'block rounded-md px-3 py-2 no-underline transition-colors hover:bg-emerald-50 focus:bg-emerald-50 focus:outline-none dark:hover:bg-emerald-500/10 dark:focus:bg-emerald-500/10';
+                path.className = 'mb-1 block text-[0.7rem] font-semibold uppercase tracking-normal text-emerald-700 dark:text-emerald-300';
                 title.className = 'block text-sm font-semibold text-slate-900 dark:text-slate-100';
                 excerpt.className = 'mt-1 line-clamp-2 block text-xs leading-5 text-slate-600 dark:text-slate-400';
 
+                path.textContent = resultPathLabel(data);
                 title.textContent = resultLabel(data);
                 excerpt.innerHTML = resultExcerpt(data);
 
+                link.addEventListener('click', () => {
+                    if (context.mode === 'mobile') {
+                        setBodyScrollLocked(false);
+                        modal.classList.add('hidden');
+                        openButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                if (path.textContent) {
+                    link.append(path);
+                }
                 link.append(title, excerpt);
                 item.append(link);
-                resultsList.append(item);
+                context.resultsList.append(item);
             });
 
-            setStatus(resultData.length ? '' : 'No results found.');
-            setPanelOpen(true);
+            setStatus(context, resultData.length ? '' : 'No results found.');
+            setPanelOpen(context, true);
         };
 
-        const runSearch = async () => {
-            const query = input.value.trim();
+        const runSearch = async (context: SearchContext) => {
+            activeContext = context;
+            const query = context.input.value.trim();
             const requestId = searchRequest + 1;
             searchRequest = requestId;
-            updateClearButton();
 
             if (query.length === 0) {
-                resultsList.replaceChildren();
-                setStatus('');
-                setPanelOpen(false);
+                context.resultsList.replaceChildren();
+                setStatus(context, '');
+                setPanelOpen(context, false);
                 return;
             }
 
             if (query.length < 2) {
-                resultsList.replaceChildren();
-                setStatus('Type at least 2 characters.');
-                setPanelOpen(true);
+                context.resultsList.replaceChildren();
+                setStatus(context, 'Type at least 2 characters.');
+                setPanelOpen(context, true);
                 return;
             }
 
-            setStatus('Searching...');
-            setPanelOpen(true);
+            setStatus(context, 'Searching...');
+            setPanelOpen(context, true);
 
             try {
                 const pagefind = await loadPagefind();
                 const search = await pagefind.search(query);
-                await renderResults(search.results, requestId);
+                await renderResults(search.results, requestId, context);
             } catch {
-                if (requestId !== searchRequest) return;
+                if (requestId !== searchRequest || context !== activeContext) return;
 
-                resultsList.replaceChildren();
-                setStatus('Search is available after the site has been built.');
-                setPanelOpen(true);
+                context.resultsList.replaceChildren();
+                setStatus(context, 'Search is available after the site has been built.');
+                setPanelOpen(context, true);
             }
         };
 
-        const queueSearch = () => {
+        const queueSearch = (context: SearchContext) => {
             window.clearTimeout(searchTimeout);
-            searchTimeout = window.setTimeout(runSearch, 180);
+            searchTimeout = window.setTimeout(() => runSearch(context), 180);
         };
 
-        input.addEventListener('input', queueSearch);
-        input.addEventListener('focus', () => {
-            if (input.value.trim().length > 0) {
-                setPanelOpen(true);
-            }
+        contexts.forEach((context) => {
+            context.input.addEventListener('input', () => queueSearch(context));
+            context.input.addEventListener('focus', () => {
+                activeContext = context;
+                if (context.input.value.trim().length > 0) {
+                    setPanelOpen(context, true);
+                }
+            });
         });
 
-        clearButton.addEventListener('click', () => {
-            input.value = '';
-            input.focus();
-            runSearch();
-        });
+        openButton.addEventListener('click', openModal);
+        backdrop?.addEventListener('click', closeModal);
+        closeButtons.forEach((button) => button.addEventListener('click', closeModal));
 
-        root.addEventListener('keydown', (event) => {
+        const handleSearchKeydown = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
-                setPanelOpen(false);
-                input.focus();
+                if (!modal.classList.contains('hidden')) {
+                    closeModal();
+                } else {
+                    setPanelOpen(activeContext, false);
+                    activeContext.input.focus();
+                }
                 return;
             }
 
@@ -273,18 +439,24 @@
                 return;
             }
 
-            if (event.key === 'Enter' && document.activeElement === input) {
+            if (event.key === 'Enter' && document.activeElement === activeContext.input) {
                 const [firstLink] = searchLinks();
                 if (firstLink) {
                     firstLink.click();
                 }
             }
-        });
+        };
+
+        root.addEventListener('keydown', handleSearchKeydown);
+        modal.addEventListener('keydown', handleSearchKeydown);
 
         document.addEventListener('click', (event) => {
-            if (!root.contains(event.target as Node)) {
-                setPanelOpen(false);
-            }
+            const target = event.target;
+            if (!(target instanceof Node) || root.contains(target)) return;
+
+            contexts
+                .filter((context) => context.mode === 'desktop')
+                .forEach((context) => setPanelOpen(context, false));
         });
     }
 </script>

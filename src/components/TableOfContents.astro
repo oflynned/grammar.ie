@@ -11,11 +11,11 @@ const isMobile = variant === 'mobile'
 ]} aria-label="Table of contents" data-toc-root data-toc-variant={variant}>
     {isMobile ? (
             <details
-                    class="rounded-md border border-background-border bg-background/95 shadow-sm backdrop-blur-md transition-colors duration-300 dark:border-background-border-dark dark:bg-background-dark/95"
+                    class="relative rounded-md border border-background-border bg-background/95 shadow-sm backdrop-blur-md transition-colors duration-300 dark:border-background-border-dark dark:bg-background-dark/95"
                     data-toc-details
             >
                 <summary
-                        class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors duration-200 hover:text-brand-primary-hover dark:text-slate-200 dark:hover:text-brand-primary-dark-hover [&::-webkit-details-marker]:hidden">
+                        class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors duration-200 hover:text-brand-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:text-slate-200 dark:hover:text-brand-primary-dark-hover [&::-webkit-details-marker]:hidden">
                     <span>On this page</span>
                     <span class="flex min-w-0 items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
                         <span class="truncate" data-toc-current>Sections</span>
@@ -27,7 +27,7 @@ const isMobile = variant === 'mobile'
                     </span>
                 </summary>
 
-                <ul class="flex flex-col border-t border-background-border px-2 py-2 dark:border-background-border-dark"
+                <ul class="absolute left-0 right-0 top-full z-30 mt-2 flex flex-col rounded-md border border-background-border bg-background px-2 py-2 shadow-xl shadow-slate-950/10 dark:border-background-border-dark dark:bg-background-dark dark:shadow-black/30"
                     data-toc-scroll>
                     {relevantHeaders.map((heading) => (
                             <li class={`depth-${heading.depth}`}>
@@ -238,7 +238,9 @@ const isMobile = variant === 'mobile'
             }
 
             if (details instanceof HTMLDetailsElement) {
-                details.open = false;
+                window.setTimeout(() => {
+                    details.open = false;
+                }, 0);
             }
         });
 

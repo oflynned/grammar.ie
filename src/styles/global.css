@@ -44,7 +44,17 @@ h1 {
 }
 
 h2, h3, h4, h5, h6, p {
-    @apply tracking-normal scroll-mt-24;
+    @apply tracking-normal;
+}
+
+h2, h3, h4, h5, h6 {
+    scroll-margin-top: 10rem;
+}
+
+@media (min-width: 768px) {
+    h2, h3, h4, h5, h6 {
+        scroll-margin-top: 8rem;
+    }
 }
 
 html {
@@ -63,8 +73,32 @@ pre > code {
 .prose table {
     display: block;
     max-width: 100%;
+    margin-block: 1.75rem;
+    border-collapse: collapse;
+    border: 0;
     overflow-x: auto;
     white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.prose :where(th, td) {
+    padding-inline: 0.9rem;
+}
+
+.prose :where(th:first-child, td:first-child) {
+    padding-left: 0;
+}
+
+.prose :where(th:last-child, td:last-child) {
+    padding-right: 0;
+}
+
+.prose :where(thead) {
+    border-bottom-color: rgb(203 213 225);
+}
+
+.dark .prose :where(thead) {
+    border-bottom-color: rgb(71 85 105);
 }
 
 code {
@@ -74,7 +108,17 @@ code {
 
 h1, h2, h3, h4, h5, h6 {
     code {
-        @apply text-[0.8em] mx-2 align-baseline;
+        @apply text-[0.8em];
+        vertical-align: 0.05em;
+        line-height: 1;
+        margin-inline: 0.15em;
+        padding-block: 0.12em;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    code:first-child {
+        margin-left: 0;
     }
 }
 
@@ -87,7 +131,7 @@ code::after {
 }
 
 .tag {
-    @apply inline-flex items-center gap-1.5 rounded-md border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 shadow-sm shadow-emerald-950/5 transition-colors duration-200 dark:border-emerald-500/25 dark:bg-emerald-500/10 dark:text-emerald-300;
+    @apply inline-flex items-center gap-1.5 rounded-md border border-emerald-200/70 bg-emerald-50/70 px-2.5 py-1 text-xs font-medium text-emerald-700 transition-colors duration-200 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-300;
 }
 
 .tag-icon {
@@ -120,12 +164,36 @@ code::after {
     width: min(28rem, calc(100vw - 2rem));
 }
 
-.search-results-panel mark {
+[data-search-panel] mark {
     @apply rounded-sm bg-emerald-100 px-0.5 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-200;
 }
 
 .search-results-panel a[data-selected="true"] {
     @apply bg-emerald-50 dark:bg-emerald-500/10;
+}
+
+.note-content {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.note-content :where(p, li, em, strong, a) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.note-content code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.note-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
 
 .relation-link-icon {

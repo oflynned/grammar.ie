@@ -9,7 +9,7 @@ const { title = 'Note' } = Astro.props;
 <aside
   role="note"
   aria-label={title}
-  class="my-5 grid gap-1.5 rounded-lg border border-violet-200 bg-violet-50 px-4 py-3.5 text-[0.9375rem] leading-relaxed text-slate-700 dark:border-violet-500/25 dark:bg-violet-500/10 dark:text-slate-300"
+  class="my-5 grid min-w-0 max-w-full gap-1.5 rounded-lg border border-violet-200 bg-violet-50 px-4 py-3.5 text-[0.9375rem] leading-relaxed text-slate-700 dark:border-violet-500/25 dark:bg-violet-500/10 dark:text-slate-300"
 >
   <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">
     <svg class="size-4 shrink-0" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -19,7 +19,7 @@ const { title = 'Note' } = Astro.props;
     </svg>
     {title}
   </div>
-  <div class="[&_p]:m-0 [&_p+p]:mt-2">
+  <div class="note-content [&_p]:m-0 [&_p+p]:mt-2">
     <slot />
   </div>
 </aside>
