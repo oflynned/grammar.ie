@@ -1,19 +1,114 @@
 ---
 import '@fontsource-variable/plus-jakarta-sans';
-import "../styles/global.css"
+import "../styles/global.css";
+import type {Breadcrumb} from "../components/Navigation.astro";
+import {defaultSeo, getCanonicalUrl, buildBreadcrumbsJsonLd} from "../lib/seo";
 
 interface Props {
     title: string;
+    seoTitle?: string;
+    description?: string;
+    canonicalUrl?: string;
+    ogType?: 'website' | 'article';
+    ogImage?: string;
+    ogImageAlt?: string;
+    keywords?: string[] | string;
+    noindex?: boolean;
+    schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+    breadcrumbs?: Breadcrumb[];
 }
 
-const {title} = Astro.props;
-const tabTitle = title === 'Home' ? 'Grammar.ie' : `${title} | Grammar.ie`
+const {
+    title,
+    seoTitle,
+    description = defaultSeo.description,
+    canonicalUrl: customCanonical,
+    ogType = 'website',
+    ogImage = defaultSeo.ogImage,
+    ogImageAlt = defaultSeo.ogImageAlt,
+    keywords = defaultSeo.keywords,
+    noindex = false,
+    schema,
+    breadcrumbs,
+} = Astro.props;
+
+const pageTitle = seoTitle ?? (title === 'Home' ? defaultSeo.homeTitle : `${title} | Grammar.ie`);
+const canonical = customCanonical ?? getCanonicalUrl(Astro.url.pathname);
+const keywordsString = Array.isArray(keywords) ? keywords.join(', ') : keywords;
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+
+const jsonLdItems: Record<string, unknown>[] = [];
+if (breadcrumbs && breadcrumbs.length > 0) {
+    jsonLdItems.push(buildBreadcrumbsJsonLd(breadcrumbs, canonical));
+}
+if (schema) {
+    if (Array.isArray(schema)) {
+        jsonLdItems.push(...schema);
+    } else {
+        jsonLdItems.push(schema);
+    }
+}
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{pageTitle}</title>
+    <meta name="description" content={description}/>
+    {keywordsString && <meta name="keywords" content={keywordsString}/>}
+    <link rel="canonical" href={canonical}/>
+
+    <!-- Robots Directives for Search Engines -->
+    {noindex ? (
+        <meta name="robots" content="noindex, nofollow"/>
+    ) : (
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+    )}
+
+    <!-- Google Search Console Verification -->
+    {googleSiteVerification && <meta name="google-site-verification" content={googleSiteVerification}/>}
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:site_name" content="Grammar.ie"/>
+    <meta property="og:title" content={pageTitle}/>
+    <meta property="og:description" content={description}/>
+    <meta property="og:url" content={canonical}/>
+    <meta property="og:type" content={ogType}/>
+    <meta property="og:image" content={ogImage}/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:alt" content={ogImageAlt}/>
+    <meta property="og:locale" content="en_IE"/>
+    <meta property="og:locale:alternate" content="ga_IE"/>
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content={pageTitle}/>
+    <meta name="twitter:description" content={description}/>
+    <meta name="twitter:image" content={ogImage}/>
+    <meta name="twitter:image:alt" content={ogImageAlt}/>
+
+    <!-- Sitemap & Manifest -->
+    <link rel="sitemap" href="/sitemap-index.xml"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+
+    <!-- Icons & Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+    <meta name="theme-color" content="#10b981"/>
+    <meta name="generator" content={Astro.generator}/>
+
+    <!-- JSON-LD Structured Data -->
+    {jsonLdItems.map((item) => (
+        <script type="application/ld+json" set:html={JSON.stringify(item)} is:inline />
+    ))}
+
     <script is:inline>
         (() => {
             const storageKey = 'grammar.ie.theme';
@@ -34,12 +129,6 @@ const tabTitle = title === 'Home' ? 'Grammar.ie' : `${title} | Grammar.ie`
             document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
         })();
     </script>
-    <meta charset="UTF-8"/>
-    <meta name="description" content="Modern Irish Grammar Resource"/>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <meta name="generator" content={Astro.generator}/>
-    <title>{tabTitle}</title>
 </head>
 <body>
 	<slot/>

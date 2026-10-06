@@ -3,6 +3,7 @@ import PageContent from "../layouts/PageContent.astro";
 import Card from "../components/Card.astro";
 import {getCollection} from 'astro:content';
 import {directChildrenForPath, moduleMetadata, type TreeChild} from '../lib/contentTree';
+import {defaultSeo, websiteJsonLd} from '../lib/seo';
 
 type Module = {
     title: Record<'en' | 'ga', string>,
@@ -32,14 +33,15 @@ const modules = directChildrenForPath(entries, '')
 const startUrl = modules[0]?.url ?? '#modules';
 ---
 
-<PageContent title="Home">
+<PageContent
+    title="Home"
+    seoTitle={defaultSeo.homeTitle}
+    description={defaultSeo.description}
+    keywords={defaultSeo.keywords}
+    schema={websiteJsonLd}
+>
     <article class="w-full max-w-6xl mx-auto">
-
         <header class="mb-20 mt-8 flex flex-col items-start">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-brand-primary dark:text-emerald-400 text-sm font-semibold tracking-wide mb-6">
-                <span>Irish Grammar</span>
-            </div>
-
             <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-6 text-slate-900 dark:text-white">
                 Gramadach na <span class="text-brand-primary dark:text-brand-primary-dark">Gaeilge.</span>
             </h1>

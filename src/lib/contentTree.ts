@@ -18,7 +18,7 @@ export function entryPath(entry: { id: string }) {
 
 export const moduleMetadata: Record<string, { en: string, ga: string; order: number }> = {
     nouns: {en: 'Nouns', ga: 'AN tAINMFHOCAL', order: 10},
-    articles: {en: 'Articles', ga: 'AN CÓNASC', order: 20},
+    articles: {en: 'Articles', ga: 'AN tALT', order: 20},
     adjectives: {en: 'Adjectives', ga: 'AN AIDIACHT', order: 30},
     verbs: {en: 'Verbs', ga: 'AN BRIATHAR', order: 40},
     copula: {en: 'Copula', ga: 'AN CHOPAIL', order: 40},
@@ -103,7 +103,7 @@ export function directChildrenForPath(entries: GrammarEntry[], path: string): Tr
         return {
             slug: folderPath,
             title: titleForPath(entries, folderPath),
-            href: `/${folderPath}`,
+            href: `/${folderPath}/`,
             kind: 'folder',
             count,
             order: moduleMetadata[rootSlug]?.order,
@@ -113,9 +113,9 @@ export function directChildrenForPath(entries: GrammarEntry[], path: string): Tr
     const pageChildren = pages.map<TreeChild>((entry) => ({
         title: entry.data.enTitle,
         slug: entryPath(entry),
-        href: `/${entryPath(entry)}`,
+        href: `/${entryPath(entry)}/`,
         kind: 'page',
-        description: entry.data.description,
+        description: entry.data.description || (entry.data as Record<string, any>).seoDescription,
         order: entry.data.order,
     }));
 
