@@ -6,9 +6,11 @@ const content = defineCollection({
     schema: z.object({
         enTitle: z.string(),
         gaTitle: z.string(),
-        description: z.string(),
+        description: z.string().optional(),
         order: z.number().optional(),
         tags: z.array(z.string()).default([]),
+        seoTitle: z.string().optional(),
+        seoDescription: z.string().optional(),
     }).passthrough(),
 });
 

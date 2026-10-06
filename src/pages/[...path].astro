@@ -5,6 +5,7 @@ import Card from '../components/Card.astro';
 import MarkdownContent from '../components/MarkdownContent.astro';
 import PageContent from '../layouts/PageContent.astro';
 import {directChildrenForPath, entryPath, titleForPath, type TreeChild} from '../lib/contentTree';
+import {getFolderSEO, getCanonicalUrl} from '../lib/seo';
 
 type GrammarEntry = CollectionEntry<'grammar'>;
 
@@ -32,7 +33,7 @@ export async function getStaticPaths() {
             props: {
                 path,
                 entry,
-                title: entry?.data.title ?? titleForPath(entries, path),
+                title: entry?.data.enTitle ?? titleForPath(entries, path),
                 children: directChildrenForPath(entries, path),
             },
         };
@@ -46,18 +47,26 @@ interface Props {
     children: TreeChild[];
 }
 
-const {entry, title, children} = Astro.props;
+const {path, entry, title, children} = Astro.props;
+const canonicalUrl = getCanonicalUrl(Astro.url.pathname);
+const folderSeo = !entry ? getFolderSEO(path, title, children.length, canonicalUrl) : undefined;
 ---
 
 {entry ? (
 <MarkdownContent entry={entry}/>
     ) : (
-<PageContent title={title}>
+<PageContent
+    title={title}
+    seoTitle={folderSeo?.seoTitle}
+    description={folderSeo?.description}
+    keywords={folderSeo?.keywords}
+    schema={folderSeo?.schema}
+>
     <section class="mx-auto w-full max-w-6xl flex-1 prose dark:prose-invert">
         <header class="mb-10">
             <h1>{title}</h1>
             <p class="text-lg text-slate-600 dark:text-slate-400">
-                Browse the folders and articles in this section.
+                {folderSeo?.description ?? 'Browse the folders and articles in this section.'}
             </p>
         </header>
 

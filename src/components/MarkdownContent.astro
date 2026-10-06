@@ -6,6 +6,7 @@ import TableOfContents from './TableOfContents.astro';
 import Tag from "./Tag.astro";
 import {collections} from "../content.config";
 import {directChildrenForPath, entryPath, titleForPath} from '../lib/contentTree';
+import {getArticleSEO, getCanonicalUrl} from '../lib/seo';
 
 interface Props {
     entry: CollectionEntry<keyof typeof collections>;
@@ -14,20 +15,30 @@ interface Props {
 const {entry} = Astro.props;
 const {Content, headings} = await entry.render();
 const hasTableOfContents = headings && Array.isArray(headings) && headings.length > 1;
-const pageTitle = entry.data.enTitle
+const pageTitle = entry.data.enTitle;
 const tags = entry.data.tags ?? [];
 const entries = await getCollection('grammar');
 const currentPath = entryPath(entry);
 const parentPath = currentPath.split('/').slice(0, -1).join('/');
 const parentTitle = parentPath ? titleForPath(entries, parentPath) : 'Home';
-const parentHref = parentPath ? `/${parentPath}` : '/';
+const parentHref = parentPath ? `/${parentPath}/` : '/';
 const siblingPages = directChildrenForPath(entries, parentPath).filter((child) => child.kind === 'page');
 const currentIndex = siblingPages.findIndex((child) => child.slug === currentPath);
 const previousPage = currentIndex > 0 ? siblingPages[currentIndex - 1] : undefined;
 const nextPage = currentIndex >= 0 && currentIndex < siblingPages.length - 1 ? siblingPages[currentIndex + 1] : undefined;
+
+const canonicalUrl = getCanonicalUrl(Astro.url.pathname);
+const articleSeo = getArticleSEO(entry, currentPath, canonicalUrl);
 ---
 
-<PageContent title={pageTitle}>
+<PageContent
+    title={pageTitle}
+    seoTitle={articleSeo.seoTitle}
+    description={articleSeo.description}
+    ogType="article"
+    keywords={articleSeo.keywords}
+    schema={articleSeo.schema}
+>
     <section class="flex mx-auto w-full max-w-6xl gap-12">
         <article class="flex-1 min-w-0 prose dark:prose-invert" data-pagefind-body>
             <header class="mb-8">
